@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b3cd0ff55d1c34fab2b565f2b9a3de, type: 3}
+  m_Name: FlashlightStatsBase
+  m_EditorClassIdentifier: 
+  narrowDamage: 8
+  narrowSpeed: 40
+  narrowLifetime: 1
+  narrowCooldown: 0.3
+  wideDamage: 12
+  wideSpeed: 25
+  wideLifetime: 1.8
+  wideCooldown: 1.5
+  wideExpansionMultiplier: 20
+  ultimateDamage: 10
+  ultimateRange: 300
+  ultimateDuration: 5
+  ultimateCooldown: 20
+  ultimateWindUpTime: 1.5
+  ultimateHeaviness: 3
+  ultimateCameraResistance: 0.25
+  bombDamage: 5
+  bombTick: 0.2
+  bombLifetime: 3.5
+  bombCooldown: 8
+  bombAmount: 1

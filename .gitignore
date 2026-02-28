@@ -73,6 +73,25 @@ mono_crash.*
 *.unitypackage.meta
 *.app
 
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Rider / JetBrains
+.idea/
+
+# VSCode
+.vscode/
+
+# Unity cache server
+/[Cc]ache/
+
+# IL2CPP build artifacts
+/[Ii]l2cpp[Bb]uild[Cc]ache/
+
+# Additional Unity generated
+/[Bb]ee/
+
 # Crashlytics generated file
 crashlytics-build.properties
 
