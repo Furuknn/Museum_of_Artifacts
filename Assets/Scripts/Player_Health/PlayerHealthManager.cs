@@ -4,7 +4,7 @@ using Image = UnityEngine.UI.Image;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    public static PlayerHealthManager instance { get; private set; }
+    public static PlayerHealthManager Instance { get; private set; }
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
     private Image inGameHealthBar;
@@ -22,18 +22,35 @@ public class PlayerHealthManager : MonoBehaviour
 
     private float lastDamageTime;
     private Coroutine passiveHealRoutine;
+    bool immune = false;
+    public bool deflectsDamage = false;
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
 
-        inGameHealthBar = UIManager.instance.GetInGameHealthBar();
-        healthbarFade = UIManager.instance.GetInGameHealthBarFade();
+        
+    }
+
+    public void SetImmunity(bool state)
+    {
+        immune = state;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    private void Start()
+    {
+        inGameHealthBar = UIManager.Instance.GetInGameHealthBar();
+        healthbarFade = UIManager.Instance.GetInGameHealthBarFade();
         Debug.Log($"healthBar UI: {inGameHealthBar.gameObject.name}");
-        maxHealth = GameManager.instance.characters[GameManager.instance.currentHeroIndex].playerStatisticsSO.maxHealth;
+        maxHealth = GameManager.Instance.characters[GameManager.Instance.currentHeroIndex].playerStatisticsSO.maxHealth;
         health = maxHealth;
         Debug.Log($"PlayerHealthManager: {health}");
 
@@ -59,6 +76,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     public void ModifyHealth(float amount)//MUST BE + or -
     {
+        if (amount < 0 && immune) return;
         Debug.Log($"ModifyHealth: Player's health has been modified amount: {amount}");
 
         health += amount;
@@ -83,15 +101,15 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if (health <= 0)
         {
-            if (LevelManager.instance.isPlayerGetFirstWin)
+            if (LevelManager.Instance.isPlayerGetFirstWin)
             {
                 Debug.Log("Lose but not at all");
 
                 ResetAllStatsOfPlayer();//RESET ALL STATS
                 //LevelManager.instance.BackToTheFormerPosition();
-                LevelManager.instance.ReturnFromLevel();
-                LevelManager.instance.DestroyCurrentLevel();
-                LevelManager.instance.ReturnWithLoseFromLevel();
+                LevelManager.Instance.ReturnFromLevel();
+                LevelManager.Instance.DestroyCurrentLevel();
+                LevelManager.Instance.ReturnWithLoseFromLevel();
             }
             else
             {
@@ -132,7 +150,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     public void KillPlayer()
     {
-        GameManager.instance.GameOverLose();
+        GameManager.Instance.GameOverLose();
     }
     private void UpdateHealthUI()
     {
@@ -164,7 +182,7 @@ public class PlayerHealthManager : MonoBehaviour
     private void ResetAllStatsOfPlayer()
     {
         health = maxHealth;
-        PlayerXpManagement.instance.ResetXp();
+        PlayerXpManagement.Instance.ResetXp();
         //THERE WILL BE RESET SKILL TREE
     }
 }

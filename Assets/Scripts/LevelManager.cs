@@ -8,7 +8,7 @@ using UnityEditor;
 #endif
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager instance;
+    public static LevelManager Instance;
     private string currentMainLevel;
     [Header("Tree Settings")]
     [SerializeField] private GameObject treeGO;
@@ -38,9 +38,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject museum;
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         currentMainLevel = this.gameObject.scene.name;
         Debug.Log($"Level manager'a ait Suan ki levelin adi: {currentMainLevel}");
@@ -91,7 +91,7 @@ public class LevelManager : MonoBehaviour
     public void ReturnFromLevel()
     {
         ActiveMuseum(true);
-        var player = ThirdPersonController.instance;
+        var player = ThirdPersonController.Instance;
         CharacterController cc = player.GetComponent<CharacterController>();
         if (cc != null)
         {
@@ -150,7 +150,7 @@ public class LevelManager : MonoBehaviour
 
         if (totalWinCount == levelCount)
         {
-            GameManager.instance.GameOverWin();
+            GameManager.Instance.GameOverWin();
         }
 
     }
@@ -160,7 +160,7 @@ public class LevelManager : MonoBehaviour
         {
             //COMPLETLY LOSE SCREEN
             Debug.Log("COMPLETLY Lose Screen");
-            GameManager.instance.GameOverLose();
+            GameManager.Instance.GameOverLose();
             //ResetCurrentMainLevel();
         }
         else

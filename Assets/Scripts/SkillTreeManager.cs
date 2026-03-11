@@ -79,7 +79,7 @@ public class SkillTreeManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
             return;
         }
 
@@ -164,7 +164,7 @@ public class SkillTreeManager : MonoBehaviour
         if (nightStickTreePanel != null) nightStickTreePanel.SetActive(false);
         if (flashlightTreePanel != null) flashlightTreePanel.SetActive(false);
 
-        int currentHeroIndex = GameManager.instance.currentHeroIndex;
+        int currentHeroIndex = GameManager.Instance.currentHeroIndex;
 
         switch (currentHeroIndex)
         {

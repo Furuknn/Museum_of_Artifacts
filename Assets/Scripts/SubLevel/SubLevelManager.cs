@@ -13,7 +13,7 @@ using Cinemachine;
 
 public class SubLevelManager : MonoBehaviour
 {
-    public static SubLevelManager instace { get; private set; }
+    public static SubLevelManager Instance { get; private set; }
     [System.Serializable]
     public class SpawnEnemy
     {
@@ -30,7 +30,7 @@ public class SubLevelManager : MonoBehaviour
     [SerializeField] private Collider bossTrigerCollider;
     void Awake()
     {
-        if (instace == null) instace = this;
+        if (Instance == null) Instance = this;
         SpawnEnemies();
     }
     private void SpawnEnemies()

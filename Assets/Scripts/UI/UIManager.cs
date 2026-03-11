@@ -4,7 +4,7 @@ using Image = UnityEngine.UI.Image;
 
 public class UIManager : MonoBehaviour, IGameStateListener
 {
-    public static UIManager instance { get; private set; }
+    public static UIManager Instance { get; private set; }
     [Header("Panels")]
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject gameIntro;
@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour, IGameStateListener
 
     void Awake()
     {
-        instance = this;
+        Instance = this;
     }
     public void GameStateChangedCallBack(EGameState gameState)
     {
@@ -40,44 +40,34 @@ public class UIManager : MonoBehaviour, IGameStateListener
     private bool isGamePaused = false;
     public void PauseMenuToggle()
     {
-        if (GameManager.instance.gameState == EGameState.INSKILLTREE)
+        if (GameManager.Instance.gameState == EGameState.INSKILLTREE)
         {
             ToggleSkillTree();
             return;
         }
-        isGamePaused = !isGamePaused;
+        
 
-        if (isGamePaused && GameManager.instance.gameState == EGameState.INGAME)
+        if (!isGamePaused && GameManager.Instance.gameState == EGameState.INGAME)
         {
-            GameManager.instance.SetGameState(EGameState.PAUSE);
-            Time.timeScale = 0f;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            GameManager.Instance.StopGame(EGameState.PAUSE);
         }
-        else if (!isGamePaused && GameManager.instance.gameState == EGameState.PAUSE)
+        else if (isGamePaused && GameManager.Instance.gameState == EGameState.PAUSE)
         {
-            GameManager.instance.SetGameState(EGameState.INGAME);
-            Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            GameManager.Instance.ContinueGame();
         }
+
+        isGamePaused = !isGamePaused;
 
     }
     public void ToggleSkillTree()
     {
-        if (GameManager.instance.gameState == EGameState.INSKILLTREE)
+        if (GameManager.Instance.gameState == EGameState.INSKILLTREE) //if skill tree is already open, close it and set the game state to in game
         {
-            GameManager.instance.SetGameState(EGameState.INGAME);
-            Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            GameManager.Instance.ContinueGame();
         }
         else
         {
-            GameManager.instance.SetGameState(EGameState.INSKILLTREE);
-            Time.timeScale = 0f;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            GameManager.Instance.StopGame(EGameState.INSKILLTREE);
         }
     }
     public Image GetInGameHealthBar()

@@ -20,6 +20,7 @@ public class FlashlightStatsBase : ScriptableObject
 
     [Header("Ultimate Beam")]
     public float ultimateDamage;
+    public float ultimateTick;
     public float ultimateRange;
     public float ultimateDuration;
     public float ultimateCooldown;

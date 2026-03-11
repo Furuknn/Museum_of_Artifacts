@@ -7,16 +7,16 @@ public class LevelWinLoseInteraction : MonoBehaviour, IInteractable
     [SerializeField] private bool isWin;
     public void Interact()
     {
-        LevelManager.instance.ReturnFromLevel();
-        LevelManager.instance.DestroyCurrentLevel();
+        LevelManager.Instance.ReturnFromLevel();
+        LevelManager.Instance.DestroyCurrentLevel();
 
         if (isWin)
         {
-            LevelManager.instance.ReturnWithWinFromLevel();
+            LevelManager.Instance.ReturnWithWinFromLevel();
         }
         else
         {
-            LevelManager.instance.ReturnWithLoseFromLevel();
+            LevelManager.Instance.ReturnWithLoseFromLevel();
         }
     }
 

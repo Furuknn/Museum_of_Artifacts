@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance { get; private set; }
+    public static GameManager Instance { get; private set; }
     public enum CharacterType
     {
         WARRIOR,//jop male
@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
         public PlayerStatisticsSO playerStatisticsSO;
     }
 
+    public static System.Action OnGameStopped;
+    public static System.Action OnGameContinued;
+
     public CharacterData[] characters = new CharacterData[3];
 
     [SerializeField] private GameObject player;
@@ -38,7 +41,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        DontDestroyOnLoad(gameObject);
+        Instance = this;
+        
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -46,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         /*Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;*/
-        SetGameState(EGameState.CHARACTERSELECTION);
+        SetGameState(gameState);
         freeLookCamera = GameObject.Find("FreeLook Camera");
 
         ActiveControl(false);
@@ -56,6 +61,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void OnDestroy()
+    {
+        SetGameState(gameState);
+        Debug.Log("GameManager imha ediliyor! İz sürülüyor...", this);
+        Debug.Log(System.Environment.StackTrace);
+    }
 
     void Update()
     {
@@ -104,49 +115,58 @@ public class GameManager : MonoBehaviour
     }
     public void InGame(int selectedCharacterIndex)
     {
-        Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        SetGameState(EGameState.INGAME);
-        SpawnChrahterAtIndex(selectedCharacterIndex);
+        ContinueGame();
+        SpawnCharacterAtIndex(selectedCharacterIndex);
     }
 
     public void GameOverWin()
     {
-        Time.timeScale = 0f;
-        ActiveControl(false);
-        SetGameState(EGameState.GAMEOVERWIN);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        StopGame(EGameState.GAMEOVERWIN);
     }
     public void GameOverLose()
     {
-        Time.timeScale = 0f;
+        StopGame(EGameState.GAMEOVERLOSE);
+    }
+
+    public void StopGame(EGameState gameState)
+    {
         ActiveControl(false);
-        SetGameState(EGameState.GAMEOVERLOSE);
-        Cursor.lockState = CursorLockMode.None;
+        SetGameState(gameState);
+        Cursor.lockState= CursorLockMode.None;
         Cursor.visible = true;
+
+        OnGameStopped?.Invoke();
+    }
+
+    public void ContinueGame()
+    {
+        ActiveControl(true);
+        SetGameState(EGameState.INGAME);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        OnGameContinued?.Invoke();
     }
 
 
-    public void SpawnChrahterAtIndex(int index)
+    public void SpawnCharacterAtIndex(int index)
     {
         currentHeroIndex = index;
         Debug.Log(characters[index].characterName + " spawned");
         player = Instantiate(characters[index].characterPrefab, spawnObjectParent.position, spawnObjectParent.rotation, spawnObjectParent.transform);
 
-        ThirdPersonController.instance.GetAnimatorCompononet();
+        ThirdPersonController.Instance.GetAnimatorComponent();
         GameObject heroNameUI = GameObject.Find("HeroName");
         heroNameUI.GetComponent<TextMeshProUGUI>().text = characters[index].characterName;
         switch (index)
         {
             case 0://nighrstick cam
-                ThirdPersonController.instance.currentCameraStyle = ThirdPersonController.CameraStyle.Combat;
-                Debug.Log($"SpawnChrahterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.instance.currentCameraStyle} sistemine değiştri");
+                ThirdPersonController.Instance.currentCameraStyle = ThirdPersonController.CameraStyle.Combat;
+                Debug.Log($"SpawnChrahterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.Instance.currentCameraStyle} sistemine değiştri");
                 break;
             case 1://beam cam
-                ThirdPersonController.instance.currentCameraStyle = ThirdPersonController.CameraStyle.Shooter;
-                Debug.Log($"SpawnChrahterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.instance.currentCameraStyle} sistemine değiştri");
+                ThirdPersonController.Instance.currentCameraStyle = ThirdPersonController.CameraStyle.Shooter;
+                Debug.Log($"SpawnChrahterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.Instance.currentCameraStyle} sistemine değiştri");
                 break;
         }
         ActiveControl(true);
@@ -159,19 +179,13 @@ public class GameManager : MonoBehaviour
     public void ActiveControl(bool isActive)
     {
         if (isActive)
-        {
             freeLookCamera.GetComponent<Cinemachine.CinemachineFreeLook>().enabled = true;
-            ThirdPersonController.instance.playerInputActions.Player.Enable();
-        }
         else
-        {
             freeLookCamera.GetComponent<Cinemachine.CinemachineFreeLook>().enabled = false;
-            ThirdPersonController.instance.playerInputActions.Player.Disable();
-        }
     }
     void OnDisable()
     {
-        ThirdPersonController.instance.playerInputActions.Player.Disable();
+        ThirdPersonController.Instance.playerInputActions.Player.Disable();
     }
 
     void RemoveCurrentPlayer()
