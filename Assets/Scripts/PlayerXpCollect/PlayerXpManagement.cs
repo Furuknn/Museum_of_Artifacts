@@ -25,6 +25,11 @@ public class PlayerXpManagement : MonoBehaviour
             instance = this;
         }
         levelPoint = 0;
+       
+    }
+
+    private void Start()
+    {
         inGameXpBarUI = UIManager.instance.GetInGameXpBar();
         inGameLevelPointUI = UIManager.instance.GetInGameLevelPointText();
         Debug.Log($"xpBar UI: {inGameXpBarUI.gameObject.name}");

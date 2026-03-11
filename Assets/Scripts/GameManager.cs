@@ -41,7 +41,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         instance = this;
+        
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         /*Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;*/
-        SetGameState(EGameState.CHARACTERSELECTION);
+        SetGameState(gameState);
         freeLookCamera = GameObject.Find("FreeLook Camera");
 
         ActiveControl(false);
@@ -59,6 +61,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void OnDestroy()
+    {
+        SetGameState(gameState);
+        Debug.Log("GameManager imha ediliyor! İz sürülüyor...", this);
+        Debug.Log(System.Environment.StackTrace);
+    }
 
     void Update()
     {

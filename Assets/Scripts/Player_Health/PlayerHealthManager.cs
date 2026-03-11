@@ -22,6 +22,8 @@ public class PlayerHealthManager : MonoBehaviour
 
     private float lastDamageTime;
     private Coroutine passiveHealRoutine;
+    bool immune = false;
+    public bool deflectsDamage = false;
 
     void Awake()
     {
@@ -30,6 +32,21 @@ public class PlayerHealthManager : MonoBehaviour
             instance = this;
         }
 
+        
+    }
+
+    public void SetImmunity(bool state)
+    {
+        immune = state;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    private void Start()
+    {
         inGameHealthBar = UIManager.instance.GetInGameHealthBar();
         healthbarFade = UIManager.instance.GetInGameHealthBarFade();
         Debug.Log($"healthBar UI: {inGameHealthBar.gameObject.name}");
@@ -59,6 +76,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     public void ModifyHealth(float amount)//MUST BE + or -
     {
+        if (amount < 0 && immune) return;
         Debug.Log($"ModifyHealth: Player's health has been modified amount: {amount}");
 
         health += amount;

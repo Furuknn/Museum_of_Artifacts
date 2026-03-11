@@ -1,3 +1,5 @@
+using Cinemachine;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +19,16 @@ public class ThirdPersonController : MonoBehaviour
     [Header("Camera Settings")]
     public CameraStyle currentCameraStyle; // Editörden veya kodla değiştirebilirsin
     [SerializeField] Transform cam;
+    public CinemachineFreeLook freeLook;
 
     [Header("Movement")]
     [SerializeField] public CharacterController characterController;
     [SerializeField, Range(0f, 100f)] private float speed = 10f;
+    public float speedMultiplier = 1f;
     [SerializeField, Range(0f, 1f)] private float rotationSmoothTime = 0.5f;
     private float rotationVelocity;
     private bool canMove = true;
+    bool isLanded = true;
 
     [Header("Sprint")]
     [SerializeField] private float sprintMultiplier = 1.6f;
@@ -31,6 +36,7 @@ public class ThirdPersonController : MonoBehaviour
     private float baseSpeed;
 
     [Header("Jump and Gravity")]
+    public bool canJump = true;
     [SerializeField, Range(-100f, 100f)] private float gravity = -9.81f;
     [SerializeField, Range(0f, 50f)] private float jumpForce = 5f;
     [SerializeField, Range(1f, 2f)] private float groundRange;
@@ -126,10 +132,16 @@ public class ThirdPersonController : MonoBehaviour
     }
 
     #region Movement and TPS Camera
+
+    public void SetSpeed(float value)
+    {
+        speedMultiplier = value;
+    }
+
     void MovementHandle()
     {
         if (isAttacking) return;
-
+        isSprinting = Input.GetKey(KeyCode.LeftShift);
         Vector2 movementInput = playerInputActions.Player.Movement.ReadValue<Vector2>();
         Vector3 direction = new Vector3(movementInput.x, 0f, movementInput.y).normalized;
 
@@ -148,7 +160,14 @@ public class ThirdPersonController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-                characterController.Move(moveDir.normalized * speed * Time.deltaTime);
+                float finalSpeed = speed * speedMultiplier;
+
+                if (isSprinting && direction.magnitude >= 0.1f)
+                {
+                    finalSpeed *= sprintMultiplier;
+                }
+
+                characterController.Move(moveDir.normalized * finalSpeed * Time.deltaTime);
             }
             // --- SHOOTER MODU (Strafe Hareket) ---
             else if (currentCameraStyle == CameraStyle.Shooter)
@@ -161,7 +180,7 @@ public class ThirdPersonController : MonoBehaviour
 
 
 
-                float finalSpeed = speed;
+                float finalSpeed = speed * speedMultiplier;
 
                 if (isSprinting && direction.magnitude >= 0.1f)
                 {
@@ -177,6 +196,19 @@ public class ThirdPersonController : MonoBehaviour
         }
     }
 
+    void ChangeFOV(float targetFov, float duration)
+    {
+        // FreeLook referansını alalım (Daha temiz kod için)
+        var freeLook = ThirdPersonController.instance.freeLook;
+
+        // DOTween.To(Getter, Setter, TargetValue, Duration)
+        DOTween.To(() => freeLook.m_Lens.FieldOfView,
+                   x => freeLook.m_Lens.FieldOfView = x,
+                   targetFov,
+                   duration)
+               .SetEase(Ease.OutQuad);
+    }
+
     private void SprintStart(InputAction.CallbackContext context)
     {
         if (isAttacking) return;
@@ -184,7 +216,14 @@ public class ThirdPersonController : MonoBehaviour
         isSprinting = true;
 
         if (animator != null)
+        {
+            ChangeFOV(65, 0.1f);
             animator.SetBool("isSprinting", true);
+            animator.SetFloat("moveSpeed", 1.8f);
+        }
+            
+        
+
     }
 
     private void SprintEnd(InputAction.CallbackContext context)
@@ -192,16 +231,21 @@ public class ThirdPersonController : MonoBehaviour
         isSprinting = false;
 
         if (animator != null)
+        {
+            ChangeFOV(60, 0.1f);
             animator.SetBool("isSprinting", false);
+            animator.SetFloat("moveSpeed", 1.2f);
+        }
+            
     }
 
     // Shooter modu için karakteri zorla kameranın baktığı yöne döndürür
-    private void RotatePlayerToCameraForward()
+    public void RotatePlayerToCameraForward()
     {
-        Vector3 camForward = cam.forward;
-        camForward.y = 0f;
+        Vector3 camForward = Camera.main.transform.forward;
+        camForward.x = 0f;
 
-        if (camForward.sqrMagnitude < 0.001f) return;
+        //if (camForward.sqrMagnitude < 0.001f) return;
 
         Quaternion targetRotation = Quaternion.LookRotation(camForward);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f); // Hızlı dönüş
@@ -219,13 +263,17 @@ public class ThirdPersonController : MonoBehaviour
         {
             gravity = jumpForce;
             characterController.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
-            if (animator != null) animator.SetBool("isJumping", true);
+            if (animator != null)
+            {
+                animator.SetTrigger("Jump");
+                isLanded = false;
+            }
         }
     }
 
     bool isPlayerOnGround()
     {
-        return Physics.Raycast(transform.position, Vector3.down, groundRange, LayerMask.GetMask("Ground"));
+        return Physics.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.GetMask("Ground"));
     }
     #endregion
 
@@ -249,11 +297,15 @@ public class ThirdPersonController : MonoBehaviour
             if (gravity < 0 && !isPlayerOnGround() && animator != null)
             {
                 animator.SetBool("isJumping", false);
-                animator.SetBool("isFalling", true);
             }
         }
-        gravity += -9.81f * Time.deltaTime;
+        gravity += -20f * Time.deltaTime;
         characterController.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
+        if (!isLanded && isPlayerOnGround())
+        {
+            animator.SetTrigger("Land");
+            isLanded = true;
+        }
     }
     #endregion
 
