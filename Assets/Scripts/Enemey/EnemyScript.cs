@@ -120,6 +120,11 @@ public class EnemyScript : MonoBehaviour, IDamageable
 
         CheckDealtDamage();
     }
+
+    public float GetHealth()
+    {
+        return enemyHealth;
+    }
     private void FindPlayerGO()
     {
         playerGO = FindObjectOfType<ThirdPersonController>().gameObject;
@@ -334,7 +339,7 @@ public class EnemyScript : MonoBehaviour, IDamageable
 
         if (afterTakeDamageIsEnemyGetStun)
         {
-            ApplyStun();
+            ApplyStun(stunTime);
         }
     }
     private void Death()
@@ -353,6 +358,9 @@ public class EnemyScript : MonoBehaviour, IDamageable
         {
             ReturnLevel();
         }
+
+        LyposEnemy lyposEnemy = GetComponent<LyposEnemy>();
+        if (lyposEnemy != null) lyposEnemy.OnDie();
     }
     public void DestroyEnemy()
     {
@@ -364,7 +372,7 @@ public class EnemyScript : MonoBehaviour, IDamageable
 
         Destroy(gameObject);
     }
-    public void ApplyStun()
+    public void ApplyStun(float time)
     {
         // DÜZELTME 1: Çakışmayı Önleme
         // Eğer halihazırda işleyen bir Stun varsa onu durdur.
@@ -373,26 +381,27 @@ public class EnemyScript : MonoBehaviour, IDamageable
             StopCoroutine(currentStunCoroutine);
         }
         // Yeni Stun'ı başlat ve değişkene ata.
-        currentStunCoroutine = StartCoroutine(Stun());
+        currentStunCoroutine = StartCoroutine(Stun(time));
     }
-    IEnumerator Stun()
+    IEnumerator Stun(float time)
     {
         ChangeMovementAnimatorParameters(false, false, false);
         isEnemyCanDesicion = false;
         FinishEnemyDealingDamage();
 
-        float multiplier = stunClipDuration / stunTime;
-        if (stunTime <= 0) multiplier = 1;
+        float multiplier = stunClipDuration / time;
+        if (time <= 0) multiplier = 1;
 
         animator.SetFloat("stunSpeed", multiplier);
 
         animator.ResetTrigger("stun");
         animator.SetTrigger("stun");
-        yield return new WaitForSeconds(stunTime);
+        yield return new WaitForSeconds(time);
 
         animator.ResetTrigger("stun");
         isEnemyCanDesicion = true;
         currentStunCoroutine = null;
+        //if (enemyHealth <= 0) TakeDamage(1);
     }
 
     void ShowOnUI(float damage)
@@ -471,6 +480,7 @@ public class EnemyScript : MonoBehaviour, IDamageable
                         dealtDamage.Add(hit.collider.gameObject);
 
                         playerHealth.ModifyHealth(-currentActiveDamage);
+                        if (playerHealth.deflectsDamage) TakeDamage(currentActiveDamage / 2); //50% Damage Deflect
 
                         Debug.Log($"Player vuruldu! Hasar: {currentActiveDamage}");
                     }

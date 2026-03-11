@@ -23629,10 +23629,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCameraStyle: 0
   cam: {fileID: 7175824088235378996}
+  freeLook: {fileID: 0}
   characterController: {fileID: 1764833590651927755}
   speed: 6
+  speedMultiplier: 1
   rotationSmoothTime: 0.1
   sprintMultiplier: 2
+  canJump: 1
   gravity: 0
   jumpForce: 5
   groundRange: 1.2
@@ -27894,7 +27897,7 @@ MonoBehaviour:
   flashlightStatsBase: {fileID: 11400000, guid: 24256ea819638ce46b984818b510831e,
     type: 2}
   flashlightStatsRuntime: {fileID: 0}
-  nightStickStatsBase: {fileID: 11400000, guid: f11f64c5703461f468d105f5fd4be326,
+  nightStickStatsBase: {fileID: 11400000, guid: 036178738b4d6294d82c0dff008681e1,
     type: 2}
   nightStickStatsRuntime: {fileID: 0}
 --- !u!114 &8423738994332926725
