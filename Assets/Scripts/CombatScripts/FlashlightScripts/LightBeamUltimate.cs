@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class LightBeamUltimate : MonoBehaviour
     private float _laserRange => WeaponStatsManager.Instance.flashlightStatsRuntime.ultimateRange;
     private float _laserDuration => WeaponStatsManager.Instance.flashlightStatsRuntime.ultimateDuration;
     private float _laserDamage => WeaponStatsManager.Instance.flashlightStatsRuntime.ultimateDamage;
+    private float _laserTick => WeaponStatsManager.Instance.flashlightStatsRuntime.ultimateTick;
     private float _ultimateHeaviness => WeaponStatsManager.Instance.flashlightStatsRuntime.ultimateHeaviness;
     private float cameraResistanceMultiplier => WeaponStatsManager.Instance.flashlightStatsRuntime.ultimateCameraResistance;
 
@@ -25,8 +27,6 @@ public class LightBeamUltimate : MonoBehaviour
     private AnimationCurve widthExpandCurve =
     AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-    [Header("Damage Tick")]
-    [SerializeField] private float damageTick = 0.25f;
     private float damageTimer;
 
     [Header("Line Renderer")]
@@ -185,34 +185,35 @@ public class LightBeamUltimate : MonoBehaviour
         Vector3 camPos = playerCam.transform.position;
         Vector3 camDir = playerCam.transform.forward;
 
-        // 1. Find visual endpoint (first hit only)
+        // 1. Find visual endpoint — stop only at solid geometry, ignore enemies
         Vector3 endPoint = camPos + camDir * _laserRange;
 
-        if (Physics.Raycast(camPos, camDir, out RaycastHit firstHit, _laserRange))
+        RaycastHit[] allHits = Physics.RaycastAll(camPos, camDir, _laserRange);
+        System.Array.Sort(allHits, (a, b) => a.distance.CompareTo(b.distance));
+
+        foreach (RaycastHit hit in allHits)
         {
-            endPoint = firstHit.point;
+            // If it's NOT a damageable, treat it as a wall and stop the beam visually
+            if (hit.collider.GetComponent<IDamageable>() == null)
+            {
+                endPoint = hit.point - camDir*0.15f;
+                break;
+            }
+            // Damageable? Skip it — beam passes through
         }
 
         // 2. Set laser positions
-        Vector3 start = firePoint.position;
-        laserLine.SetPosition(0, start);
+        laserLine.SetPosition(0, firePoint.position);
         laserLine.SetPosition(1, endPoint);
 
-        // 3. Piercing damage (RaycastAll)
+        // 3. Volumetric damage via OverlapCapsule
         if (!canDealDamage) return;
 
         damageTimer += Time.deltaTime;
-
-        if (damageTimer >= damageTick)
+        if (damageTimer >= _laserTick)
         {
             damageTimer = 0f;
-
-            RaycastHit[] hits = Physics.RaycastAll(camPos, camDir, _laserRange);
-            foreach (RaycastHit hit in hits)
-            {
-                hit.collider.GetComponent<IDamageable>()
-                    ?.TakeDamage(_laserDamage);
-            }
+            DealDamageInBeamVolume(firePoint.position, endPoint);
         }
 
         // 4. Hit VFX at visual endpoint
@@ -222,6 +223,33 @@ public class LightBeamUltimate : MonoBehaviour
                 hitVFX = Instantiate(hitEffectPrefab, endPoint, Quaternion.identity);
             else
                 hitVFX.transform.position = endPoint;
+        }
+    }
+
+    private void DealDamageInBeamVolume(Vector3 startPos, Vector3 endPos)
+    {
+        Vector3 direction = (endPos - startPos).normalized;
+
+        // Inset the capsule end-points by radius so the end-caps don't balloon out
+        Vector3 capsulePoint0 = startPos + direction * fullWidth;
+        Vector3 capsulePoint1 = endPos - direction * fullWidth;
+
+        // Guard against zero-length beams
+        if (Vector3.Dot(capsulePoint1 - startPos, direction) <= 0f)
+            capsulePoint1 = capsulePoint0;
+
+        Collider[] hitColliders = Physics.OverlapCapsule(capsulePoint0, capsulePoint1, fullWidth);
+
+        HashSet<IDamageable> alreadyHit = new HashSet<IDamageable>();
+
+        foreach (Collider col in hitColliders)
+        {
+            IDamageable damageable = col.GetComponent<IDamageable>();
+            if (damageable != null && !alreadyHit.Contains(damageable))
+            {
+                damageable.TakeDamage(_laserDamage);
+                alreadyHit.Add(damageable);
+            }
         }
     }
 
@@ -264,4 +292,110 @@ public class LightBeamUltimate : MonoBehaviour
     }
 
     #endregion
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!isLaserActive || !canDealDamage || firePoint == null) return;
+
+        Vector3 camPos = playerCam.transform.position;
+        Vector3 camDir = playerCam.transform.forward;
+
+        // Recalculate endPoint exactly as UpdateLaser does
+        Vector3 endPoint = camPos + camDir * _laserRange;
+
+        RaycastHit[] allHits = Physics.RaycastAll(camPos, camDir, _laserRange);
+        System.Array.Sort(allHits, (a, b) => a.distance.CompareTo(b.distance));
+        foreach (RaycastHit hit in allHits)
+        {
+            if (hit.collider.GetComponent<IDamageable>() == null)
+            {
+                endPoint = hit.point - camDir*0.15f;
+                break;
+            }
+        }
+
+        Vector3 startPos = firePoint.position;
+        Vector3 direction = (endPoint - startPos).normalized;
+        float radius = fullWidth;
+
+        Vector3 capsulePoint0 = startPos + direction * radius;
+        Vector3 capsulePoint1 = endPoint - direction * radius;
+        if (Vector3.Dot(capsulePoint1 - startPos, direction) <= 0f)
+            capsulePoint1 = capsulePoint0;
+
+        // Draw the capsule body as a wire cylinder approximation
+        Gizmos.color = new Color(1f, 0.2f, 0.2f, 0.4f);
+        DrawWireCapsule(capsulePoint0, capsulePoint1, radius);
+
+        // Draw the LineRenderer path so you can compare
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(startPos, endPoint);
+
+        // Draw end-cap centers
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(capsulePoint0, 0.05f);
+        Gizmos.DrawWireSphere(capsulePoint1, 0.05f);
+    }
+
+    private void DrawWireCapsule(Vector3 p0, Vector3 p1, float radius)
+    {
+        // p0 and p1 are the sphere centers of the capsule
+        Vector3 up = (p1 - p0).normalized;
+        Vector3 forward = Vector3.Slerp(Vector3.forward, -Vector3.up, 0.5f);
+        Vector3 right = Vector3.Cross(up, forward).normalized;
+        forward = Vector3.Cross(right, up).normalized;
+
+        int segments = 20;
+
+        // Draw two end-cap circles
+        DrawCircle(p0, up, radius, segments);
+        DrawCircle(p1, up, radius, segments);
+
+        // Draw 4 longitudinal lines connecting the caps
+        for (int i = 0; i < 4; i++)
+        {
+            float angle = i * Mathf.PI / 2f;
+            Vector3 offset = (Mathf.Cos(angle) * right + Mathf.Sin(angle) * forward) * radius;
+            Gizmos.DrawLine(p0 + offset, p1 + offset);
+        }
+
+        // Draw end-cap hemisphere arcs (2 planes each)
+        DrawHemisphereArc(p0, up, right, radius, segments, false);
+        DrawHemisphereArc(p0, up, forward, radius, segments, false);
+        DrawHemisphereArc(p1, up, right, radius, segments, true);
+        DrawHemisphereArc(p1, up, forward, radius, segments, true);
+    }
+
+    private void DrawCircle(Vector3 center, Vector3 normal, float radius, int segments)
+    {
+        Vector3 tangent = Vector3.Slerp(Vector3.forward, -Vector3.up, 0.5f);
+        Vector3 right = Vector3.Cross(normal, tangent).normalized;
+        Vector3 forward = Vector3.Cross(right, normal).normalized;
+
+        Vector3 prev = center + right * radius;
+        for (int i = 1; i <= segments; i++)
+        {
+            float angle = i * Mathf.PI * 2f / segments;
+            Vector3 next = center + (Mathf.Cos(angle) * right + Mathf.Sin(angle) * forward) * radius;
+            Gizmos.DrawLine(prev, next);
+            prev = next;
+        }
+    }
+
+    private void DrawHemisphereArc(Vector3 center, Vector3 up, Vector3 axis, float radius, int segments, bool flipped)
+    {
+        int half = segments / 2;
+        float flip = flipped ? 1f : -1f;
+        Vector3 prev = center + axis * radius;
+
+        for (int i = 1; i <= half; i++)
+        {
+            float angle = i * Mathf.PI / half;
+            Vector3 next = center + (Mathf.Cos(angle) * axis + flip * Mathf.Sin(angle) * up) * radius;
+            Gizmos.DrawLine(prev, next);
+            prev = next;
+        }
+    }
+#endif
 }

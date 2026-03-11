@@ -45,39 +45,29 @@ public class UIManager : MonoBehaviour, IGameStateListener
             ToggleSkillTree();
             return;
         }
-        isGamePaused = !isGamePaused;
+        
 
-        if (isGamePaused && GameManager.instance.gameState == EGameState.INGAME)
+        if (!isGamePaused && GameManager.instance.gameState == EGameState.INGAME)
         {
-            GameManager.instance.SetGameState(EGameState.PAUSE);
-            Time.timeScale = 0f;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            GameManager.instance.StopGame(EGameState.PAUSE);
         }
-        else if (!isGamePaused && GameManager.instance.gameState == EGameState.PAUSE)
+        else if (isGamePaused && GameManager.instance.gameState == EGameState.PAUSE)
         {
-            GameManager.instance.SetGameState(EGameState.INGAME);
-            Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            GameManager.instance.ContinueGame();
         }
+
+        isGamePaused = !isGamePaused;
 
     }
     public void ToggleSkillTree()
     {
-        if (GameManager.instance.gameState == EGameState.INSKILLTREE)
+        if (GameManager.instance.gameState == EGameState.INSKILLTREE) //if skill tree is already open, close it and set the game state to in game
         {
-            GameManager.instance.SetGameState(EGameState.INGAME);
-            Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            GameManager.instance.ContinueGame();
         }
         else
         {
-            GameManager.instance.SetGameState(EGameState.INSKILLTREE);
-            Time.timeScale = 0f;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            GameManager.instance.StopGame(EGameState.INSKILLTREE);
         }
     }
     public Image GetInGameHealthBar()

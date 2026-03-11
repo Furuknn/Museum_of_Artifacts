@@ -24,7 +24,7 @@ public class FlashlightWeapon : WeaponBase
 
     private const string AbilityKey = "SelectedAbility";
 
-
+    private bool canAttack = true;
 
     private void Start()
     {
@@ -35,7 +35,7 @@ public class FlashlightWeapon : WeaponBase
 
     private void OnEnable()
     {
-        UI_AbilityButton.OnAbilitySelected += ApplySelectedAbility;
+        AbilitySelectionManager.OnAbilityConfirmed += ApplySelectedAbility;
 
         // Subscribe to Input Events
         if (secondaryAttackInput != null)
@@ -45,11 +45,23 @@ public class FlashlightWeapon : WeaponBase
             secondaryAttackInput.action.performed += OnSecondaryPerformed; // Button Clicked (for wide beam)
             secondaryAttackInput.action.Enable();
         }
+
+        GameManager.OnGameContinued += OnGameContinued;
+        GameManager.OnGameStopped += OnGameStopped;
+    }
+
+    private void OnGameContinued()
+    {
+        canAttack = true;
+    }
+    private void OnGameStopped()
+    {
+        canAttack = false;
     }
 
     private void OnDisable()
     {
-        UI_AbilityButton.OnAbilitySelected -= ApplySelectedAbility;
+        AbilitySelectionManager.OnAbilityConfirmed -= ApplySelectedAbility;
         // Unsubscribe to prevent memory leaks
         if (secondaryAttackInput != null)
         {
@@ -58,6 +70,9 @@ public class FlashlightWeapon : WeaponBase
             secondaryAttackInput.action.performed -= OnSecondaryPerformed;
             secondaryAttackInput.action.Disable();
         }
+
+        GameManager.OnGameContinued -= OnGameContinued;
+        GameManager.OnGameStopped -= OnGameStopped;
     }
 
     private void Update()
@@ -96,6 +111,8 @@ public class FlashlightWeapon : WeaponBase
 
     private void OnSecondaryStarted(InputAction.CallbackContext ctx)
     {
+        if (!canAttack) return;
+
         // Button Pressed Down: Start aiming if using Bomb
         if (bombShooter.gameObject.activeSelf)
         {
@@ -105,6 +122,8 @@ public class FlashlightWeapon : WeaponBase
 
     private void OnSecondaryCanceled(InputAction.CallbackContext ctx)
     {
+        if (!canAttack) return;
+
         // Button Released: Fire if using Bomb
         if (bombShooter.enabled && isHoldingBomb)
         {
@@ -118,6 +137,8 @@ public class FlashlightWeapon : WeaponBase
 
     private void OnSecondaryPerformed(InputAction.CallbackContext ctx)
     {
+        if (!canAttack) return;
+
         // Standard "Click": Fire Wide Beam if that mode is active
         // We use Performed here because Wide Beam is instant, not hold-release
         if (wideShooter.gameObject.activeSelf)

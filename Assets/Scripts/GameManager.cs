@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
         public PlayerStatisticsSO playerStatisticsSO;
     }
 
+    public static System.Action OnGameStopped;
+    public static System.Action OnGameContinued;
+
     public CharacterData[] characters = new CharacterData[3];
 
     [SerializeField] private GameObject player;
@@ -104,38 +107,47 @@ public class GameManager : MonoBehaviour
     }
     public void InGame(int selectedCharacterIndex)
     {
-        Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        SetGameState(EGameState.INGAME);
-        SpawnChrahterAtIndex(selectedCharacterIndex);
+        ContinueGame();
+        SpawnCharacterAtIndex(selectedCharacterIndex);
     }
 
     public void GameOverWin()
     {
-        Time.timeScale = 0f;
-        ActiveControl(false);
-        SetGameState(EGameState.GAMEOVERWIN);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        StopGame(EGameState.GAMEOVERWIN);
     }
     public void GameOverLose()
     {
-        Time.timeScale = 0f;
+        StopGame(EGameState.GAMEOVERLOSE);
+    }
+
+    public void StopGame(EGameState gameState)
+    {
         ActiveControl(false);
-        SetGameState(EGameState.GAMEOVERLOSE);
-        Cursor.lockState = CursorLockMode.None;
+        SetGameState(gameState);
+        Cursor.lockState= CursorLockMode.None;
         Cursor.visible = true;
+
+        OnGameStopped?.Invoke();
+    }
+
+    public void ContinueGame()
+    {
+        ActiveControl(true);
+        SetGameState(EGameState.INGAME);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        OnGameContinued?.Invoke();
     }
 
 
-    public void SpawnChrahterAtIndex(int index)
+    public void SpawnCharacterAtIndex(int index)
     {
         currentHeroIndex = index;
         Debug.Log(characters[index].characterName + " spawned");
         player = Instantiate(characters[index].characterPrefab, spawnObjectParent.position, spawnObjectParent.rotation, spawnObjectParent.transform);
 
-        ThirdPersonController.instance.GetAnimatorCompononet();
+        ThirdPersonController.instance.GetAnimatorComponent();
         GameObject heroNameUI = GameObject.Find("HeroName");
         heroNameUI.GetComponent<TextMeshProUGUI>().text = characters[index].characterName;
         switch (index)
@@ -159,15 +171,9 @@ public class GameManager : MonoBehaviour
     public void ActiveControl(bool isActive)
     {
         if (isActive)
-        {
             freeLookCamera.GetComponent<Cinemachine.CinemachineFreeLook>().enabled = true;
-            ThirdPersonController.instance.playerInputActions.Player.Enable();
-        }
         else
-        {
             freeLookCamera.GetComponent<Cinemachine.CinemachineFreeLook>().enabled = false;
-            ThirdPersonController.instance.playerInputActions.Player.Disable();
-        }
     }
     void OnDisable()
     {
