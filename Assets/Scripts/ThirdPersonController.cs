@@ -40,10 +40,7 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField, Range(0f, 50f)] private float jumpForce = 5f;
     [SerializeField, Range(1f, 2f)] private float groundRange;
     [SerializeField] private LayerMask groundLayer;
-<<<<<<< Updated upstream
     public bool canJump = true;
-=======
->>>>>>> Stashed changes
     private bool canApplyGravity = true;
 
     [Header("Interact")]
