@@ -27,6 +27,7 @@ public class ThirdPersonController : MonoBehaviour
     public float speedMultiplier = 1f;
     [SerializeField, Range(0f, 1f)] private float rotationSmoothTime = 0.5f;
     private float rotationVelocity;
+    private bool canMove = true;
     bool isLanded = true;
 
     [Header("Sprint")]
@@ -40,16 +41,21 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField, Range(0f, 50f)] private float jumpForce = 5f;
     [SerializeField, Range(1f, 2f)] private float groundRange;
     [SerializeField] private LayerMask groundLayer;
+    private bool canJump = true;
+    private bool canApplyGravity = true;
 
     [Header("Interact")]
     [SerializeField, Range(0f, 100f)] private float camRange = 20f;
     [SerializeField, Range(0f, 100f)] private float camStartOffset = 1f;
     [SerializeField] private GameObject interactionIndicator;
+    private bool canInteract = true;
 
     [Header("Input & Animation")]
     public PlayerInputActions playerInputActions;
     [SerializeField] private Animator animator;
     public bool isAttacking;
+
+    private bool canAttack = true;
 
     void Awake()
     {
@@ -60,20 +66,48 @@ public class ThirdPersonController : MonoBehaviour
         playerInputActions.Player.MenuTrigger.performed += MenuToggle;
         playerInputActions.Player.MainAttack.performed += MainAttack;
         playerInputActions.Player.SecondaryAttack.performed += SecondaryAttack;
+        playerInputActions.Player.UltimateAttack.performed += UltimateAttack;
         playerInputActions.Player.Sprint.started += SprintStart;
         playerInputActions.Player.Sprint.canceled += SprintEnd;
 
         instance = this;
     }
 
+    private void OnGameStopped()
+    {
+        canMove = false;
+        canJump = false;
+        canInteract = false;
+        canAttack = false;
+        canApplyGravity = false;
+
+        if (animator != null)
+            animator.speed = 0f;
+    }
+    private void OnGameContinued()
+    {
+        canMove = true;
+        canJump = true;
+        canInteract = true;
+        canAttack = true;
+        canApplyGravity = true;
+
+        if(animator!=null)
+            animator.speed = 1f;
+    }
+
     void OnEnable()
     {
         playerInputActions.Player.Enable();
+        GameManager.OnGameStopped += OnGameStopped;
+        GameManager.OnGameContinued += OnGameContinued;
     }
 
     void OnDisable()
     {
         playerInputActions.Player.Disable();
+        GameManager.OnGameStopped -= OnGameStopped;
+        GameManager.OnGameContinued -= OnGameContinued;
     }
 
     void Update()
@@ -91,7 +125,9 @@ public class ThirdPersonController : MonoBehaviour
 
     void FixedUpdate()
     {
-        MovementHandle();
+        if(canMove)
+            MovementHandle();
+
         CameraRay();
     }
 
@@ -244,6 +280,9 @@ public class ThirdPersonController : MonoBehaviour
     #region Gravity
     void ApplyGravity()
     {
+
+        if (!canApplyGravity) return;
+
         if (isPlayerOnGround() && gravity < 0)
         {
             gravity = -2f;
@@ -273,6 +312,7 @@ public class ThirdPersonController : MonoBehaviour
     #region Interact & Actions
     void InteractHandle(InputAction.CallbackContext context)
     {
+        if (!canInteract) return;
         if (!context.performed) return;
         RaycastHit hit;
         if (Physics.Raycast(GetRayStartOrgin(), cam.forward, out hit, camRange))
@@ -317,6 +357,8 @@ public class ThirdPersonController : MonoBehaviour
 
     public void MainAttack(InputAction.CallbackContext context)
     {
+        if (!canAttack) return;
+
         if (context.performed)
         {
             IWeapon onHand = GetComponentInChildren<IWeapon>();
@@ -326,6 +368,8 @@ public class ThirdPersonController : MonoBehaviour
 
     public void SecondaryAttack(InputAction.CallbackContext context)
     {
+        if (!canAttack) return;
+
         if (context.performed)
         {
             IWeapon onHand = GetComponentInChildren<IWeapon>();
@@ -335,6 +379,8 @@ public class ThirdPersonController : MonoBehaviour
 
     public void UltimateAttack(InputAction.CallbackContext context)
     {
+        if (!canAttack) return;
+
         if (context.performed)
         {
             IWeapon onHand = GetComponentInChildren<IWeapon>();
@@ -342,7 +388,7 @@ public class ThirdPersonController : MonoBehaviour
         }
     }
 
-    public void GetAnimatorCompononet()
+    public void GetAnimatorComponent()
     {
         animator = GetComponentInChildren<Animator>();
     }

@@ -1,8 +1,10 @@
-# Museum\_of\_Artifacts
+# Museum of Artifacts 
 
-rogue-like game set in a modern museum.
+by Nightmare Games
 
 
 
-Current Version: 2.0 Early Beta
+This is version **2.1 early beta!**
+
+**Furkna's version**
 

@@ -518,4 +518,38 @@ public class EnemyScript : MonoBehaviour, IDamageable
         LevelManager.instance.DestroyCurrentLevel();
         LevelManager.instance.ReturnWithWinFromLevel();
     }
+
+    private void OnEnable()
+    {
+        GameManager.OnGameStopped += OnGameStopped;
+        GameManager.OnGameContinued += OnGameContinued;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStopped -= OnGameStopped;
+        GameManager.OnGameContinued -= OnGameContinued;
+    }
+
+    private void OnGameStopped()
+    {
+        isEnemyCanDesicion = false;
+        animator.speed = 0f;
+
+        // Pause stun coroutine timer by stopping and caching remaining time
+        if (currentStunCoroutine != null)
+        {
+            StopCoroutine(currentStunCoroutine);
+            currentStunCoroutine = null;
+        }
+    }
+
+    private void OnGameContinued()
+    {
+        if (!isEnemyDying)
+        {
+            isEnemyCanDesicion = true;
+        }
+        animator.speed = 1f;
+    }
 }
