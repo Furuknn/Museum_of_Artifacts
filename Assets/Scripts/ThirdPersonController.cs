@@ -40,7 +40,10 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField, Range(0f, 50f)] private float jumpForce = 5f;
     [SerializeField, Range(1f, 2f)] private float groundRange;
     [SerializeField] private LayerMask groundLayer;
+<<<<<<< Updated upstream
     public bool canJump = true;
+=======
+>>>>>>> Stashed changes
     private bool canApplyGravity = true;
 
     [Header("Interact")]
@@ -303,8 +306,21 @@ public class ThirdPersonController : MonoBehaviour
         if (!isLanded && isPlayerOnGround())
         {
             animator.SetTrigger("Land");
+            StartCoroutine(LandSlowness());
             isLanded = true;
         }
+    }
+
+    IEnumerator LandSlowness()
+    {
+        float tempSpeed = speed;
+        float tempSprintMultiplier = sprintMultiplier;
+        speed /= 2;
+        sprintMultiplier = 1;
+        yield return new WaitForSeconds(0.5f);
+        speed = tempSpeed;
+        sprintMultiplier = tempSprintMultiplier;
+
     }
     #endregion
 
