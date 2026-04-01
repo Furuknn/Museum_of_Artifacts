@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public enum CharacterType
     {
-        WARRIOR,//jop male
-        MAGE,//electro shock female
-        RANGER//flashlight non selected
+        NIGHTSTICK,
+        FLASHLIGHT,
+        TASER
     }
     [System.Serializable]
     public class CharacterData
@@ -113,10 +113,10 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(EGameState.CHARACTERSELECTION);
     }
-    public void InGame(int selectedCharacterIndex)
+    public void InGame()
     {
         ContinueGame();
-        SpawnCharacterAtIndex(selectedCharacterIndex);
+        SpawnCharacterAtIndex(currentHeroIndex);
     }
 
     public void GameOverWin()
@@ -186,6 +186,11 @@ public class GameManager : MonoBehaviour
     void OnDisable()
     {
         ThirdPersonController.Instance.playerInputActions.Player.Disable();
+    }
+
+    public void SetHeroIndex(int index)
+    {
+        currentHeroIndex = index;
     }
 
     void RemoveCurrentPlayer()

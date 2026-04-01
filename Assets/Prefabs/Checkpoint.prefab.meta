@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Checkpoint.prefab.meta
 guid: c948bfc1e4f2e4f489f6e7ef954d6c11
+========
+guid: 93add3b36ebe48749b3b4c3a57f2203b
+>>>>>>>> Scoffi's-Branch:Assets/Prefabs/UI/Ability_Description_Panel.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

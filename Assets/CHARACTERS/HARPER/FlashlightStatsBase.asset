@@ -16,11 +16,18 @@ MonoBehaviour:
   narrowSpeed: 40
   narrowLifetime: 1
   narrowCooldown: 0.3
+  canDoubleDamage: 0
+  doubleDamageChance: 0.2
   wideDamage: 12
   wideSpeed: 25
   wideLifetime: 1.8
   wideCooldown: 2
   wideExpansionMultiplier: 20
+  bombDamage: 5
+  bombTick: 0.2
+  bombLifetime: 3.5
+  bombCooldown: 8
+  bombAmount: 1
   ultimateDamage: 10
   ultimateTick: 0.25
   ultimateRange: 150
@@ -29,8 +36,3 @@ MonoBehaviour:
   ultimateWindUpTime: 1.5
   ultimateHeaviness: 2
   ultimateCameraResistance: 0.15
-  bombDamage: 5
-  bombTick: 0.2
-  bombLifetime: 3.5
-  bombCooldown: 8
-  bombAmount: 1

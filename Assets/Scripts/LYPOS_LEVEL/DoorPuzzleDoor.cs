@@ -15,6 +15,12 @@ public class DoorPuzzleDoor : MonoBehaviour, IPlayerRespawn
     {
         if (isTrapped) trap.SetActive(true);
     }
+
+    public void ToggleTrap(bool state)
+    {
+        isTrapped = state;
+        trap.SetActive(state);
+    }
     private void OnTriggerEnter(Collider other)
     {
         ThirdPersonController player = other.GetComponent<ThirdPersonController>();

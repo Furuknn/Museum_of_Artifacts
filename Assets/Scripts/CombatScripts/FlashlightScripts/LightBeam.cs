@@ -13,6 +13,9 @@ public class LightBeam: MonoBehaviour
     private float _damage;
     private float _lifetime;
     private float _cooldown;
+    private float _doubleDamageChance;
+    private bool _canDoubleDamage;
+
     public LayerMask hitLayers;
 
     [Header("Wide Beam Settings")]
@@ -51,6 +54,8 @@ public class LightBeam: MonoBehaviour
             _damage = statsRuntime.narrowDamage;
             _lifetime = statsRuntime.narrowLifetime;
             _cooldown = statsRuntime.narrowCooldown;
+            _canDoubleDamage = statsRuntime.canDoubleDamage;
+            _doubleDamageChance = statsRuntime.doubleDamageChance;
         }
         else if (beamType==BeamType.Wide)
         {
@@ -83,7 +88,7 @@ public class LightBeam: MonoBehaviour
                 EnemyScript enemy = hit.collider.gameObject.GetComponent<EnemyScript>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(_damage);
+                    enemy.TakeDamage(GetDamage());
                 }
 
                 // Destroy beam on impact
@@ -133,7 +138,12 @@ public class LightBeam: MonoBehaviour
             ApplyScaleExpansion();
 
     }
-
+    private float GetDamage()
+    {
+        if (_canDoubleDamage && Random.value < _doubleDamageChance)
+            return _damage * 2f;
+        return _damage;
+    }
     private void OnTriggerEnter(Collider other)
     {
         EnemyScript enemy = other.gameObject.GetComponent<EnemyScript>();
