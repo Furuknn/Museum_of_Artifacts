@@ -218,7 +218,7 @@ public class ThirdPersonController : MonoBehaviour
         {
             ChangeFOV(65, 0.1f);
             animator.SetBool("isSprinting", true);
-            animator.SetFloat("moveSpeed", 1.8f);
+            animator.SetFloat("moveSpeed", 1.4f);
         }
             
         
@@ -233,7 +233,7 @@ public class ThirdPersonController : MonoBehaviour
         {
             ChangeFOV(60, 0.1f);
             animator.SetBool("isSprinting", false);
-            animator.SetFloat("moveSpeed", 1.2f);
+            animator.SetFloat("moveSpeed", 1f);
         }
             
     }
@@ -312,7 +312,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         float tempSpeed = speed;
         float tempSprintMultiplier = sprintMultiplier;
-        speed /= 2;
+        //speed /= 2;
         sprintMultiplier = 1;
         yield return new WaitForSeconds(0.5f);
         speed = tempSpeed;

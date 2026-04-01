@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7675117877543777947}
   - component: {fileID: 1538548819350463730}
   - component: {fileID: 3598728530053535301}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TrappedBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

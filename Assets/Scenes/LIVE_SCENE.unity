@@ -24854,13 +24854,13 @@ MonoBehaviour:
   speedMultiplier: 1
   rotationSmoothTime: 0.1
   sprintMultiplier: 2
-  canJump: 1
-  gravity: 0
+  gravity: 5
   jumpForce: 5
-  groundRange: 1.2
+  groundRange: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  canJump: 1
   camRange: 5
   camStartOffset: 1
   interactionIndicator: {fileID: 1976594307}

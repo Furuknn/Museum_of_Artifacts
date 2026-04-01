@@ -42,12 +42,12 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
     {
         foreach (var button in buttons)
         {
-            button.OpenButton();
+            if (button.number <= buttonsNeedToPress) button.OpenButton();
         }
         yield return new WaitForSeconds(3f);
         foreach (var button in buttons)
         {
-            button.CloseButton();
+            if (button.number <= buttonsNeedToPress) button.CloseButton();
         }
     }
     public void ShuffleButtons()
