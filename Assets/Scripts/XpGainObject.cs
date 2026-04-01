@@ -89,7 +89,7 @@ public class XpGainObject : MonoBehaviour
 
     private void CollectXp()
     {
-        PlayerXpManagement.instance.ModifyXp(xpGain);
+        PlayerXpManagement.Instance.ModifyXp(xpGain);
 
         Destroy(gameObject);
     }

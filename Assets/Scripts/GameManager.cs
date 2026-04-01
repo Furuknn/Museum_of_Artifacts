@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance { get; private set; }
+    public static GameManager Instance { get; private set; }
     public enum CharacterType
     {
-        WARRIOR,//jop male
-        MAGE,//electro shock female
-        RANGER//flashlight non selected
+        NIGHTSTICK,
+        FLASHLIGHT,
+        TASER
     }
     [System.Serializable]
     public class CharacterData
@@ -41,7 +41,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        DontDestroyOnLoad(gameObject);
+        Instance = this;
+        
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         /*Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;*/
-        SetGameState(EGameState.CHARACTERSELECTION);
+        SetGameState(gameState);
         freeLookCamera = GameObject.Find("FreeLook Camera");
 
         ActiveControl(false);
@@ -59,6 +61,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void OnDestroy()
+    {
+        SetGameState(gameState);
+        Debug.Log("GameManager imha ediliyor! İz sürülüyor...", this);
+        Debug.Log(System.Environment.StackTrace);
+    }
 
     void Update()
     {
@@ -105,10 +113,10 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(EGameState.CHARACTERSELECTION);
     }
-    public void InGame(int selectedCharacterIndex)
+    public void InGame()
     {
         ContinueGame();
-        SpawnCharacterAtIndex(selectedCharacterIndex);
+        SpawnCharacterAtIndex(currentHeroIndex);
     }
 
     public void GameOverWin()
@@ -147,18 +155,18 @@ public class GameManager : MonoBehaviour
         Debug.Log(characters[index].characterName + " spawned");
         player = Instantiate(characters[index].characterPrefab, spawnObjectParent.position, spawnObjectParent.rotation, spawnObjectParent.transform);
 
-        ThirdPersonController.instance.GetAnimatorComponent();
+        ThirdPersonController.Instance.GetAnimatorComponent();
         GameObject heroNameUI = GameObject.Find("HeroName");
         heroNameUI.GetComponent<TextMeshProUGUI>().text = characters[index].characterName;
         switch (index)
         {
             case 0://nighrstick cam
-                ThirdPersonController.instance.currentCameraStyle = ThirdPersonController.CameraStyle.Combat;
-                Debug.Log($"SpawnChrahterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.instance.currentCameraStyle} sistemine değiştri");
+                ThirdPersonController.Instance.currentCameraStyle = ThirdPersonController.CameraStyle.Combat;
+                Debug.Log($"SpawnChrahterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.Instance.currentCameraStyle} sistemine değiştri");
                 break;
             case 1://beam cam
-                ThirdPersonController.instance.currentCameraStyle = ThirdPersonController.CameraStyle.Shooter;
-                Debug.Log($"SpawnChrahterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.instance.currentCameraStyle} sistemine değiştri");
+                ThirdPersonController.Instance.currentCameraStyle = ThirdPersonController.CameraStyle.Shooter;
+                Debug.Log($"SpawnChrahterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.Instance.currentCameraStyle} sistemine değiştri");
                 break;
         }
         ActiveControl(true);
@@ -177,7 +185,12 @@ public class GameManager : MonoBehaviour
     }
     void OnDisable()
     {
-        ThirdPersonController.instance.playerInputActions.Player.Disable();
+        ThirdPersonController.Instance.playerInputActions.Player.Disable();
+    }
+
+    public void SetHeroIndex(int index)
+    {
+        currentHeroIndex = index;
     }
 
     void RemoveCurrentPlayer()

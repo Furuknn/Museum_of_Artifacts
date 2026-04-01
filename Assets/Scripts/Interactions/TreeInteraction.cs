@@ -8,19 +8,19 @@ public class TreeInteraction : MonoBehaviour, IInteractable
     public void Interact()
     {
 
-        if (LevelManager.instance != null)
+        if (LevelManager.Instance != null)
         {
-            Debug.Log($"Intreaction with tree and museum artifacts: {LevelManager.instance.isMuseumArtifactsCursedCheck()}");
-            if (!LevelManager.instance.isMuseumArtifactsCursedCheck())
+            Debug.Log($"Intreaction with tree and museum artifacts: {LevelManager.Instance.isMuseumArtifactsCursedCheck()}");
+            if (!LevelManager.Instance.isMuseumArtifactsCursedCheck())
             {
-                LevelManager.instance.ArtifectsInMuseum();
+                LevelManager.Instance.ArtifectsInMuseum();
                 Debug.Log("Interaction: Agacla etkilesime gecildi: Artifactlar curselendi");
 
                 if (!apples.activeSelf)
                     apples.SetActive(true);
             }
 
-            UIManager.instance.ToggleSkillTree();
+            UIManager.Instance.ToggleSkillTree();
             Debug.Log("Skill Tree açıldı");
         }
 

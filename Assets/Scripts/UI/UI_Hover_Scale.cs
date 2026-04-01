@@ -50,6 +50,7 @@ public class UI_Hover_Scale : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (abilityKeyName == null) return;
         if (IsChosen)
         {
             // clicking again deselects

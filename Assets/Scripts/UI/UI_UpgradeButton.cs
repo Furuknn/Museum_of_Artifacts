@@ -17,6 +17,9 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private string descriptionText;
     [SerializeField] private int skillCost;
 
+    [Header("Upgrades unlocked after purchasing this one")]
+    [SerializeField] private List<UI_UpgradeButton> unlocksOnPurchase;
+
     private string numberColor = "#4AFF4A";
 
     public string UpgradeCode => upgradeCode;
@@ -28,13 +31,31 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private void Awake()
     {
-        button= GetComponent<Button>();
-        image= GetComponent<Image>();
-
+        button = GetComponent<Button>();
+        image = GetComponent<Image>();
         ApplyDescription();
         RefreshFromSave();
-
+    }
+    private void OnEnable()
+    {
         SkillTreeManager.OnUpgradeUnlocked += OnUpgradeUnlocked;
+    }
+    private void OnDisable()
+    {
+        SkillTreeManager.OnUpgradeUnlocked -= OnUpgradeUnlocked;
+    }
+
+    private void Start()
+    {
+        // If this upgrade itself is already purchased, skip locking its children
+        if (PlayerPrefs.GetInt(upgradeCode, 0) == 1) return;
+
+        foreach (var next in unlocksOnPurchase)
+        {
+            if (next == null) continue;
+            if (PlayerPrefs.GetInt(next.UpgradeCode, 0) == 0)
+                next.Lock();
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -49,7 +70,21 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private void OnUpgradeUnlocked(string unlockedUpgrade)
     {
         if (unlockedUpgrade == upgradeCode)
+        {
             RefreshFromSave();
+            foreach (var next in unlocksOnPurchase)
+                if (next != null) next.Unlock();
+        }
+    }
+
+    public void Lock()
+    {
+        button.interactable = false;
+    }
+
+    public void Unlock()
+    {
+        button.interactable = true;
     }
 
     public void ApplyDescription()
@@ -69,11 +104,6 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
             if (image != null)
                 image.color = Color.green;
         }
-    }
-
-    public void Lock()
-    {
-        button.interactable = false;
     }
 
     private void OnDestroy()

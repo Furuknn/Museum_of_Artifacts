@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelScenes/sculptScene.unity
     guid: e1ff9600afc965c4fb7ed36e65bf623f
+  - enabled: 1
+    path: Assets/Scenes/Scoffis_World.unity
+    guid: 8363b18f747099e4dbfc01beaab9637a
+  - enabled: 1
+    path: Assets/Scenes/LevelScenes/lyposScene.unity
+    guid: ffa06cc9f51894e4a886cc55fa422e53
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 7fdc7d9aa0b885e49b8d4d36f41bf207,
       type: 3}

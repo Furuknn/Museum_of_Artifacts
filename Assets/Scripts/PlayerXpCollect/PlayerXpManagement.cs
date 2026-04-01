@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PlayerXpManagement : MonoBehaviour
 {
-    public static PlayerXpManagement instance { get; private set; }
+    public static PlayerXpManagement Instance { get; private set; }
     [SerializeField] private float playerXp;
     [SerializeField] private float xpMultiplier;
     [SerializeField] private float xpReqToLvlUp;
@@ -20,16 +20,21 @@ public class PlayerXpManagement : MonoBehaviour
     private int increaseAmount = 1;
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         levelPoint = 0;
-        inGameXpBarUI = UIManager.instance.GetInGameXpBar();
-        inGameLevelPointUI = UIManager.instance.GetInGameLevelPointText();
+       
+    }
+
+    private void Start()
+    {
+        inGameXpBarUI = UIManager.Instance.GetInGameXpBar();
+        inGameLevelPointUI = UIManager.Instance.GetInGameLevelPointText();
         Debug.Log($"xpBar UI: {inGameXpBarUI.gameObject.name}");
-        xpReqToLvlUp = GameManager.instance.characters[GameManager.instance.currentHeroIndex].playerStatisticsSO.xpRequiredToLevelUp;
-        xpMultiplier = GameManager.instance.characters[GameManager.instance.currentHeroIndex].playerStatisticsSO.xpMultiplier;
+        xpReqToLvlUp = GameManager.Instance.characters[GameManager.Instance.currentHeroIndex].playerStatisticsSO.xpRequiredToLevelUp;
+        xpMultiplier = GameManager.Instance.characters[GameManager.Instance.currentHeroIndex].playerStatisticsSO.xpMultiplier;
         Debug.Log($"XP required to level up: {xpReqToLvlUp}");
         UpdateXpUI();
     }

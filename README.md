@@ -1,10 +1,10 @@
-# Museum of Artifacts 
+# Museum of Artifacts
 
 by Nightmare Games
 
 
 
-This is version **2.1 early beta!**
+This is version **3.0 Beta!**
 
-**Furkna's version**
+**Furkna version**
 

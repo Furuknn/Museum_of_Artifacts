@@ -1673,6 +1673,7 @@ GameObject:
   - component: {fileID: 3707874234084129845}
   - component: {fileID: 1543513631936661054}
   - component: {fileID: 8290252841968405823}
+  - component: {fileID: 8621774447896291828}
   m_Layer: 7
   m_Name: Enemy_Goblin
   m_TagString: Untagged
@@ -1829,6 +1830,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decaySpeed: 0.25
   maxScale: 0.08
+--- !u!54 &8621774447896291828
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475514327369348805}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6685026148245386863
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,8 +22,8 @@ public class LevelObjectInteraction : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
-        LevelManager.instance.SaveLastInteractArtifact(this.gameObject.GetComponent<LevelObjectInteraction>());
-        LevelManager.instance.ModifyFormerPositionForReturn(this.transform.position + (this.transform.forward * 3));
+        LevelManager.Instance.SaveLastInteractArtifact(this.gameObject.GetComponent<LevelObjectInteraction>());
+        LevelManager.Instance.ModifyFormerPositionForReturn(this.transform.position + (this.transform.forward * 3));
         Debug.Log($"Obje ile etkileşime geçildi {loadToScene} yükleniyor");
 
         StartCoroutine(LoadSceneAndTeleport());
@@ -36,7 +36,7 @@ public class LevelObjectInteraction : MonoBehaviour, IInteractable
     IEnumerator LoadSceneAndTeleport()
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(loadToScene, LoadSceneMode.Additive);
-        LevelManager.instance.ModifyCurrentLevelName(loadToScene);
+        LevelManager.Instance.ModifyCurrentLevelName(loadToScene);
         while (!asyncOperation.isDone)
         {
             yield return null;
@@ -49,11 +49,11 @@ public class LevelObjectInteraction : MonoBehaviour, IInteractable
     }
     private void TeleportPlayerToLevel()
     {
-        var player = ThirdPersonController.instance;
+        var player = ThirdPersonController.Instance;
         GameObject spawnObj = GameObject.Find("PlayerSpawnPoint");
         Vector3 targetPos = spawnObj.transform.position + new Vector3(0, tpPlayerPosY, 0);
 
-        LevelManager.instance.ActiveMuseum(false);
+        LevelManager.Instance.ActiveMuseum(false);
         CharacterController cc = player.GetComponent<CharacterController>();
         if (cc != null)
         {

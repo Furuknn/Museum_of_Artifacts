@@ -16,6 +16,16 @@ public class AbilitySelectionManager : MonoBehaviour
 
     private void Awake()
     {
+        if (PlayerPrefs.HasKey(AbilityKey))
+        {
+            this.gameObject.SetActive(false);
+            //OnAbilityConfirmed?.Invoke();
+        }
+        else
+        {
+            this.gameObject.SetActive(true);
+        }
+
         if (confirmButton == null) Debug.LogWarning("null!!");
         Instance = this;
         confirmButton.interactable = false;

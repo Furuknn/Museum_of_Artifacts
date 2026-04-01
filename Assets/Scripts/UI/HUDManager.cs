@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
+    public static HUDManager hudManager;
     [SerializeField] private List<Image> cooldownIcons;
     [SerializeField] private List<TextMeshProUGUI> cooldownTexts;
 
@@ -16,6 +17,7 @@ public class HUDManager : MonoBehaviour
 
     private void Start()
     {
+        if (hudManager == null) hudManager = this;
         foreach(Image icon in cooldownIcons)
         {
             icon.fillAmount = 0;

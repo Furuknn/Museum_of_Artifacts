@@ -4,7 +4,7 @@ using Image = UnityEngine.UI.Image;
 
 public class UIManager : MonoBehaviour, IGameStateListener
 {
-    public static UIManager instance { get; private set; }
+    public static UIManager Instance { get; private set; }
     [Header("Panels")]
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject gameIntro;
@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour, IGameStateListener
 
     void Awake()
     {
-        instance = this;
+        Instance = this;
     }
     public void GameStateChangedCallBack(EGameState gameState)
     {
@@ -40,20 +40,20 @@ public class UIManager : MonoBehaviour, IGameStateListener
     private bool isGamePaused = false;
     public void PauseMenuToggle()
     {
-        if (GameManager.instance.gameState == EGameState.INSKILLTREE)
+        if (GameManager.Instance.gameState == EGameState.INSKILLTREE)
         {
             ToggleSkillTree();
             return;
         }
         
 
-        if (!isGamePaused && GameManager.instance.gameState == EGameState.INGAME)
+        if (!isGamePaused && GameManager.Instance.gameState == EGameState.INGAME)
         {
-            GameManager.instance.StopGame(EGameState.PAUSE);
+            GameManager.Instance.StopGame(EGameState.PAUSE);
         }
-        else if (isGamePaused && GameManager.instance.gameState == EGameState.PAUSE)
+        else if (isGamePaused && GameManager.Instance.gameState == EGameState.PAUSE)
         {
-            GameManager.instance.ContinueGame();
+            GameManager.Instance.ContinueGame();
         }
 
         isGamePaused = !isGamePaused;
@@ -61,13 +61,13 @@ public class UIManager : MonoBehaviour, IGameStateListener
     }
     public void ToggleSkillTree()
     {
-        if (GameManager.instance.gameState == EGameState.INSKILLTREE) //if skill tree is already open, close it and set the game state to in game
+        if (GameManager.Instance.gameState == EGameState.INSKILLTREE) //if skill tree is already open, close it and set the game state to in game
         {
-            GameManager.instance.ContinueGame();
+            GameManager.Instance.ContinueGame();
         }
         else
         {
-            GameManager.instance.StopGame(EGameState.INSKILLTREE);
+            GameManager.Instance.StopGame(EGameState.INSKILLTREE);
         }
     }
     public Image GetInGameHealthBar()
