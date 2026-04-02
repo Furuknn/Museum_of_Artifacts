@@ -172,8 +172,8 @@ public class EnemyScript : MonoBehaviour, IDamageable
         switch (currentState)
         {
             case State.idle:
-                Patrol();
-                if (distanceToPlayer <= chaseRange)
+                //Patrol();
+                //if (distanceToPlayer <= chaseRange)
                     currentState = State.chase;
                 break;
 

@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc8db4f28cdeb24880e77c0e061385e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossPrefab: {fileID: 1633968217728865667, guid: 4ccc5e1efb8c1c14fbee34729188283f,
+  bossPrefab: {fileID: 1633968217728865667, guid: 48156723455104942923881e76154a0a,
     type: 3}
   bossSpawnPosition: {fileID: 548582427}
   afterUseDestroy: 0

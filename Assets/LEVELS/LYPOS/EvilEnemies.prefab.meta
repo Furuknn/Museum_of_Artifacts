@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/LEVELS/LYPOS/EvilEnemies.prefab.meta
 guid: fe6d72a995f97a047b927a2a3b3f3806
+========
+guid: 2dfedab81fad32747bd133583d9ef008
+>>>>>>>> Furkna:Assets/LEVELS/LYPOS/FloorButton.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

@@ -57,14 +57,14 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
     }
     public void ShuffleButtons()
     {
-        // 1. Buton sayýsý kadar bir sayý listesi oluþtur (1, 2, 3...)
+        // 1. Buton sayï¿½sï¿½ kadar bir sayï¿½ listesi oluï¿½tur (1, 2, 3...)
         List<int> numbers = new List<int>();
         for (int i = 1; i <= buttons.Count; i++)
         {
             numbers.Add(i);
         }
 
-        // 2. Sayý listesini rastgele karýþtýr (Fisher-Yates Algorithm)
+        // 2. Sayï¿½ listesini rastgele karï¿½ï¿½tï¿½r (Fisher-Yates Algorithm)
         for (int i = 0; i < numbers.Count; i++)
         {
             int temp = numbers[i];
@@ -73,16 +73,16 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
             numbers[randomIndex] = temp;
         }
 
-        // 3. Karýþtýrýlmýþ sayýlarý butonlara ata
+        // 3. Karï¿½ï¿½tï¿½rï¿½lmï¿½ï¿½ sayï¿½larï¿½ butonlara ata
         for (int i = 0; i < buttons.Count; i++)
         {
             buttons[i].InitializeButton(numbers[i]);
 
-            // Görsel geri bildirim için buton üzerindeki yazýyý güncelleyebilirsin
+            // Gï¿½rsel geri bildirim iï¿½in buton ï¿½zerindeki yazï¿½yï¿½ gï¿½ncelleyebilirsin
             // buttons[i].UpdateUI(); 
         }
 
-        Debug.Log("Buton numaralarý baþarýyla karýþtýrýldý!");
+        Debug.Log("Buton numaralarï¿½ baï¿½arï¿½yla karï¿½ï¿½tï¿½rï¿½ldï¿½!");
     }
 
     public void CheckButton(int x)

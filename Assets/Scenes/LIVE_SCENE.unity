@@ -3886,8 +3886,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 534.3801, y: 853.0054}
+  m_AnchoredPosition: {x: 0, y: 3.4498}
+  m_SizeDelta: {x: 420.318, y: 859.9056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &266690344
 MonoBehaviour:
@@ -5341,8 +5341,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.7313766, y: 0}
-  m_SizeDelta: {x: 587, y: 937}
+  m_AnchoredPosition: {x: 0.0000076294, y: -30.004}
+  m_SizeDelta: {x: 428.6694, y: 876.9915}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &438204017
 MonoBehaviour:
@@ -9820,8 +9820,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 618.9976, y: -30.325}
-  m_SizeDelta: {x: 496.385, y: 792.36}
+  m_AnchoredPosition: {x: 600, y: -15.217598}
+  m_SizeDelta: {x: 439.5876, y: 822.5708}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &787598069
 MonoBehaviour:
@@ -13951,8 +13951,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -600, y: -26.12912}
-  m_SizeDelta: {x: 501.6421, y: 800.7471}
+  m_AnchoredPosition: {x: -600, y: -13.4111}
+  m_SizeDelta: {x: 438.3833, y: 826.1838}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1180730366
 MonoBehaviour:
@@ -19351,7 +19351,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 3349481329647215731, guid: 4e342c2e9b19c9b409b45e40a0795010,
+      objectReference: {fileID: -1094923612794619989, guid: f976469cbe6f0214cb0ba4c71e3b6590,
         type: 3}
     - target: {fileID: -7511558181221131132, guid: bd35f8513a136354ca79db1802dc8028,
         type: 3}
@@ -24244,11 +24244,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553881257601859298, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
-      propertyPath: isAbility
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8553881257601859298, guid: 93add3b36ebe48749b3b4c3a57f2203b,
-        type: 3}
       propertyPath: abilityKeyName
       value: LightBomb
       objectReference: {fileID: 0}
@@ -28134,7 +28129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff9a7dc9bfe09b4b9e96ba43a82c09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCameraStyle: 0
+  currentCameraStyle: 1
   cam: {fileID: 7175824088235378996}
   freeLook: {fileID: 0}
   characterController: {fileID: 1764833590651927755}

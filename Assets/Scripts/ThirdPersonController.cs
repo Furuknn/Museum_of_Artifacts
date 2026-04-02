@@ -242,12 +242,12 @@ public class ThirdPersonController : MonoBehaviour
     public void RotatePlayerToCameraForward()
     {
         Vector3 camForward = Camera.main.transform.forward;
-        camForward.x = 0f;
+        camForward.y = 0f; // was camForward.x = 0f
 
         //if (camForward.sqrMagnitude < 0.001f) return;
 
         Quaternion targetRotation = Quaternion.LookRotation(camForward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f); // Hızlı dönüş
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
     }
     #endregion
 
