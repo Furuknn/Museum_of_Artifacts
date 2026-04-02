@@ -7,7 +7,7 @@ public class DoorPuzzleDoor : MonoBehaviour, IPlayerRespawn
 {
     public bool isTrapped = true;
     public GameObject door1;
-    public GameObject door2;
+    //public GameObject door2;
     public GameObject trap;
     bool isOpened = false;
 
@@ -47,13 +47,13 @@ public class DoorPuzzleDoor : MonoBehaviour, IPlayerRespawn
     void OpenDoor()
     {
         door1.transform.DOLocalRotate(new Vector3(0, 90, 0), 1f).SetEase(Ease.OutBounce);
-        door2.transform.DOLocalRotate(new Vector3(0, -90, 0), 1f).SetEase(Ease.OutBounce);
+        //door2.transform.DOLocalRotate(new Vector3(0, -90, 0), 1f).SetEase(Ease.OutBounce);
         isOpened = true;
     }
     void CloseDoor()
     {
         door1.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f).SetEase(Ease.OutBounce);
-        door2.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f).SetEase(Ease.OutBounce);
+        //door2.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f).SetEase(Ease.OutBounce);
         isOpened = false;
     }
 }

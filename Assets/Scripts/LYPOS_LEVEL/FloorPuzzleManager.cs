@@ -6,6 +6,7 @@ using UnityEngine;
 public class FloorPuzzleManager : MonoBehaviour, IInteractable
 {
     public static FloorPuzzleManager Instance;
+    public Transform room;
     public GameObject resetButton;
     public List<FloorPuzzleButton> buttons;
     public List<int> pressedNumbers;
@@ -14,6 +15,8 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
     float enemiesMultiplier = 1;
     public List<GameObject> enemyGroups;
     public bool isDone = false;
+    public Transform enemyParent;
+    public GameObject enemies;
 
     private void Awake()
     {
@@ -42,7 +45,7 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
     {
         foreach (var button in buttons)
         {
-            button.OpenButton();
+            //button.OpenButton();
             if (button.number <= buttonsNeedToPress) button.OpenButton();
         }
         yield return new WaitForSeconds(3f);
@@ -111,6 +114,8 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
 
     void SpawnEnemies()
     {
+        Instantiate(enemies, enemyParent);
+        return;
         enemiesToSpawn = Mathf.Pow(enemiesToSpawn, enemiesMultiplier);
 
         enemyGroups[(int)enemiesMultiplier].SetActive(true);
@@ -132,5 +137,7 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
             button.isInteractable = false;
         }
         resetButton.transform.DOMoveY(transform.position.y+1.5f, 4f);
+        room.DOLocalRotate(new Vector3(0, 90, 0), 4f);
+
     }
 }

@@ -3908,6 +3908,7 @@ MonoBehaviour:
   image: {fileID: 266690345}
   pressedColor: {r: 1, g: 1, b: 1, a: 1}
   abilityKeyName: 
+  isAbility: 0
 --- !u!114 &266690345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9841,6 +9842,7 @@ MonoBehaviour:
   image: {fileID: 787598070}
   pressedColor: {r: 1, g: 1, b: 1, a: 1}
   abilityKeyName: 
+  isAbility: 0
 --- !u!114 &787598070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13971,6 +13973,7 @@ MonoBehaviour:
   image: {fileID: 1180730367}
   pressedColor: {r: 1, g: 1, b: 1, a: 1}
   abilityKeyName: 
+  isAbility: 0
 --- !u!114 &1180730367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18190,6 +18193,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8553881257601859298, guid: 93add3b36ebe48749b3b4c3a57f2203b,
+        type: 3}
+      propertyPath: isAbility
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8553881257601859298, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -24236,6 +24244,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553881257601859298, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
+      propertyPath: isAbility
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8553881257601859298, guid: 93add3b36ebe48749b3b4c3a57f2203b,
+        type: 3}
       propertyPath: abilityKeyName
       value: LightBomb
       objectReference: {fileID: 0}
@@ -28130,13 +28143,13 @@ MonoBehaviour:
   rotationSmoothTime: 0.1
   sprintMultiplier: 2
   gravity: 5
-  jumpForce: 5
+  jumpForce: 8
   groundRange: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   canJump: 1
-  camRange: 5
+  camRange: 7
   camStartOffset: 1
   interactionIndicator: {fileID: 1976594307}
   animator: {fileID: 0}
@@ -29104,6 +29117,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553881257601859298, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
+      propertyPath: isAbility
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8553881257601859298, guid: 93add3b36ebe48749b3b4c3a57f2203b,
+        type: 3}
       propertyPath: abilityKeyName
       value: WideBeam
       objectReference: {fileID: 0}
@@ -29671,7 +29689,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_MaxSpeed: 800
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X

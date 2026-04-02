@@ -28,6 +28,6 @@ public class DoorPuzzleManager : MonoBehaviour, IPlayerRespawn
 
     public void OnPlayerRespawn()
     {
-        ShuffleDoors();
+        //ShuffleDoors();
     }
 }

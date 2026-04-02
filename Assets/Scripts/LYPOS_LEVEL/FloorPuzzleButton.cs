@@ -24,12 +24,12 @@ public class FloorPuzzleButton : MonoBehaviour, IInteractable
 
     public void OpenButton()
     {
-        transform.DORotateQuaternion(Quaternion.Euler(0,0,0), 1f);
+        transform.DOLocalRotate(new Vector3(180,0,0), 1f);
     }
 
     public void CloseButton()
     {
-        transform.DORotateQuaternion(Quaternion.Euler(0, 0, 180), 1f);
+        transform.DOLocalRotate(new Vector3(0, 0, 0), 1f);
     }
     IEnumerator PressButton()
     {

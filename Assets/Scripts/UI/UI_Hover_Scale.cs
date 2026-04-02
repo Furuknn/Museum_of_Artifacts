@@ -20,7 +20,7 @@ public class UI_Hover_Scale : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     [Tooltip("Leave empty if this is not an ability")]
     public string abilityKeyName;
-
+    public bool isAbility = false;
     public bool IsChosen { get; private set; }
 
     private Vector3 originalScale;
@@ -50,7 +50,7 @@ public class UI_Hover_Scale : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (abilityKeyName == null) return;
+        if (!isAbility) return;
         if (IsChosen)
         {
             // clicking again deselects

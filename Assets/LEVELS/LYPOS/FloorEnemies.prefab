@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 726284483284318792}
   m_Layer: 0
-  m_Name: EvilEnemies
+  m_Name: FloorEnemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,8 +33,102 @@ Transform:
   - {fileID: 191073785694882012}
   - {fileID: 2361458824721518127}
   - {fileID: 5737358792040281513}
+  - {fileID: 3919681844814819621}
+  - {fileID: 539926267652462992}
+  - {fileID: 5368724626003594625}
+  - {fileID: 4265741987006940772}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &681654503631333072
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 726284483284318792}
+    m_Modifications:
+    - target: {fileID: 9156094158545664191, guid: 78230d655d22cf74c8f42e9ff7f72837,
+        type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2014969234146309581, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.198679
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.16718826
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9054272
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.42450157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -50.238
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475514327369348805, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_Name
+      value: Lypos_Goblin_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771075755229552384, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 5159976747264422781, guid: f976469cbe6f0214cb0ba4c71e3b6590,
+        type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d6f861d62cb477a4b922e0dca3462e0d, type: 3}
+--- !u!4 &539926267652462992 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 681654503631333072}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &913484861310105500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,6 +309,186 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3372663367370191215}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3835229052175317284
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 726284483284318792}
+    m_Modifications:
+    - target: {fileID: 9156094158545664191, guid: 78230d655d22cf74c8f42e9ff7f72837,
+        type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2014969234146309581, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.9777762
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.46659
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9054272
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.42450157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -50.238
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475514327369348805, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_Name
+      value: Lypos_Goblin_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771075755229552384, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -2604980750307736924, guid: f976469cbe6f0214cb0ba4c71e3b6590,
+        type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d6f861d62cb477a4b922e0dca3462e0d, type: 3}
+--- !u!4 &4265741987006940772 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3835229052175317284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4066201679984479845
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 726284483284318792}
+    m_Modifications:
+    - target: {fileID: 9156094158545664191, guid: 78230d655d22cf74c8f42e9ff7f72837,
+        type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2014969234146309581, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.8882732
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.55794203
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9054272
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.42450157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -50.238
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475514327369348805, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_Name
+      value: Lypos_Goblin_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771075755229552384, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4748508668008586140, guid: aa36f5a30163adf40b24da78d614f5c6,
+        type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d6f861d62cb477a4b922e0dca3462e0d, type: 3}
+--- !u!4 &3919681844814819621 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4066201679984479845}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4725608964369681129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -304,6 +578,96 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
     type: 3}
   m_PrefabInstance: {fileID: 4725608964369681129}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4938768355172053697
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 726284483284318792}
+    m_Modifications:
+    - target: {fileID: 9156094158545664191, guid: 78230d655d22cf74c8f42e9ff7f72837,
+        type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2014969234146309581, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.19793165
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.4343615
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9054272
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.42450157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -50.238
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475514327369348805, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_Name
+      value: Lypos_Goblin_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771075755229552384, guid: d6f861d62cb477a4b922e0dca3462e0d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 6390658260179540656, guid: 9acaa473fe1691c44904128723477599,
+        type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d6f861d62cb477a4b922e0dca3462e0d, type: 3}
+--- !u!4 &5368724626003594625 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4938768355172053697}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7669564246388128426
 PrefabInstance:

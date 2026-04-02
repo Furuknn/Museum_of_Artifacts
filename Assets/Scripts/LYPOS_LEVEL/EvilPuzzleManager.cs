@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class EvilPuzzleManager : MonoBehaviour, IInteractable
 {
     public static EvilPuzzleManager Instance;
+    public Transform room;
+    public GameObject puzzlePiece;
     public GameObject door;
     public GameObject enemies;
     public Transform enemyParent;
@@ -156,6 +159,7 @@ public class EvilPuzzleManager : MonoBehaviour, IInteractable
 
     void LoseEvent()
     {
+        //door.SetActive(true);
         isInteractable = false;
         enemyParent.gameObject.SetActive(true);
         foreach (EvilPuzzleSymbol symbol in symbols)
@@ -171,6 +175,8 @@ public class EvilPuzzleManager : MonoBehaviour, IInteractable
     void WinEvent()
     {
         door.SetActive(false);
+        puzzlePiece.SetActive(true);
+        room.DOLocalRotate(new Vector3(0, -359, 0), 4f);
         isDone = true;
     }
 }
