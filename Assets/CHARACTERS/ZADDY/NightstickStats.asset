@@ -17,19 +17,19 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 7
   isSmashActive: 0
-  smashGroundDamage: 50
-  smashGroundStunTime: 2
+  smashGroundDamage: 20
+  smashGroundStunTime: 3
   smashGroundRadius: 6
-  smashGroundCooldown: 8
-  isSpinActive: 0
-  spinDamage: 20
+  smashGroundCooldown: 15
+  isSpinActive: 1
+  spinDamage: 8
   spinRadius: 1.5
   spinDuration: 4
   spinSpeed: 1.8
   spinPlayerSpeed: 1.5
   spinHealthRegen: 0
   spinCooldown: 12
-  isDashActive: 1
+  isDashActive: 0
   dashDamage: 30
   dashRange: 5
   dashWidth: 1

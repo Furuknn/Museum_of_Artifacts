@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/3D_Assets/Tree_03.fbx.meta
 guid: 429b5b50ad6147a468dd6059632cc72b
+========
+guid: 9652b94e61e5ac44294c673d3d27f8fc
+>>>>>>>> Scoffi's-Branch:Assets/CHARACTERS/HARPER/FlashUltimate_Cylinder.fbx.meta
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []

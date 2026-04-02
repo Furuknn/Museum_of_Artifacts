@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/CHARACTERS/ZADDY.meta
 guid: f89c37aabcddd3e4a8e25ef502b4a34c
+========
+guid: d3dd269a28479d04297f8818dc41438b
+>>>>>>>> Scoffi's-Branch:Assets/CHARACTERS/HARPER.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

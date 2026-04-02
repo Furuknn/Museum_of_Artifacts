@@ -132,6 +132,12 @@ public class NightstickWeapon : WeaponBase
             {
                 enemy.TakeDamage(_mainAttackDamage);
             }
+
+            LyposBoss lypos = hit.collider.gameObject.GetComponentInParent<LyposBoss>();
+            if (lypos != null)
+            {
+                lypos.TakeDamage(_mainAttackDamage);
+            }
         }
         HUDManager.hudManager.StartCooldown(0.6f, 0);
     }
@@ -219,6 +225,12 @@ public class NightstickWeapon : WeaponBase
                 // Eðer EnemyScript içinde Stun metodun varsa:
                 
             }
+
+            LyposBoss lypos = hitCollider.GetComponentInParent<LyposBoss>();
+            if (lypos != null)
+            {
+                lypos.TakeDamage(_smashGroundDamage);
+            }
         }
 
         smashEffect.transform.parent = null;
@@ -275,6 +287,14 @@ public class NightstickWeapon : WeaponBase
                 enemy.TakeDamage(_spinDamage);
 
                 if(_spinHealthRegen) PlayerHealthManager.Instance.ModifyHealth(PlayerHealthManager.Instance.GetMaxHealth()*3/100);
+            }
+
+            LyposBoss lypos = hitCollider.GetComponentInParent<LyposBoss>();
+            if (lypos != null)
+            {
+                lypos.TakeDamage(_spinDamage);
+
+                if (_spinHealthRegen) PlayerHealthManager.Instance.ModifyHealth(PlayerHealthManager.Instance.GetMaxHealth() * 3 / 100);
             }
         }
     }
@@ -358,6 +378,12 @@ public class NightstickWeapon : WeaponBase
             {
                 enemy.TakeDamage(_dashDamage);
                 if (enemy.GetHealth() > 0) enemy.ApplyStun(0.5f);
+            }
+
+            LyposBoss lypos = other.gameObject.GetComponent<LyposBoss>();
+            if (lypos != null)
+            {
+                lypos.TakeDamage(_dashDamage);
             }
         }
     }

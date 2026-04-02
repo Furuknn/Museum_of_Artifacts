@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/CHARACTERS.meta
 guid: aa29ab4559cee4f45948044b79c156d9
+========
+guid: 3e0585d6027533e45a05a23dcc5b16b2
+>>>>>>>> Scoffi's-Branch:Assets/CHARACTERS/HARPER/AnimationClips.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

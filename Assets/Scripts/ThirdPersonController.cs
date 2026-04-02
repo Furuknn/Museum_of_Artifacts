@@ -218,7 +218,7 @@ public class ThirdPersonController : MonoBehaviour
         {
             ChangeFOV(65, 0.1f);
             animator.SetBool("isSprinting", true);
-            animator.SetFloat("moveSpeed", 1.8f);
+            animator.SetFloat("moveSpeed", 1.4f);
         }
             
         
@@ -233,7 +233,7 @@ public class ThirdPersonController : MonoBehaviour
         {
             ChangeFOV(60, 0.1f);
             animator.SetBool("isSprinting", false);
-            animator.SetFloat("moveSpeed", 1.2f);
+            animator.SetFloat("moveSpeed", 1f);
         }
             
     }
@@ -242,12 +242,12 @@ public class ThirdPersonController : MonoBehaviour
     public void RotatePlayerToCameraForward()
     {
         Vector3 camForward = Camera.main.transform.forward;
-        camForward.x = 0f;
+        camForward.y = 0f; // was camForward.x = 0f
 
-        //if (camForward.sqrMagnitude < 0.001f) return;
+        if (camForward.sqrMagnitude < 0.001f) return;
 
         Quaternion targetRotation = Quaternion.LookRotation(camForward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f); // Hızlı dönüş
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
     }
     #endregion
 
@@ -303,8 +303,21 @@ public class ThirdPersonController : MonoBehaviour
         if (!isLanded && isPlayerOnGround())
         {
             animator.SetTrigger("Land");
+            StartCoroutine(LandSlowness());
             isLanded = true;
         }
+    }
+
+    IEnumerator LandSlowness()
+    {
+        float tempSpeed = speed;
+        float tempSprintMultiplier = sprintMultiplier;
+        //speed /= 2;
+        sprintMultiplier = 1;
+        yield return new WaitForSeconds(0.5f);
+        speed = tempSpeed;
+        sprintMultiplier = tempSprintMultiplier;
+
     }
     #endregion
 

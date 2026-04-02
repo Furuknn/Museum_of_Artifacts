@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Beam/FlashUltimate_Cylinder.prefab.meta
 guid: 5652611350ecefe4788964493ee491f4
+========
+guid: c948bfc1e4f2e4f489f6e7ef954d6c11
+>>>>>>>> Scoffi's-Branch:Assets/Prefabs/Checkpoint.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

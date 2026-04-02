@@ -8,10 +8,13 @@ public class CastlePuzzleManager : MonoBehaviour
     public List<CastlePuzzleSlot> slots = new List<CastlePuzzleSlot>();
     public GameObject castleDoor;
 
+    public LyposBoss lypos;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
         castleDoor.SetActive(true);
+
     }
 
     public void CheckPuzzle()
@@ -27,5 +30,6 @@ public class CastlePuzzleManager : MonoBehaviour
     public void OpenCastleDoor()
     {
         castleDoor.SetActive(false);
+        lypos.StartBoss();
     }
 }
