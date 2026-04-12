@@ -24,7 +24,16 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public string UpgradeCode => upgradeCode;
     public string Description => descriptionText;
-    public string SkillCost => skillCost.ToString();
+
+    public string SkillCost
+    {
+        get
+        {
+            // Read the real cost from the source of truth
+            var upgrade = SkillTreeManager.Instance?.GetUpgrade(upgradeCode);
+            return upgrade != null ? upgrade.cost.ToString() : skillCost.ToString();
+        }
+    }
 
     private Button button;
     private Image image;
@@ -33,6 +42,9 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         button = GetComponent<Button>();
         image = GetComponent<Image>();
+
+        button.onClick.AddListener(() => SkillTreeManager.Instance.UpgradeStat(upgradeCode));
+
         ApplyDescription();
         RefreshFromSave();
     }
@@ -105,12 +117,6 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
                 image.color = Color.green;
         }
     }
-
-    private void OnDestroy()
-    {
-        SkillTreeManager.OnUpgradeUnlocked -= OnUpgradeUnlocked;
-    }
-
 }
 
 public static class TMPNumberColorizer

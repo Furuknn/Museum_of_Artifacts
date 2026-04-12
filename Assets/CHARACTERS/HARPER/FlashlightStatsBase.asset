@@ -32,7 +32,7 @@ MonoBehaviour:
   ultimateTick: 0.25
   ultimateRange: 150
   ultimateDuration: 5
-  ultimateCooldown: 1
+  ultimateCooldown: 15
   ultimateWindUpTime: 1.5
   ultimateHeaviness: 2
   ultimateCameraResistance: 0.15

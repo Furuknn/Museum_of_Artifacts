@@ -1,0 +1,333 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainMenu_tr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: tr
+  m_SharedData: {fileID: 11400000, guid: e082f89810167434da163ad6dc4d14e4, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 25298904396595204
+  m_TableData:
+  - m_Id: 81572966739968
+    m_Localized: OYNA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573004488704
+    m_Localized: AYARLAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573004488705
+    m_Localized: "\xC7IKI\u015E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573004488706
+    m_Localized: "OYUNA D\xD6N"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683008
+    m_Localized: "ANA MEN\xDCYE D\xD6N"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683009
+    m_Localized: "Kahraman\u0131n\u0131 Se\xE7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683010
+    m_Localized: 'Ad:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683011
+    m_Localized: "Ya\u015F:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683012
+    m_Localized: 'Silah:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683013
+    m_Localized: El Feneri
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683024
+    m_Localized: Cop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 311127795085312
+    m_Localized: Yetenekler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 311127795085313
+    m_Localized: "GER\u0130 D\xD6N"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 311127795085314
+    m_Localized: ONAYLA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204500893696
+    m_Localized: "Temel Yetenek: I\u015F\u0131k Huzmesi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448128
+    m_Localized: "Sald\u0131r\u0131 tu\u015Funa basarak mavi \u0131\u015F\u0131nlar
+      g\xF6nderirsin\nI\u015F\u0131nlar D\xFC\u015F\xFCk Tek Hedef Hasar\u0131 verir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448129
+    m_Localized: "\u0130kincil Yetenek: Geni\u015Fleyen I\u015F\u0131n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448130
+    m_Localized: "Yetenek tu\u015Funa basarak s\xFCrekli geni\u015Fleyen bir \u0131\u015F\u0131n
+      g\xF6nderirsin\nI\u015F\u0131n, d\xFC\u015Fmanlar\u0131 Delip Ge\xE7en Orta
+      D\xFCzey hasara sahiptir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448131
+    m_Localized: "\u0130kincil Yetenek: I\u015F\u0131k Bombas\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448132
+    m_Localized: "Yetenek tu\u015Funa bas\u0131l\u0131 tutarak ni\u015Fan al, serbest
+      b\u0131rakarak bombay\u0131 f\u0131rlat. Bomba herhangi bir yere \xE7arp\u0131nca
+      patlar ve alan hasar\u0131 veren bir etki alan\u0131 olu\u015Fturur.\nEtki
+      Alan\u0131 i\xE7indeki d\xFC\u015Fmanlara Orta D\xFCzeyde hasar verir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448133
+    m_Localized: "\u0130kincil Yetenek: I\u015F\u0131n K\u0131l\u0131c\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448134
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448135
+    m_Localized: "Ulti: Manyak \xD6l\xFCmc\xFCl I\u015F\u0131n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448136
+    m_Localized: "Ulti tu\u015Funa basarak 5 saniye boyunca s\xFCren g\xFC\xE7l\xFC,
+      yo\u011Fun bir k\u0131rm\u0131z\u0131 \u0131\u015F\u0131n ate\u015Flersin.\nI\u015F\u0131n,
+      Zamanla hasar verir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448137
+    m_Localized: 'Temel Yetenek: Pataklama'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448138
+    m_Localized: "Sald\u0131r\u0131 tu\u015Funa basarak copu sa\u011Fa sola savurursun\nBu
+      yetenek Orta D\xFCzey Alan Hasar\u0131 Verir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448139
+    m_Localized: "\u0130kincil Yetenek: Y\u0131k\u0131c\u0131 Darbe"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448140
+    m_Localized: "Yetenek tu\u015Funa basarak havaya s\u0131\xE7rar ve copla yere
+      sert bir darbe indirirsin\nBu yetenek Y\xFCksek Alan Hasar\u0131 Verir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448141
+    m_Localized: "\u0130kincil Yetenek: Topa\xE7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448142
+    m_Localized: "Yetenek tu\u015Funa basarak copla kendi etraf\u0131nda h\u0131zla
+      d\xF6nersin. Aktifken hareket h\u0131z\u0131n artar\nBu yetenek Y\xFCksek Alan
+      Hasar\u0131 Verir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448143
+    m_Localized: "\u0130kincil Yetenek: \u0130\xE7inden Ge\xE7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448144
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448145
+    m_Localized: "Ulti: Eri\u015Fim Engellendi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448146
+    m_Localized: "Ulti tu\u015Funa basarak di\u011Fer elinle bir SWAT kalkan\u0131
+      a\xE7ars\u0131n\nKalkan, 5 saniyeli\u011Fine hasara kar\u015F\u0131 dokunulmazl\u0131k
+      sa\u011Flar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309641442799616
+    m_Localized: "\u015Eok Cihaz\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448147
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448148
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448149
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448150
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448151
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448152
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448153
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448154
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448155
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448156
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890639577088
+    m_Localized: "\u0130K\u0130NC\u0130L YETENE\u011E\u0130N\u0130 SE\xC7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937216
+    m_Localized: "GEN\u0130\u015ELEYEN I\u015EIN"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937217
+    m_Localized: "Yetenek tu\u015Funa bas ve \u0130lerledik\xE7e geni\u015Fleyen
+      bir \u0131\u015F\u0131n f\u0131rlat, her \u015Feyi delip ge\xE7er ve d\xFC\u015Fmanlara
+      alan hasar\u0131 verir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937218
+    m_Localized: "HASAR: {wideDamage}\nETK\u0130 S\xDCRES\u0130: {wideLifetime}s\nBEKLEME
+      S\xDCRES\u0130: {wideCooldown}s"
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595204
+  - m_Id: 756890668937219
+    m_Localized: "I\u015EIK BOMBASI"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937220
+    m_Localized: "Yetenek tu\u015Funa bas\u0131l\u0131 tutarak ni\u015Fan al, serbest
+      b\u0131rakarak bombay\u0131 f\u0131rlat.\nBomba herhangi bir yere \xE7arp\u0131nca
+      patlar ve {bombTick} saniyede bir alan hasar\u0131 veren bir etki alan\u0131
+      olu\u015Fturur."
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595204
+  - m_Id: 756890668937221
+    m_Localized: "HASAR: {bombDamage}\nETK\u0130 S\xDCRES\u0130: {bombLifetime}s\nBEKLEME
+      S\xDCRES\u0130: {bombCooldown}s"
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595204
+  - m_Id: 756890668937222
+    m_Localized: "I\u015EIN KILICI"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937223
+    m_Localized: "Yetenek tu\u015Funa bas ve el fenerini bir \u0131\u015F\u0131n
+      k\u0131l\u0131c\u0131na d\xF6n\xFC\u015Ft\xFCr. Bu etki aktifken sald\u0131r\u0131
+      tu\u015Funa her bas\u0131\u015F\u0131nda 2 kat daha fazla hasar verirsin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937224
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 771883699318784
+    m_Localized: YIKICI DARBE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 771883699318785
+    m_Localized: "Yetenek tu\u015Funa basarak havaya s\u0131\xE7ra ve cop ile yere
+      darbe indir, etki alan\u0131ndaki d\xFC\u015Fmanlara alan hasar\u0131 ver ve
+      {smashGroundStunTime} sn boyunca sersemlet."
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595204
+  - m_Id: 771883699318786
+    m_Localized: "HASAR: {smashGroundDamage}\nETK\u0130 ALANI: {smashGroundRadius}m\nBEKLEME
+      S\xDCRES\u0130: {smashGroundCooldown}s"
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595204
+  - m_Id: 771883699318787
+    m_Localized: "TOPA\xC7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 771883699318788
+    m_Localized: "Yetenek tu\u015Funa basarak cop ile kendi etraf\u0131nda h\u0131zla
+      d\xF6n, yetenek aktif oldu\u011Fu s\xFCre boyunca hareket h\u0131z\u0131 kazan\u0131rs\u0131n
+      ve yak\u0131ndaki d\xFC\u015Fmanlara s\xFCrekli alan hasar\u0131 verirsin."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 771883699318789
+    m_Localized: "HASAR: {spinDamage}\nETK\u0130 S\xDCRES\u0130: {spinDuration}s\nBEKLEME
+      S\xDCRES\u0130: {spinCooldown}s"
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595204
+  - m_Id: 771883699318790
+    m_Localized: "\u0130\xC7\u0130NDEN GE\xC7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 771883699318791
+    m_Localized: "Yetenek tu\u015Funa basarak h\u0131zl\u0131ca {dashRange}m ileri
+      at\u0131l, yolundaki d\xFC\u015Fmanlar\u0131 geri savur ve onlara alan hasar\u0131
+      ver."
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595204
+  - m_Id: 771883699318792
+    m_Localized: "HASAR: {dashDamage}\nATILMA MESAFES\u0130: {dashRange}m\nBEKLEME
+      S\xDCRES\u0130: {dashCooldown}s"
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595204
+  references:
+    version: 2
+    RefIds:
+    - rid: 25298904396595204
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 756890668937220
+        - id: 756890668937221
+        - id: 756890668937218
+        - id: 771883699318785
+        - id: 771883699318786
+        - id: 771883699318789
+        - id: 771883699318791
+        - id: 771883699318792

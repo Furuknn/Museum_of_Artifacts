@@ -37,27 +37,24 @@ public class UIManager : MonoBehaviour, IGameStateListener
         gameOverWinPanel.SetActive(gameState == EGameState.GAMEOVERWIN);
         gameOverLosePanel.SetActive(gameState == EGameState.GAMEOVERLOSE);
     }
-    private bool isGamePaused = false;
     public void PauseMenuToggle()
     {
-        if (GameManager.Instance.gameState == EGameState.INSKILLTREE)
+        EGameState state = GameManager.Instance.gameState;
+
+        if (state == EGameState.INSKILLTREE)
         {
             ToggleSkillTree();
             return;
         }
-        
 
-        if (!isGamePaused && GameManager.Instance.gameState == EGameState.INGAME)
+        if (state == EGameState.INGAME)
         {
             GameManager.Instance.StopGame(EGameState.PAUSE);
         }
-        else if (isGamePaused && GameManager.Instance.gameState == EGameState.PAUSE)
+        else if (state == EGameState.PAUSE)
         {
             GameManager.Instance.ContinueGame();
         }
-
-        isGamePaused = !isGamePaused;
-
     }
     public void ToggleSkillTree()
     {
@@ -68,6 +65,7 @@ public class UIManager : MonoBehaviour, IGameStateListener
         else
         {
             GameManager.Instance.StopGame(EGameState.INSKILLTREE);
+            SkillTreeManager.Instance.UpdateSkillTreeUI();
         }
     }
     public Image GetInGameHealthBar()

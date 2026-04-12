@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class DoorPuzzleManager : MonoBehaviour, IPlayerRespawn
 {
     public List<DoorPuzzleDoor> doors;
@@ -28,6 +29,6 @@ public class DoorPuzzleManager : MonoBehaviour, IPlayerRespawn
 
     public void OnPlayerRespawn()
     {
-        //ShuffleDoors();
+        ShuffleDoors();
     }
 }

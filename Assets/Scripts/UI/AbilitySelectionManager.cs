@@ -7,58 +7,76 @@ public class AbilitySelectionManager : MonoBehaviour
 {
     public static AbilitySelectionManager Instance { get; private set; }
 
-    [SerializeField] private List<UI_Hover_Scale> abilityButtons;
-    public Button confirmButton;
-
     public static System.Action OnAbilityConfirmed;
 
     private const string AbilityKey = "SelectedAbility";
 
+    [System.Serializable]
+    public class CharacterAbilityGroup
+    {
+        public string characterKey; // e.g. "NightStick", "Flashlight"
+        public List<UI_Hover_Scale> abilityButtons;
+        public Button confirmButton;
+    }
+
+    [SerializeField] private List<CharacterAbilityGroup> characterGroups;
+
+    private CharacterAbilityGroup activeGroup;
+
     private void Awake()
     {
-        if (PlayerPrefs.HasKey(AbilityKey))
-        {
-            this.gameObject.SetActive(false);
-            //OnAbilityConfirmed?.Invoke();
-        }
-        else
-        {
-            this.gameObject.SetActive(true);
-        }
-
-        if (confirmButton == null) Debug.LogWarning("null!!");
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-        confirmButton.interactable = false;
+
+        if (PlayerPrefs.HasKey(AbilityKey))
+            gameObject.SetActive(false);
+        else
+            gameObject.SetActive(true);
+
+        foreach (var group in characterGroups)
+            if (group.confirmButton != null)
+            {
+                group.confirmButton.interactable = false;
+                group.confirmButton.onClick.AddListener(() => OnConfirmPressed());
+            }
+    }
+
+    // Call this when the active character/tree changes
+    public void SetActiveCharacter(int heroIndex)
+    {
+        if (heroIndex < 0 || heroIndex >= characterGroups.Count) return;
+        activeGroup = characterGroups[heroIndex];
     }
 
     public void OnAbilitySelected(UI_Hover_Scale selected)
     {
-        foreach (UI_Hover_Scale btn in abilityButtons)
-        {
-            if (btn != selected)
-                btn.Deselect();
-        }
+        if (activeGroup == null) return;
 
-        confirmButton.interactable = true;
+        foreach (var btn in activeGroup.abilityButtons)
+            if (btn != selected) btn.Deselect();
+
+        activeGroup.confirmButton.interactable = true;
     }
 
     public void OnAbilityDeselected()
     {
-        bool anyChosen = false;
-        foreach (UI_Hover_Scale btn in abilityButtons)
-        {
-            if (btn.IsChosen) { anyChosen = true; break; }
-        }
+        if (activeGroup == null) return;
 
-        confirmButton.interactable=anyChosen;   
+        bool anyChosen = false;
+        foreach (var btn in activeGroup.abilityButtons)
+            if (btn.IsChosen) { anyChosen = true; break; }
+
+        activeGroup.confirmButton.interactable = anyChosen;
     }
 
     public void OnConfirmPressed()
     {
-        foreach(UI_Hover_Scale btn in abilityButtons)
-        {
-            if (btn.IsChosen && btn.abilityKeyName!=null) PlayerPrefs.SetString(AbilityKey, btn.abilityKeyName);
-        }
+        if (activeGroup == null) return;
+
+        foreach (var btn in activeGroup.abilityButtons)
+            if (btn.IsChosen && btn.abilityKeyName != null)
+                PlayerPrefs.SetString(AbilityKey, btn.abilityKeyName);
+
         PlayerPrefs.Save();
         OnAbilityConfirmed?.Invoke();
     }

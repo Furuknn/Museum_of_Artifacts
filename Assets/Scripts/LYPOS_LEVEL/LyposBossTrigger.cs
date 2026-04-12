@@ -14,8 +14,11 @@ public class LyposBossTrigger : MonoBehaviour
         if (boss._bossAwake == false)
         {
             door.SetActive(true);
-            boss.transform.DOLocalMoveY(3f, 4f);
-            boss._bossAwake = true;
+            boss.transform.DOLocalMoveY(3f, 4f).OnComplete(() => {
+                boss.StartBoss();
+
+            });
+
         }
     }
 }

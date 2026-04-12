@@ -6,7 +6,6 @@ using UnityEngine;
 public class FloorPuzzleManager : MonoBehaviour, IInteractable
 {
     public static FloorPuzzleManager Instance;
-    public Transform room;
     public GameObject resetButton;
     public List<FloorPuzzleButton> buttons;
     public List<int> pressedNumbers;
@@ -15,8 +14,6 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
     float enemiesMultiplier = 1;
     public List<GameObject> enemyGroups;
     public bool isDone = false;
-    public Transform enemyParent;
-    public GameObject enemies;
 
     private void Awake()
     {
@@ -45,26 +42,24 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
     {
         foreach (var button in buttons)
         {
-            //button.OpenButton();
             if (button.number <= buttonsNeedToPress) button.OpenButton();
         }
         yield return new WaitForSeconds(3f);
         foreach (var button in buttons)
         {
-            button.CloseButton();
             if (button.number <= buttonsNeedToPress) button.CloseButton();
         }
     }
     public void ShuffleButtons()
     {
-        // 1. Buton sayï¿½sï¿½ kadar bir sayï¿½ listesi oluï¿½tur (1, 2, 3...)
+        // 1. Buton sayýsý kadar bir sayý listesi oluþtur (1, 2, 3...)
         List<int> numbers = new List<int>();
         for (int i = 1; i <= buttons.Count; i++)
         {
             numbers.Add(i);
         }
 
-        // 2. Sayï¿½ listesini rastgele karï¿½ï¿½tï¿½r (Fisher-Yates Algorithm)
+        // 2. Sayý listesini rastgele karýþtýr (Fisher-Yates Algorithm)
         for (int i = 0; i < numbers.Count; i++)
         {
             int temp = numbers[i];
@@ -73,16 +68,16 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
             numbers[randomIndex] = temp;
         }
 
-        // 3. Karï¿½ï¿½tï¿½rï¿½lmï¿½ï¿½ sayï¿½larï¿½ butonlara ata
+        // 3. Karýþtýrýlmýþ sayýlarý butonlara ata
         for (int i = 0; i < buttons.Count; i++)
         {
             buttons[i].InitializeButton(numbers[i]);
 
-            // Gï¿½rsel geri bildirim iï¿½in buton ï¿½zerindeki yazï¿½yï¿½ gï¿½ncelleyebilirsin
+            // Görsel geri bildirim için buton üzerindeki yazýyý güncelleyebilirsin
             // buttons[i].UpdateUI(); 
         }
 
-        Debug.Log("Buton numaralarï¿½ baï¿½arï¿½yla karï¿½ï¿½tï¿½rï¿½ldï¿½!");
+        Debug.Log("Buton numaralarý baþarýyla karýþtýrýldý!");
     }
 
     public void CheckButton(int x)
@@ -114,8 +109,6 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
 
     void SpawnEnemies()
     {
-        Instantiate(enemies, enemyParent);
-        return;
         enemiesToSpawn = Mathf.Pow(enemiesToSpawn, enemiesMultiplier);
 
         enemyGroups[(int)enemiesMultiplier].SetActive(true);
@@ -137,7 +130,5 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
             button.isInteractable = false;
         }
         resetButton.transform.DOMoveY(transform.position.y+1.5f, 4f);
-        room.DOLocalRotate(new Vector3(0, 90, 0), 4f);
-
     }
 }

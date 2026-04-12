@@ -1,0 +1,363 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainMenu_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: e082f89810167434da163ad6dc4d14e4, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 25298904396595203
+  m_TableData:
+  - m_Id: 81572966739968
+    m_Localized: PLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573004488704
+    m_Localized: SETTINGS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573004488705
+    m_Localized: QUIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573004488706
+    m_Localized: RESUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683008
+    m_Localized: QUIT TO MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683009
+    m_Localized: Select Your Hero
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683010
+    m_Localized: 'Name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683011
+    m_Localized: 'Age:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683012
+    m_Localized: 'Weapon:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683013
+    m_Localized: Flashlight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81573008683024
+    m_Localized: Nightstick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309641442799616
+    m_Localized: Taser
+    m_Metadata:
+      m_Items: []
+  - m_Id: 311127795085312
+    m_Localized: Abilities
+    m_Metadata:
+      m_Items: []
+  - m_Id: 311127795085313
+    m_Localized: BACK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 311127795085314
+    m_Localized: SELECT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204500893696
+    m_Localized: 'Main Ability: Light Beam'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448128
+    m_Localized: 'Press the Attack button to continuously shoot blue light beams
+      that deal
+
+      Deals Low Single Target Damage'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448129
+    m_Localized: 'Secondary Ability: Expanding Beam'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448130
+    m_Localized: 'Press the Ability button to fire a blue light beam that expands
+      the more it travels
+
+      Deals Medium Piercing Damage'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448131
+    m_Localized: 'Secondary Ability: Light Bomb'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448132
+    m_Localized: 'Hold the Ability button to see the trajectory and release to fire
+      a blue light bomb that detonates upon impact and lasts 6 seconds.
+
+      Deals
+      Medium AoE Damage'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448133
+    m_Localized: 'Secondary Ability: Light Saber'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448134
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448135
+    m_Localized: 'Ultimate Ability: Asteroid Destroyer'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448136
+    m_Localized: 'Press the Ultimate button to unleash a strong, heavy red beam that
+      lasts 5 seconds and deals damage over time
+
+      Deals High AoE Damage Over
+      Time'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448137
+    m_Localized: 'Main Ability: Punishing Bonk'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448138
+    m_Localized: 'Press the Attack button to sway the nightstick left and right
+
+      Deals
+      Medium AoE Damage'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448139
+    m_Localized: 'Secondary Ability: Power Smash'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448140
+    m_Localized: 'Press the Ability button to Jump high into the sky and smash the
+      ground with the nightstick.
+
+      Deals High AoE damage'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448141
+    m_Localized: 'Secondary Ability: Judgement Call'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448142
+    m_Localized: 'Press the Ability button to rapidly spin in circles while holding
+      out the nightstick. Get a movement speed boost while active.
+
+      Deals High
+      AoE damage'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448143
+    m_Localized: 'Secondary Ability: Night-Dash'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448144
+    m_Localized: 'Press the Ability button to dash {dashRange}m forward. Knockbacks
+      enemies in range
+
+      Deals High AoE damage'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448145
+    m_Localized: 'Ultimate Ability: Access Denied'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448146
+    m_Localized: 'Press the Ultimate button to cast a SWAT shield with your other
+      hand
+
+      Grants immunity for 5 seconds'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448147
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448148
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448149
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448150
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448151
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448152
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448153
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448154
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448155
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411204534448156
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890639577088
+    m_Localized: CHOOSE YOUR SECONDARY ABILITY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937216
+    m_Localized: EXPANDING BEAM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937217
+    m_Localized: Press the Ability button to fire a beam that widens as it travels,
+      piercing all and dealing AoE damage.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937218
+    m_Localized: 'DMG: {wideDamage}
+
+      DURATION: {wideLifetime}s
+
+      COOLDOWN:
+      {wideCooldown}s'
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595203
+  - m_Id: 756890668937219
+    m_Localized: LIGHT BOMB
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937220
+    m_Localized: Press and hold the Ability button to aim, release to launch a bomb.
+      Explodes on impact, dealing AoE damage every {bombTick}s.
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595203
+  - m_Id: 756890668937221
+    m_Localized: 'DMG: {bombDamage}
+
+      DURATION: {bombLifetime}s
+
+      COOLDOWN:
+      {bombCooldown}s'
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595203
+  - m_Id: 756890668937222
+    m_Localized: LIGHT SABER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937223
+    m_Localized: Press the Ability button to turn your flashlight into an energy
+      blade. Press the Attack button to strike for double damage.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756890668937224
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 771883699318784
+    m_Localized: POWER SMASH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 771883699318785
+    m_Localized: Press the Ability button to leap into the air and slam down with
+      the nightstick, dealing AoE damage to enemies in range and stunning them for
+      {smashGroundStunTime}s.
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595203
+  - m_Id: 771883699318786
+    m_Localized: 'DMG: {smashGroundDamage}
+
+      RADIUS: {smashGroundRadius}m
+
+      COOLDOWN:
+      {smashGroundCooldown}s'
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595203
+  - m_Id: 771883699318787
+    m_Localized: JUDGEMENT CALL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 771883699318788
+    m_Localized: Press the Ability button to rapidly spin with the nightstick, gaining
+      movement speed and dealing continuous AoE damage to nearby enemies.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 771883699318789
+    m_Localized: 'DMG: {spinDamage}
+
+      DURATION: {spinDuration}s
+
+      COOLDOWN:
+      {spinCooldown}s'
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595203
+  - m_Id: 771883699318790
+    m_Localized: NIGHT-DASH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 771883699318791
+    m_Localized: Press the Ability button to dash {dashRange}m forward, knocking
+      back enemies in your path and dealing AoE damage.
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595203
+  - m_Id: 771883699318792
+    m_Localized: 'DMG: {dashDamage}
+
+      DASH RANGE: {dashRange}m
+
+      COOLDOWN:
+      {dashCooldown}s'
+    m_Metadata:
+      m_Items:
+      - rid: 25298904396595203
+  references:
+    version: 2
+    RefIds:
+    - rid: 25298904396595203
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 756890668937220
+        - id: 756890668937221
+        - id: 756890668937218
+        - id: 771883699318785
+        - id: 771883699318786
+        - id: 771883699318789
+        - id: 771883699318791
+        - id: 771883699318792

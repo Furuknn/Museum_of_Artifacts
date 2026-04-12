@@ -56,7 +56,7 @@ PrefabInstance:
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.91
+      value: 9.52
       objectReference: {fileID: 0}
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.78
+      value: 4.13
       objectReference: {fileID: 0}
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
@@ -108,12 +108,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lypos_Goblin_1
       objectReference: {fileID: 0}
-    - target: {fileID: 8771075755229552384, guid: d6f861d62cb477a4b922e0dca3462e0d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 6390658260179540656, guid: 9acaa473fe1691c44904128723477599,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -146,7 +140,7 @@ PrefabInstance:
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.57
+      value: 9.06
       objectReference: {fileID: 0}
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
@@ -156,7 +150,7 @@ PrefabInstance:
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.61
+      value: -11.03
       objectReference: {fileID: 0}
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
@@ -198,12 +192,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lypos_Goblin_2
       objectReference: {fileID: 0}
-    - target: {fileID: 8771075755229552384, guid: d6f861d62cb477a4b922e0dca3462e0d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 5159976747264422781, guid: f976469cbe6f0214cb0ba4c71e3b6590,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -236,7 +224,7 @@ PrefabInstance:
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.1
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
@@ -246,7 +234,7 @@ PrefabInstance:
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.2
+      value: -12.55
       objectReference: {fileID: 0}
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
@@ -288,12 +276,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lypos_Goblin_3
       objectReference: {fileID: 0}
-    - target: {fileID: 8771075755229552384, guid: d6f861d62cb477a4b922e0dca3462e0d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -2604980750307736924, guid: f976469cbe6f0214cb0ba4c71e3b6590,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -326,7 +308,7 @@ PrefabInstance:
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
@@ -336,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.7
+      value: 7.43
       objectReference: {fileID: 0}
     - target: {fileID: 1012057833202417472, guid: d6f861d62cb477a4b922e0dca3462e0d,
         type: 3}
@@ -378,12 +360,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lypos_Goblin
       objectReference: {fileID: 0}
-    - target: {fileID: 8771075755229552384, guid: d6f861d62cb477a4b922e0dca3462e0d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -4748508668008586140, guid: aa36f5a30163adf40b24da78d614f5c6,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

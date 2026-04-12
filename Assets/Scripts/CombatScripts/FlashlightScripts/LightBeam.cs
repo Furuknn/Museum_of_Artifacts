@@ -91,6 +91,12 @@ public class LightBeam: MonoBehaviour
                     enemy.TakeDamage(GetDamage());
                 }
 
+                LyposBoss lypos = hit.collider.GetComponentInParent<LyposBoss>();
+                if (lypos != null)
+                {
+                    lypos.TakeDamage(GetDamage());
+                }
+
                 // Destroy beam on impact
                 Destroy(gameObject);
 
@@ -115,10 +121,17 @@ public class LightBeam: MonoBehaviour
                 // Check if we already hit this specific enemy instance
                 if (!alreadyHitTargets.Contains(hitObj))
                 {
+                    
+                    LyposBoss lypos = hitObj.GetComponentInParent<LyposBoss>();
+                    if (lypos != null)
+                    {
+                        lypos.TakeDamage(-_damage);
+                    }
                     EnemyScript enemy = hitObj.GetComponent<EnemyScript>();
                     if (enemy != null)
                     {
                         enemy.TakeDamage(_damage);
+                        
                         alreadyHitTargets.Add(hitObj); // Mark as hit
 
                         // Optional: Spawn hit effect for wide beam hitting an enemy
@@ -152,6 +165,12 @@ public class LightBeam: MonoBehaviour
             enemy.TakeDamage(_damage);
         }
 
+        LyposBoss lypos = other.gameObject.GetComponentInParent<LyposBoss>();
+        if (lypos != null)
+        {
+            lypos.TakeDamage(-_damage);
+        }
+
         if (beamType == BeamType.Narrow) // sadece ince beamse temas anýnda yok et
         {
             Destroy(gameObject);
@@ -167,6 +186,12 @@ public class LightBeam: MonoBehaviour
         if (enemy != null)
         {
             enemy.TakeDamage(_damage);
+        }
+
+        LyposBoss lypos = collision.gameObject.GetComponentInParent<LyposBoss>();
+        if (lypos != null)
+        {
+            lypos.TakeDamage(-_damage);
         }
 
         if (beamType == BeamType.Narrow) // sadece ince beamse temas anýnda yok et

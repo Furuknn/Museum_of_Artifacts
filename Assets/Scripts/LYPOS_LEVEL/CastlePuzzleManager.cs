@@ -7,14 +7,13 @@ public class CastlePuzzleManager : MonoBehaviour
     public static CastlePuzzleManager Instance;
     public List<CastlePuzzleSlot> slots = new List<CastlePuzzleSlot>();
     public GameObject castleDoor;
-
     public LyposBoss lypos;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         castleDoor.SetActive(true);
-
+        //lypos = FindObjectOfType<LyposBoss>();
     }
 
     public void CheckPuzzle()

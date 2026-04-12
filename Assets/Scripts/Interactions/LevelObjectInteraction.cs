@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelObjectInteraction : MonoBehaviour, IInteractable
 {
-
     [SerializeField] private string loadToScene;
     [SerializeField] private float tpPlayerPosY = 3;
     private MeshRenderer meshRenderer;
@@ -42,10 +41,15 @@ public class LevelObjectInteraction : MonoBehaviour, IInteractable
             yield return null;
         }
 
+        Scene newlyLoadedScene = SceneManager.GetSceneByName(loadToScene);
+
+        if (newlyLoadedScene.IsValid())
+        {
+            // Bu satır, Lighting (Fog dahil) ayarlarının bu sahneden alınmasını sağlar
+            SceneManager.SetActiveScene(newlyLoadedScene);
+        }
+
         TeleportPlayerToLevel();
-
-
-        //SetDefaultMaterial();
     }
     private void TeleportPlayerToLevel()
     {

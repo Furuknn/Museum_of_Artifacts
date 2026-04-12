@@ -58,6 +58,17 @@ public class NightstickWeapon : WeaponBase
     Vector3 dashStartPos;
     Vector3 forward;
 
+    private const string ABILITY_KEY = "SelectedAbility";
+
+    private void Awake()
+    {
+        WeaponStatsManager.Instance.nightStickStatsRuntime.isDashActive = false;
+        WeaponStatsManager.Instance.nightStickStatsRuntime.isSmashActive = false;
+        WeaponStatsManager.Instance.nightStickStatsRuntime.isSpinActive = false;
+
+        OnAbilityConfirmed();
+    }
+
     private void Start()
     {
         health = PlayerHealthManager.Instance;
@@ -83,12 +94,32 @@ public class NightstickWeapon : WeaponBase
     {
         GameManager.OnGameContinued += OnGameContinued;
         GameManager.OnGameStopped += OnGameStopped;
+        AbilitySelectionManager.OnAbilityConfirmed += OnAbilityConfirmed;
     }
 
     private void OnDisable()
     {
         GameManager.OnGameContinued -= OnGameContinued;
         GameManager.OnGameStopped -= OnGameStopped;
+        AbilitySelectionManager.OnAbilityConfirmed -= OnAbilityConfirmed;
+    }
+
+    private void OnAbilityConfirmed()
+    {
+        if (!PlayerPrefs.HasKey(ABILITY_KEY))
+        {
+            Debug.LogWarning("No Ability Selected!");
+            return;
+        }
+
+        switch (PlayerPrefs.GetString(ABILITY_KEY))
+        {
+            case "SmashGround": WeaponStatsManager.Instance.nightStickStatsRuntime.isSmashActive = true; break;
+            case "Spin": WeaponStatsManager.Instance.nightStickStatsRuntime.isSpinActive = true; break;
+            case "Dash": WeaponStatsManager.Instance.nightStickStatsRuntime.isDashActive = true; break;
+            default: break;
+        }
+
     }
 
     private void OnGameStopped()
@@ -455,6 +486,8 @@ public class NightstickWeapon : WeaponBase
         yield return new WaitForSeconds(_shieldCooldown);
         _canUlti = true;
     }
+
+    
 
     private void OnDrawGizmosSelected()
     {

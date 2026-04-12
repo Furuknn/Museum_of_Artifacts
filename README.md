@@ -4,7 +4,7 @@ by Nightmare Games
 
 
 
-This is version **3.1 Beta!**
+This is version **3.2 Beta!**
 
 **MERGED version**
 
