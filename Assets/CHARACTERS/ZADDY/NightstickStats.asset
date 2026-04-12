@@ -21,7 +21,7 @@ MonoBehaviour:
   smashGroundStunTime: 3
   smashGroundRadius: 6
   smashGroundCooldown: 15
-  isSpinActive: 1
+  isSpinActive: 0
   spinDamage: 8
   spinRadius: 1.5
   spinDuration: 4
@@ -33,7 +33,7 @@ MonoBehaviour:
   dashDamage: 30
   dashRange: 5
   dashWidth: 1
-  dashImmunity: 0
+  dashImmunity: 1
   dashCooldown: 5
   isUltiActive: 1
   shieldDuration: 5

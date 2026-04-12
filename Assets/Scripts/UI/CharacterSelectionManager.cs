@@ -1,27 +1,17 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 [System.Serializable]
 public class CharacterInfo
 {
     public string characterName;
+    public string characterKey; // "flashlight", "nightstick", "taser"
     public Sprite characterImage;
     public int age;
-    public string weaponName;
-    public string mainAbilityName;
-    [TextArea] public string mainAbilityDescription;
-    public List<AbilityInfo> secondaryAbilities;
-    public string ultimateAbilityName;
-    [TextArea] public string ultimateAbilityDescription;
-}
-
-[System.Serializable]
-public class AbilityInfo
-{
-    public string abilityName;
-    [TextArea] public string abilityDescription;
+    public int secondaryAbilityCount; // how many secondaries this character has
 }
 
 public class CharacterSelectionManager : MonoBehaviour
@@ -50,6 +40,8 @@ public class CharacterSelectionManager : MonoBehaviour
     [Header("Back Button")]
     [SerializeField] private Button backButton;
 
+    private int currentCharacterIndex = -1;
+
     private void Awake()
     {
         for (int i = 0; i < characterButtons.Count; i++)
@@ -68,12 +60,27 @@ public class CharacterSelectionManager : MonoBehaviour
         characterDetailsPanel.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+    }
+
+    private void OnDisable()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+    }
+
+    private void OnLocaleChanged(UnityEngine.Localization.Locale locale)
+    {
+        if (currentCharacterIndex >= 0)
+            DisplayCharacter(currentCharacterIndex);
+    }
+
     private void OnCharacterSelected(int index)
     {
         if (index < 0 || index >= characters.Count) return;
-
+        currentCharacterIndex = index;
         DisplayCharacter(index);
-
         characterSelectionPanel.SetActive(false);
         characterDetailsPanel.SetActive(true);
     }
@@ -87,25 +94,55 @@ public class CharacterSelectionManager : MonoBehaviour
     private void DisplayCharacter(int index)
     {
         CharacterInfo c = characters[index];
+        string ck = c.characterKey; // e.g. "flashlight"
 
-        if (characterDetailImage != null) characterDetailImage.sprite = c.characterImage;
-        if (nameText != null) nameText.text = c.characterName;
-        if (ageText != null) ageText.text = c.age.ToString();
-        if (weaponText != null) weaponText.text = c.weaponName;
-        if (mainAbilityNameText != null) mainAbilityNameText.text = c.mainAbilityName;
-        if (mainAbilityDescText != null) mainAbilityDescText.text = c.mainAbilityDescription;
-        if (ultimateAbilityNameText != null) ultimateAbilityNameText.text = c.ultimateAbilityName;
-        if (ultimateAbilityDescText != null) ultimateAbilityDescText.text = c.ultimateAbilityDescription;
+        if (characterDetailImage != null)
+            characterDetailImage.sprite = c.characterImage;
 
+        // Static label keys (same for all characters)
+        if (nameText != null)
+            nameText.text = c.characterName;
+
+        if (ageText != null)
+            ageText.text = "" + c.age;
+
+        if (weaponText != null)
+            weaponText.text = LocalizationSettings.StringDatabase
+                .GetLocalizedString("MainMenu", $"UI.heroWeapon.desc.{ck}");
+
+        if (mainAbilityNameText != null)
+            mainAbilityNameText.text = LocalizationSettings.StringDatabase
+                .GetLocalizedString("MainMenu", $"UI.heroMainAbility.{ck}");
+
+        if (mainAbilityDescText != null)
+            mainAbilityDescText.text = LocalizationSettings.StringDatabase
+                .GetLocalizedString("MainMenu", $"UI.heroMainAbility.desc.{ck}");
+
+        if (ultimateAbilityNameText != null)
+            ultimateAbilityNameText.text = LocalizationSettings.StringDatabase
+                .GetLocalizedString("MainMenu", $"UI.heroUltimateAbility.{ck}");
+
+        if (ultimateAbilityDescText != null)
+            ultimateAbilityDescText.text = LocalizationSettings.StringDatabase
+                .GetLocalizedString("MainMenu", $"UI.heroUltimateAbility.desc.{ck}");
+
+        // Secondary abilities — keys are 01, 02, 03...
         for (int i = 0; i < secondaryAbilityNameTexts.Count; i++)
         {
-            bool hasAbility = c.secondaryAbilities != null && i < c.secondaryAbilities.Count;
+            string index2Digit = (i + 1).ToString("D2"); // 01, 02, 03
+            bool hasAbility = i < c.secondaryAbilityCount;
 
             if (secondaryAbilityNameTexts[i] != null)
-                secondaryAbilityNameTexts[i].text = hasAbility ? c.secondaryAbilities[i].abilityName : "";
+                secondaryAbilityNameTexts[i].text = hasAbility
+                    ? LocalizationSettings.StringDatabase
+                        .GetLocalizedString("MainMenu", $"UI.heroSecondaryAbility{index2Digit}.{ck}")
+                    : "";
 
             if (i < secondaryAbilityDescTexts.Count && secondaryAbilityDescTexts[i] != null)
-                secondaryAbilityDescTexts[i].text = hasAbility ? c.secondaryAbilities[i].abilityDescription : "";
+                secondaryAbilityDescTexts[i].text = hasAbility
+                    ? LocalizationSettings.StringDatabase
+                        .GetLocalizedString("MainMenu", $"UI.heroSecondaryAbility{index2Digit}.desc.{ck}")
+                    : "";
         }
     }
 

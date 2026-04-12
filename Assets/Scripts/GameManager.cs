@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
 
     public int currentHeroIndex;
 
-    [SerializeField] private GameObject skillTreeUI;
 
     void Awake()
     {
@@ -49,16 +48,10 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        /*Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;*/
         SetGameState(gameState);
         freeLookCamera = GameObject.Find("FreeLook Camera");
 
         ActiveControl(false);
-        /*player = GameObject.Find("Third_Person_Player");
-        player.GetComponent<ThirdPersonController>().enabled = false;
-        ThirdPersonController.instance.playerInputActions.Player.Disable();*/
-
     }
 
     void OnDestroy()
@@ -70,23 +63,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //IT WILL MOVE TO UI MANAGER AND WILL ADD ON NEW INPUT SYSTEM
-        /*if (Input.GetKeyDown(KeyCode.Tab) && !skillTreeUI.gameObject.activeSelf)
-        {
 
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            ActiveControl(false);
-            skillTreeUI.SetActive(!skillTreeUI.gameObject.activeSelf);
-
-        }
-        else if (skillTreeUI.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Tab))
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            ActiveControl(true);
-            skillTreeUI.SetActive(!skillTreeUI.gameObject.activeSelf);
-        }*/
     }
 
     public void SetGameState(EGameState gameState)
@@ -162,18 +139,24 @@ public class GameManager : MonoBehaviour
         {
             case 0://nighrstick cam
                 ThirdPersonController.Instance.currentCameraStyle = ThirdPersonController.CameraStyle.Combat;
-                Debug.Log($"SpawnChrahterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.Instance.currentCameraStyle} sistemine değiştri");
+                Debug.Log($"SpawnCharacterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.Instance.currentCameraStyle} sistemine değişti");
                 break;
             case 1://beam cam
                 ThirdPersonController.Instance.currentCameraStyle = ThirdPersonController.CameraStyle.Shooter;
-                Debug.Log($"SpawnChrahterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.Instance.currentCameraStyle} sistemine değiştri");
+                Debug.Log($"SpawnCharacterAtIndex() index: {index}: Kamera sistemi {ThirdPersonController.Instance.currentCameraStyle} sistemine değişti");
                 break;
         }
         ActiveControl(true);
-        /*player.GetComponent<ThirdPersonController>().enabled = true;
-        freeLookCamera.GetComponent<Cinemachine.CinemachineFreeLook>().enabled = true;
-        ThirdPersonController.instance.playerInputActions.Player.Enable();*/
 
+        if (AbilitySelectionManager.Instance == null)
+        {
+            Debug.LogWarning("AbilitySelectionManager is null!");
+            return;
+        }
+        else
+        {
+            AbilitySelectionManager.Instance.SetActiveCharacter(currentHeroIndex);
+        }
     }
 
     public void ActiveControl(bool isActive)
@@ -191,13 +174,5 @@ public class GameManager : MonoBehaviour
     public void SetHeroIndex(int index)
     {
         currentHeroIndex = index;
-    }
-
-    void RemoveCurrentPlayer()
-    {
-        if (player != null)
-        {
-            Destroy(player);
-        }
     }
 }

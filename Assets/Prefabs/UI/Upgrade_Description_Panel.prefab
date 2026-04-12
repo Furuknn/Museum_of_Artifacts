@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Header
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 76116318732199745bb1d6668993db9f, type: 2}
-  m_sharedMaterial: {fileID: 600890341949251387, guid: 76116318732199745bb1d6668993db9f,
+  m_fontAsset: {fileID: 11400000, guid: 0033efff57ccb6d49a4ba1c0c3c972e2, type: 2}
+  m_sharedMaterial: {fileID: -8924296881801423392, guid: 0033efff57ccb6d49a4ba1c0c3c972e2,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -164,7 +164,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7292620716256099412}
   - {fileID: 8090715837713356118}
@@ -295,8 +295,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Skill Cost:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2648ba62b171845499db116803d9db54, type: 2}
-  m_sharedMaterial: {fileID: -2254361701340819715, guid: 2648ba62b171845499db116803d9db54,
+  m_fontAsset: {fileID: 11400000, guid: cf9d678ad48e0824f863a8df9da66bc3, type: 2}
+  m_sharedMaterial: {fileID: -8651897371133251598, guid: cf9d678ad48e0824f863a8df9da66bc3,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -321,8 +321,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -430,8 +430,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Description
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2648ba62b171845499db116803d9db54, type: 2}
-  m_sharedMaterial: {fileID: -2254361701340819715, guid: 2648ba62b171845499db116803d9db54,
+  m_fontAsset: {fileID: 11400000, guid: cf9d678ad48e0824f863a8df9da66bc3, type: 2}
+  m_sharedMaterial: {fileID: -8651897371133251598, guid: cf9d678ad48e0824f863a8df9da66bc3,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -456,8 +456,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

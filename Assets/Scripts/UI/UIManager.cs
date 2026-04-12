@@ -68,6 +68,7 @@ public class UIManager : MonoBehaviour, IGameStateListener
         else
         {
             GameManager.Instance.StopGame(EGameState.INSKILLTREE);
+            SkillTreeManager.Instance.UpdateSkillTreeUI();
         }
     }
     public Image GetInGameHealthBar()

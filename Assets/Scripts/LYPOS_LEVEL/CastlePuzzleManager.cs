@@ -13,7 +13,7 @@ public class CastlePuzzleManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        castleDoor.SetActive(true);
+        //castleDoor.SetActive(true);
 
     }
 
@@ -30,6 +30,6 @@ public class CastlePuzzleManager : MonoBehaviour
     public void OpenCastleDoor()
     {
         castleDoor.SetActive(false);
-        lypos.StartBoss();
+        //lypos.StartBoss();
     }
 }

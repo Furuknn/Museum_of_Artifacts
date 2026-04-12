@@ -7,7 +7,7 @@ using System.Drawing;
 
 public enum BossState { Idle, Chasing, Attacking, Ability, Death }
 
-public class LyposBoss : MonoBehaviour
+public class LyposBoss : MonoBehaviour, IDamageable
 {
     public BossState currentState;
     public Transform player;

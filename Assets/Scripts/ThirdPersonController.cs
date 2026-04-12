@@ -20,6 +20,7 @@ public class ThirdPersonController : MonoBehaviour
     public CameraStyle currentCameraStyle; // Editörden veya kodla değiştirebilirsin
     [SerializeField] Transform cam;
     public CinemachineFreeLook freeLook;
+    private Camera mainCam;
 
     [Header("Movement")]
     [SerializeField] public CharacterController characterController;
@@ -44,9 +45,10 @@ public class ThirdPersonController : MonoBehaviour
     private bool canApplyGravity = true;
 
     [Header("Interact")]
-    [SerializeField, Range(0f, 100f)] private float camRange = 20f;
-    [SerializeField, Range(0f, 100f)] private float camStartOffset = 1f;
+    [SerializeField, Range(0f, 100f)] private float interactRange = 20f;
     [SerializeField] private GameObject interactionIndicator;
+
+    private IInteractable currentInteractable;
     private bool canInteract = true;
 
     [Header("Input & Animation")]
@@ -55,6 +57,10 @@ public class ThirdPersonController : MonoBehaviour
     public bool isAttacking;
 
     private bool canAttack = true;
+
+    private bool isNoClip;
+    private float noClipSpeedMultiplier = 5f;
+    private float originalMultiplier;
 
     void Awake()
     {
@@ -70,6 +76,8 @@ public class ThirdPersonController : MonoBehaviour
         playerInputActions.Player.Sprint.canceled += SprintEnd;
 
         Instance = this;
+
+        mainCam=Camera.main;
     }
 
     private void OnGameStopped()
@@ -119,15 +127,39 @@ public class ThirdPersonController : MonoBehaviour
             RotatePlayerToCameraForward();
         }
 
+        CameraRay();
         CheckInteractable();
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F1) || Input.GetKeyDown(KeyCode.End))
+        {
+            if (isNoClip)
+            {
+                isNoClip = false;
+                speedMultiplier = originalMultiplier; // restore speed
+                SetLayerRecursively(gameObject, LayerMask.NameToLayer("Ignore Raycast")); // or whatever your normal layer is
+            }
+            else
+            {
+                isNoClip = true;
+                originalMultiplier = speedMultiplier; // save before overwriting
+                speedMultiplier = noClipSpeedMultiplier;
+                SetLayerRecursively(gameObject, LayerMask.NameToLayer("NoClip"));
+            }
+        }
+#endif
+    }
+    private void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+            SetLayerRecursively(child.gameObject, layer);
     }
 
     void FixedUpdate()
     {
         if(canMove)
             MovementHandle();
-
-        CameraRay();
     }
 
     #region Movement and TPS Camera
@@ -241,7 +273,7 @@ public class ThirdPersonController : MonoBehaviour
     // Shooter modu için karakteri zorla kameranın baktığı yöne döndürür
     public void RotatePlayerToCameraForward()
     {
-        Vector3 camForward = Camera.main.transform.forward;
+        Vector3 camForward = mainCam.transform.forward;
         camForward.y = 0f; // was camForward.x = 0f
 
         //if (camForward.sqrMagnitude < 0.001f) return;
@@ -258,7 +290,7 @@ public class ThirdPersonController : MonoBehaviour
         if (!context.performed) return;
         if (isAttacking) return;
 
-        if (isPlayerOnGround())
+        if (isPlayerOnGround() || isNoClip)
         {
             gravity = jumpForce;
             characterController.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
@@ -310,12 +342,9 @@ public class ThirdPersonController : MonoBehaviour
 
     IEnumerator LandSlowness()
     {
-        float tempSpeed = speed;
         float tempSprintMultiplier = sprintMultiplier;
-        //speed /= 2;
-        sprintMultiplier = 1;
-        yield return new WaitForSeconds(0.5f);
-        speed = tempSpeed;
+        sprintMultiplier = 1.35f;
+        yield return new WaitForSeconds(0.25f);
         sprintMultiplier = tempSprintMultiplier;
 
     }
@@ -324,42 +353,33 @@ public class ThirdPersonController : MonoBehaviour
     #region Interact & Actions
     void InteractHandle(InputAction.CallbackContext context)
     {
-        if (!canInteract) return;
-        if (!context.performed) return;
-        RaycastHit hit;
-        if (Physics.Raycast(GetRayStartOrgin(), cam.forward, out hit, camRange))
-        {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-            if (interactable != null) interactable.Interact();
-        }
+        if (!canInteract || !context.performed) return;
+        currentInteractable?.Interact();
     }
 
     void CheckInteractable()
     {
-        RaycastHit hit;
+        currentInteractable = null;
 
-        if (Physics.Raycast(GetRayStartOrgin(), cam.forward, out hit, camRange))
+        Ray ray = GetCrosshairRay();
+        if (Physics.Raycast(ray, out RaycastHit hit, interactRange))
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            currentInteractable = hit.collider.GetComponent<IInteractable>();
+        }
 
-            interactionIndicator.SetActive(interactable != null);
-        }
-        else
-        {
-            // IMPORTANT: turn it off when raycast hits nothing
-            interactionIndicator.SetActive(false);
-        }
+        interactionIndicator.SetActive(currentInteractable != null);
     }
 
-
-    private Vector3 GetRayStartOrgin()
+    private Ray GetCrosshairRay()
     {
-        return cam.position + (cam.forward * camStartOffset);
+        return mainCam.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
     }
 
     private void CameraRay()
     {
-        Debug.DrawRay(GetRayStartOrgin(), cam.forward * camRange, Color.red);
+        Ray ray = GetCrosshairRay();
+        Debug.DrawRay(ray.origin, ray.direction * interactRange, Color.red);
+        //Debug.DrawWireSphere(transform.position, interactSphereRadius); // needs Gizmos
     }
 
     public void MenuToggle(InputAction.CallbackContext context)
