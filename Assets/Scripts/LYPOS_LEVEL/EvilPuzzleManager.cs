@@ -5,6 +5,11 @@ using UnityEngine;
 public class EvilPuzzleManager : MonoBehaviour, IInteractable
 {
     public static EvilPuzzleManager Instance;
+<<<<<<< Updated upstream
+=======
+    public GameObject puzzleSphere;
+    public GameObject puzzlePiece;
+>>>>>>> Stashed changes
     public GameObject door;
     public GameObject enemies;
     public Transform enemyParent;
@@ -171,6 +176,12 @@ public class EvilPuzzleManager : MonoBehaviour, IInteractable
     void WinEvent()
     {
         door.SetActive(false);
+<<<<<<< Updated upstream
+=======
+        puzzlePiece.SetActive(true);
+        puzzleSphere.SetActive(false);
+        //room.DOLocalRotate(new Vector3(0, -359, 0), 4f);
+>>>>>>> Stashed changes
         isDone = true;
     }
 }

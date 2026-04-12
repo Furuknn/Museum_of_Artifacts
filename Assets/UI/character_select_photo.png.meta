@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/UI/character_select_photo.png.meta
 guid: c2d88023646008a48a643f638919b06d
+=======
+<<<<<<<< HEAD:Assets/LEVELS/LYPOS/Models/deceptionsymbol_basecolor.png.meta
+guid: e86e5bf6e88f71e4591ca6ea6ec0e747
+========
+guid: d37557279228b494c87bc6c3e058c101
+>>>>>>>> Furkna:Assets/Greed_Level_Terrain/3d-grass-illustration-with-low-poly-style-free-png.png.meta
+>>>>>>> Stashed changes:Assets/Greed_Level_Terrain/3d-grass-illustration-with-low-poly-style-free-png.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

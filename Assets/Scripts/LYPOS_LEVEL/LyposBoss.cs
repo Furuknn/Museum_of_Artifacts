@@ -16,7 +16,8 @@ public class LyposBoss : MonoBehaviour
     public GameObject rock;
     public GameObject shockwave;
     [Header("References")]
-    public GameObject parkour;
+    public GameObject exitPortal;
+    //public GameObject parkour;
     public List<Transform> rockPos;
     public Transform rockParent;
     List<Transform> rocks = new List<Transform>();
@@ -51,6 +52,7 @@ public class LyposBoss : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentState = BossState.Idle;
         _currentHealth = maxHealth;
+        exitPortal.SetActive(false);
     }
 
     public void StartBoss()
@@ -135,13 +137,18 @@ public class LyposBoss : MonoBehaviour
 
     void Death()
     {
+        WinCondition();
         healthBar.SetActive(false);
         Destroy(gameObject);
     }
 
+    void WinCondition()
+    {
+        exitPortal.SetActive(true);
+    }
     IEnumerator ExposeHeartRoutine()
     {
-        parkour.SetActive(true);
+        //parkour.SetActive(true);
         chestParts[0].DOLocalMoveZ(3.8f, 1f);
         chestParts[1].DOLocalMoveZ(-3.8f, 1f);
 
@@ -150,7 +157,7 @@ public class LyposBoss : MonoBehaviour
         chestParts[0].DOLocalMoveZ(2.3f, 1f);
         chestParts[1].DOLocalMoveZ(-2.3f, 1f);
         _usingSkill = false;
-        parkour.SetActive(false);
+        //parkour.SetActive(false);
     }
 
     void WandStrike()
