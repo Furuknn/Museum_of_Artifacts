@@ -5,4 +5,6 @@ using UnityEngine;
 interface IInteractable
 {
     void Interact();
+
+    bool isInteractable();
 }

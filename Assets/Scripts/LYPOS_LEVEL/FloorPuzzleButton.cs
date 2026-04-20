@@ -9,10 +9,12 @@ public class FloorPuzzleButton : MonoBehaviour, IInteractable
 {
     public TextMeshPro numberText;
     public int number;
-    public bool isInteractable = true;
+    public bool _isInteractable = true;
+
+    public bool isInteractable() => _isInteractable;
     public void Interact()
     {
-        if (!isInteractable) return;
+        if (!_isInteractable) return;
         StartCoroutine(PressButton());
     }
 

@@ -12,8 +12,12 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
     public int buttonsNeedToPress;
     float enemiesToSpawn = 2;
     float enemiesMultiplier = 1;
-    public List<GameObject> enemyGroups;
+    public Transform enemyPos;
+    public GameObject enemyGroup;
     public bool isDone = false;
+    private bool _isInteractable = true;
+
+    public bool isInteractable() => _isInteractable;
 
     private void Awake()
     {
@@ -40,6 +44,11 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
 
     IEnumerator ShowButtons()
     {
+        foreach (var button in buttons)
+        {
+            button.CloseButton();
+        }
+        yield return new WaitForSeconds(1f);
         foreach (var button in buttons)
         {
             if (button.number <= buttonsNeedToPress) button.OpenButton();
@@ -109,11 +118,7 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
 
     void SpawnEnemies()
     {
-        enemiesToSpawn = Mathf.Pow(enemiesToSpawn, enemiesMultiplier);
-
-        enemyGroups[(int)enemiesMultiplier].SetActive(true);
-
-        enemiesMultiplier++;
+        Instantiate(enemyGroup, enemyPos.position, Quaternion.identity);
     }
 
     void WinEvent()
@@ -127,7 +132,7 @@ public class FloorPuzzleManager : MonoBehaviour, IInteractable
                 button.numberText.color = Color.green;
             }
 
-            button.isInteractable = false;
+            button._isInteractable = false;
         }
         resetButton.transform.DOMoveY(transform.position.y+1.5f, 4f);
     }

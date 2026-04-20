@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightBeam: MonoBehaviour
+public class LightBeam : MonoBehaviour
 {
     private FlashlightStatsBase statsRuntime;
-    public enum BeamType {Narrow,Wide}
+    public enum BeamType { Narrow, Wide }
     public BeamType beamType;
 
     [Header("Beam Stats")]
@@ -20,11 +20,9 @@ public class LightBeam: MonoBehaviour
 
     [Header("Wide Beam Settings")]
     [Tooltip("Defines which axes (X, Y, Z) the scaling will apply to. Use 1 for 'On' and 0 for 'Off'.")]
-    public Vector3 expansionAxes = new Vector3(1, 0, 1); // Default to X and Z (width/height)
-    [Tooltip("The maximum multiplier for the scale at the end of the curve.")]
+    public Vector3 expansionAxes = new Vector3(1, 0, 1);
     private float _expansionMultiplier;
-    [Tooltip("The curve evaluates the scale factor from 0 (start) to 1 (end of lifetime).")]
-    public AnimationCurve scaleCurve = AnimationCurve.Linear(0, 0, 1, 1); // Changed default curve
+    public AnimationCurve scaleCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
     private Vector3 fireDirection;
     private float distanceTraveled;
@@ -36,16 +34,15 @@ public class LightBeam: MonoBehaviour
 
     private List<GameObject> alreadyHitTargets = new List<GameObject>();
 
-
     public void InitializeDirection(Camera cam)
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         fireDirection = ray.direction.normalized;
     }
+
     private void Start()
     {
         initialScale = transform.localScale;
-
         statsRuntime = WeaponStatsManager.Instance.flashlightStatsRuntime;
 
         if (beamType == BeamType.Narrow)
@@ -57,10 +54,10 @@ public class LightBeam: MonoBehaviour
             _canDoubleDamage = statsRuntime.canDoubleDamage;
             _doubleDamageChance = statsRuntime.doubleDamageChance;
         }
-        else if (beamType==BeamType.Wide)
+        else if (beamType == BeamType.Wide)
         {
-            _speed= statsRuntime.wideSpeed;
-            _damage= statsRuntime.wideDamage;
+            _speed = statsRuntime.wideSpeed;
+            _damage = statsRuntime.wideDamage;
             _lifetime = statsRuntime.wideLifetime;
             _cooldown = statsRuntime.wideCooldown;
             _expansionMultiplier = statsRuntime.wideExpansionMultiplier;
@@ -75,133 +72,95 @@ public class LightBeam: MonoBehaviour
     private void Update()
     {
         float moveDistance = _speed * Time.deltaTime;
-
         float currentRadius = transform.localScale.x * 1f;
 
         // RAYCAST FOR COLLISION
-
         if (beamType == BeamType.Narrow)
         {
             // Narrow Beam: Stops on the first thing it hits (Blocking)
             if (Physics.SphereCast(transform.position, currentRadius, fireDirection, out RaycastHit hit, moveDistance + skinOffset, hitLayers))
             {
-                EnemyScript enemy = hit.collider.gameObject.GetComponent<EnemyScript>();
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(GetDamage());
-                }
-
-                LyposBoss lypos = hit.collider.GetComponentInParent<LyposBoss>();
-                if (lypos != null)
-                {
-                    lypos.TakeDamage(GetDamage());
-                }
-
-                // Destroy beam on impact
-                Destroy(gameObject);
-
-                if (hitEffectPrefab != null)
-                {
-                    GameObject hitVFX = Instantiate(hitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-                    Destroy(hitVFX, 2f);
-                }
+                HandleImpact(hit.collider.gameObject, hit.point, hit.normal);
                 return; // Stop execution so we don't move or expand
             }
         }
         else if (beamType == BeamType.Wide)
         {
             // Wide Beam: Hits EVERYTHING in its path (Piercing)
-            // SphereCastAll returns an array of everything hit in this frame's sweep
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, currentRadius, fireDirection, moveDistance + skinOffset, hitLayers);
-
             foreach (RaycastHit hit in hits)
             {
-                GameObject hitObj = hit.collider.gameObject;
-
-                // Check if we already hit this specific enemy instance
-                if (!alreadyHitTargets.Contains(hitObj))
-                {
-                    
-                    LyposBoss lypos = hitObj.GetComponentInParent<LyposBoss>();
-                    if (lypos != null)
-                    {
-                        lypos.TakeDamage(-_damage);
-                    }
-                    EnemyScript enemy = hitObj.GetComponent<EnemyScript>();
-                    if (enemy != null)
-                    {
-                        enemy.TakeDamage(_damage);
-                        
-                        alreadyHitTargets.Add(hitObj); // Mark as hit
-
-                        // Optional: Spawn hit effect for wide beam hitting an enemy
-                        if (hitEffectPrefab != null)
-                            Instantiate(hitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-                    }
-                }
+                HandleImpact(hit.collider.gameObject, hit.point, hit.normal);
             }
         }
 
         transform.position += fireDirection * moveDistance;
-
-        // Apply expansion over distance
         distanceTraveled += moveDistance;
 
-        if (beamType==BeamType.Wide)
+        if (beamType == BeamType.Wide)
             ApplyScaleExpansion();
-
     }
+
+    // --- CENTRALIZED IMPACT LOGIC ---
+    private void HandleImpact(GameObject hitObj, Vector3 hitPoint, Vector3 hitNormal)
+    {
+        // For wide beams, prevent hitting the same target twice
+        if (beamType == BeamType.Wide)
+        {
+            if (alreadyHitTargets.Contains(hitObj)) return;
+            alreadyHitTargets.Add(hitObj);
+        }
+
+        // Try to deal damage
+        IDamageable damageable = hitObj.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(GetDamage());
+        }
+
+        // Handle VFX and Destruction based on beam type
+        if (beamType == BeamType.Narrow)
+        {
+            SpawnHitVFX(hitPoint, hitNormal);
+            Destroy(gameObject); // Narrow beam always destroys on first impact
+        }
+        else if (beamType == BeamType.Wide && damageable != null)
+        {
+            // Wide beam only spawns VFX if it actually hit an enemy
+            SpawnHitVFX(hitPoint, hitNormal);
+        }
+    }
+
+    private void SpawnHitVFX(Vector3 position, Vector3 normal)
+    {
+        if (hitEffectPrefab == null) return;
+
+        Quaternion rot = normal != Vector3.zero ? Quaternion.LookRotation(normal) : Quaternion.identity;
+        GameObject hitVFX = Instantiate(hitEffectPrefab, position, rot);
+        Destroy(hitVFX, 2f);
+    }
+    // --------------------------------
+
     private float GetDamage()
     {
-        if (_canDoubleDamage && Random.value < _doubleDamageChance)
+        // Explicitly lock the double damage chance to the Narrow beam only
+        if (beamType == BeamType.Narrow && _canDoubleDamage && Random.value < _doubleDamageChance)
             return _damage * 2f;
+
         return _damage;
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        EnemyScript enemy = other.gameObject.GetComponent<EnemyScript>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(_damage);
-        }
-
-        LyposBoss lypos = other.gameObject.GetComponentInParent<LyposBoss>();
-        if (lypos != null)
-        {
-            lypos.TakeDamage(-_damage);
-        }
-
-        if (beamType == BeamType.Narrow) // sadece ince beamse temas anýnda yok et
-        {
-            Destroy(gameObject);
-            GameObject hitVFX = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
-
-            Destroy(hitVFX, 2f);
-            return;
-        }
+        HandleImpact(other.gameObject, transform.position, Vector3.zero);
     }
+
     private void OnCollisionEnter(Collision collision)
     {
-        EnemyScript enemy = collision.gameObject.GetComponent<EnemyScript>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(_damage);
-        }
+        Vector3 hitPoint = collision.contactCount > 0 ? collision.GetContact(0).point : transform.position;
+        Vector3 hitNormal = collision.contactCount > 0 ? collision.GetContact(0).normal : Vector3.zero;
 
-        LyposBoss lypos = collision.gameObject.GetComponentInParent<LyposBoss>();
-        if (lypos != null)
-        {
-            lypos.TakeDamage(-_damage);
-        }
-
-        if (beamType == BeamType.Narrow) // sadece ince beamse temas anýnda yok et
-        {
-            Destroy(gameObject);
-            GameObject hitVFX = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
-
-            Destroy(hitVFX, 2f);
-            return;
-        }
+        HandleImpact(collision.gameObject, hitPoint, hitNormal);
     }
 
     private void ApplyScaleExpansion()
@@ -221,26 +180,18 @@ public class LightBeam: MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Use the same radius logic as your Update loop
         float radius = transform.localScale.x * 1f;
 
-        // 1. Draw the "Hit Sphere" at the projectile's current center
-        Gizmos.color = Color.cyan; // Cyan for the sphere volume
+        Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, radius);
 
-        // 2. Draw the "Cast Ray" (The path it checks this frame)
-        // We simulate a frame's movement (e.g., 1/60th of a second) to see how far it checks ahead
         float simulatedDistance = (_speed > 0 ? _speed : 20f) * 0.016f;
-
-        Gizmos.color = Color.red; // Red for the forward check direction
+        Gizmos.color = Color.red;
         Vector3 direction = fireDirection != Vector3.zero ? fireDirection : transform.forward;
 
-        // Draw the ray from the center
         Gizmos.DrawRay(transform.position, direction * (simulatedDistance + skinOffset));
 
-        // 3. (Optional) Draw the sphere at the END of the cast
-        // This helps visualize the "Capsule" shape the cast effectively creates
-        Gizmos.color = new Color(0, 1, 1, 0.3f); // Faint Cyan
+        Gizmos.color = new Color(0, 1, 1, 0.3f);
         Gizmos.DrawWireSphere(transform.position + (direction * (simulatedDistance + skinOffset)), radius);
     }
 }

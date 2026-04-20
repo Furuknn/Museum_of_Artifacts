@@ -60,5 +60,5 @@ Material:
     - _VerticalRotateSpeed: 5
     m_Colors:
     - _RotationAxis: {r: -1, g: 1, b: 1, a: 0}
-    - _SpikeColor: {r: 2.0082736, g: 7.6007013, b: 9.947525, a: 1}
+    - _SpikeColor: {r: 1.3896232, g: 5.2592983, b: 6.883181, a: 1}
   m_BuildTextureStacks: []

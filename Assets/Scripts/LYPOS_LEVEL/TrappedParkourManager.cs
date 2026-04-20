@@ -21,5 +21,9 @@ public class TrappedParkourManager : MonoBehaviour
         blocks[safe2].isTrapped = false;
         blocks[safe3].isTrapped = false;
         blocks[safe4].isTrapped = false;
+        blocks[safe1].gameObject.layer = LayerMask.NameToLayer("Ground");
+        blocks[safe2].gameObject.layer = LayerMask.NameToLayer("Ground");
+        blocks[safe3].gameObject.layer = LayerMask.NameToLayer("Ground");
+        blocks[safe4].gameObject.layer = LayerMask.NameToLayer("Ground");
     }
 }

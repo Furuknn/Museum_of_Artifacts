@@ -55,5 +55,5 @@ Material:
     - _QueueOffset: 0
     - _ThrobIntensity: 0
     m_Colors:
-    - _CoreColor: {r: 0.44093153, g: 4.7210274, b: 5.992156, a: 1}
+    - _CoreColor: {r: 0.31178573, g: 3.338271, b: 4.237095, a: 1}
   m_BuildTextureStacks: []

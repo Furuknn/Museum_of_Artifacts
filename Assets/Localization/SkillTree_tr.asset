@@ -1,0 +1,204 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: SkillTree_tr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: tr
+  m_SharedData: {fileID: 11400000, guid: a43db9ae28d573640afe260c401bc85a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 8131341234180
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234181
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234182
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234189
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234190
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234198
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234203
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234204
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234205
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234206
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234212
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234213
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234214
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131299291136
+    m_Localized: "Ana sald\u0131r\u0131n\u0131n hasar\u0131n\u0131 %15 art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234176
+    m_Localized: "Ana sald\u0131r\u0131n\u0131n mermi h\u0131z\u0131n\u0131 %20 art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234177
+    m_Localized: "Ana sald\u0131r\u0131lar\u0131n %20 ihtimalle iki kat hasar verir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234178
+    m_Localized: "Ana sald\u0131r\u0131n\u0131n bekleme s\xFCresini %10 azalt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234179
+    m_Localized: "Ana sald\u0131r\u0131lar\u0131n %35 ihtimalle iki kat hasar verir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234183
+    m_Localized: "Geni\u015Fleyen I\u015F\u0131n\u0131n hasar\u0131n\u0131 %10 art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234184
+    m_Localized: "Geni\u015Fleyen I\u015F\u0131n\u0131n menzilini %20 art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234185
+    m_Localized: "Geni\u015Fleyen I\u015F\u0131n\u0131n y\xFCzey alan\u0131n\u0131
+      %15 art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234186
+    m_Localized: "Geni\u015Fleyen I\u015F\u0131n %50 ihtimalle d\xFC\u015Fmanlar\u0131
+      3 saniyeli\u011Fine sersemletir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234187
+    m_Localized: "Geni\u015Fleyen I\u015F\u0131n\u0131n s\xFCratini %10 art\u0131t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234188
+    m_Localized: "Geni\u015Fleyen I\u015F\u0131n\u0131n bekleme s\xFCresini %12 azalt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234191
+    m_Localized: "I\u015F\u0131k Bombas\u0131n\u0131n hasar\u0131n\u0131 %10 art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234192
+    m_Localized: "I\u015F\u0131k Bombas\u0131n\u0131n etki alan\u0131n\u0131 %10
+      art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234193
+    m_Localized: "Ayn\u0131 anda +1 daha fazla I\u015F\u0131k Bombas\u0131 ta\u015F\u0131yabilirsin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234194
+    m_Localized: "I\u015F\u0131k Bombas\u0131n\u0131n etki s\xFCresinin %20 art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234195
+    m_Localized: "I\u015F\u0131k Bombas\u0131n\u0131n hasar\u0131n\u0131 %15 art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234196
+    m_Localized: "Ayn\u0131 anda +1 daha fazla I\u015F\u0131k Bombas\u0131 ta\u015F\u0131yabilirsin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234197
+    m_Localized: "I\u015F\u0131k Bombas\u0131n\u0131n hasar verme aral\u0131\u011F\u0131n\u0131
+      %8 azalt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234199
+    m_Localized: "I\u015F\u0131n K\u0131l\u0131c\u0131n\u0131n bekleme s\xFCresini
+      %25 azalt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234200
+    m_Localized: "I\u015F\u0131n K\u0131l\u0131c\u0131n\u0131n etki s\xFCresini %20
+      art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234201
+    m_Localized: "I\u015F\u0131n K\u0131l\u0131c\u0131n\u0131n hasar\u0131n\u0131
+      %15 art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234202
+    m_Localized: "I\u015F\u0131n K\u0131l\u0131c\u0131 aktifken d\xFC\u015Fmanlara
+      verilen hasar\u0131n %50 kadar\u0131yla kendini iyile\u015Ftirirsin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234207
+    m_Localized: "Manyak \xD6l\xFCmc\xFCl I\u015F\u0131n\u0131n hasar\u0131n\u0131
+      %10 art\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234208
+    m_Localized: "Manyak \xD6l\xFCmc\xFCl I\u015F\u0131n\u0131n kamera hassasiyeti
+      direncini %15 azalt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234209
+    m_Localized: "Manyak \xD6l\xFCmc\xFCl I\u015F\u0131n\u0131n aktifle\u015Ftirme
+      s\xFCresini %20 azalt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234210
+    m_Localized: "Manyak \xD6l\xFCmc\xFCl I\u015F\u0131n\u0131n kahraman\u0131n\u0131
+      yava\u015Flatma etkisini %30 azalt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234211
+    m_Localized: "Manyak \xD6l\xFCmc\xFCl I\u015F\u0131n\u0131n bekleme s\xFCresini
+      %18 azalt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49441821470720
+    m_Localized: "YETENEK A\u011EACI"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49441859219456
+    m_Localized: YETENEK PUANIN MEVCUT
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

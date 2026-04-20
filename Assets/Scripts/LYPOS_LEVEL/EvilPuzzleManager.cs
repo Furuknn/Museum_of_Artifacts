@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class EvilPuzzleManager : MonoBehaviour, IInteractable
 {
     public static EvilPuzzleManager Instance;
+    public Light pieceLight;
     public GameObject puzzleSphere;
     public GameObject puzzlePiece;
     public GameObject door;
@@ -23,8 +25,11 @@ public class EvilPuzzleManager : MonoBehaviour, IInteractable
     GameObject firstObject;
     GameObject secondObject;
     public int enemyCount;
-    bool isInteractable = true;
+    bool _isInteractable = true;
     public bool isDone = false;
+    
+
+    public bool isInteractable() => _isInteractable;
 
     private void Awake()
     {
@@ -38,8 +43,12 @@ public class EvilPuzzleManager : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (!isInteractable || isDone) return;
-        CheckEvils();
+        if (!_isInteractable || isDone) return;
+        transform.DOLocalRotate(new Vector3(30, 0, 0), 0.3f).OnComplete(() => {
+            transform.DOLocalRotate(new Vector3(0, 0, 0), 0.7f);
+            CheckEvils();
+        }); 
+        
     }
 
     public void SelectEvilSymbol(string evil)
@@ -74,6 +83,7 @@ public class EvilPuzzleManager : MonoBehaviour, IInteractable
     }
     void ChooseEvils()
     {
+        pieceLight.enabled = false;
         playersChoose.Clear();
         if (chosenEvils.Count > 0)
         {
@@ -131,13 +141,13 @@ public class EvilPuzzleManager : MonoBehaviour, IInteractable
         if (enemyParent.transform.childCount > 0) Destroy(enemyParent.transform.GetChild(0).gameObject);
         Instantiate(enemies, enemyParent);
         enemyParent.gameObject.SetActive(false);
-        isInteractable = true;
+        _isInteractable = true;
 
         enemyCount = enemies.transform.childCount;
         foreach (EvilPuzzleSymbol symbol in symbols)
         {
             symbol.DisableSymbol();
-            symbol.isInteractable = true;
+            symbol._isInteractable = true;
         }
     }
     public void CheckEvils()
@@ -158,24 +168,31 @@ public class EvilPuzzleManager : MonoBehaviour, IInteractable
 
     void LoseEvent()
     {
-        isInteractable = false;
+        pieceLight.color = Color.red;
+        pieceLight.enabled = true;
+        _isInteractable = false;
         enemyParent.gameObject.SetActive(true);
         foreach (EvilPuzzleSymbol symbol in symbols)
         {
             symbol.DisableSymbol();
-            symbol.isInteractable = false;
+            symbol._isInteractable = false;
         }
 
         firstObject.SetActive(false);
         secondObject.SetActive(false);
+
+        door.transform.DOLocalMoveY(0.18f, 2f);
     }
 
     void WinEvent()
     {
+        pieceLight.color = Color.green;
+        pieceLight.enabled = true;
         door.SetActive(false);
         puzzlePiece.SetActive(true);
         puzzleSphere.SetActive(false);
         //room.DOLocalRotate(new Vector3(0, -359, 0), 4f);
         isDone = true;
+        door.transform.DOLocalMoveY(3.8f, 2f);
     }
 }

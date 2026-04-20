@@ -17,11 +17,19 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: eabe9bd328827ce42a2238aaf2d68632
   m_SerializeEntries:
-  - m_GUID: 3b7a674b82478404096e9a02715e2039
-    m_Address: MainMenu_en
+  - m_GUID: 217c91f652532134384eed689c3c2734
+    m_Address: SkillTree_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b7a674b82478404096e9a02715e2039
+    m_Address: UI_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 1a91835f2da927741abbb96fa578123d, type: 2}

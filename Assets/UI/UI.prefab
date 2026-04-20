@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SmashGroundUpgrade_03
+  localizationKey: 
   descriptionText: Increases the area of the Expanding Beam by 15%
   skillCost: 2
   unlocksOnPurchase:
@@ -660,6 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUltUpgrade_06
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase:
@@ -798,6 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SaberUpgrade_04
+  localizationKey: skillTree.flashlight.saberUpg04
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -935,6 +938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: FlashUltUpgrade_01
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase:
@@ -1073,6 +1077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUpgrade_03
+  localizationKey: 
   descriptionText: 20% chance of dealing double the damage every time Main Attack
     is triggered
   skillCost: 2
@@ -1346,6 +1351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SmashGroundUpgrade_01
+  localizationKey: 
   descriptionText: Increase the damage of the Expanding Beam by 10%
   skillCost: 1
   unlocksOnPurchase:
@@ -1362,6 +1368,7 @@ GameObject:
   - component: {fileID: 2609521855307277830}
   - component: {fileID: 4827675510403229828}
   - component: {fileID: 7158551111774050165}
+  - component: {fileID: 2781460893561803944}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -1385,8 +1392,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -844, y: 443.81}
-  m_SizeDelta: {x: 186.1677, y: 78.3836}
+  m_AnchoredPosition: {x: -750.2, y: 446.39996}
+  m_SizeDelta: {x: 302.1746, y: 45.2831}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4827675510403229828
 CanvasRenderer:
@@ -1420,7 +1427,7 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2648ba62b171845499db116803d9db54, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 312d261e968486945b6447819b64d9bd, type: 2}
   m_sharedMaterial: {fileID: -2254361701340819715, guid: 2648ba62b171845499db116803d9db54,
     type: 2}
   m_fontSharedMaterials: []
@@ -1429,7 +1436,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 3372220415
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_fontColor: {r: 1, g: 0.9784743, b: 0.4584905, a: 0.78431374}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1446,14 +1453,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1485,9 +1492,49 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2781460893561803944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445560245540780940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:a43db9ae28d573640afe260c401bc85a
+    m_TableEntryReference:
+      m_KeyId: 49441821470720
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7158551111774050165}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &500652357599628557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,6 +1669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUpgrade_01
+  localizationKey: 
   descriptionText: Increase the damage of the Main Attack by 15%
   skillCost: 1
   unlocksOnPurchase:
@@ -1896,6 +1944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BeamUpgrade_02
+  localizationKey: skillTree.flashlight.beamUpg02
   descriptionText: Increase the speed of the Main Attack  by 20%
   skillCost: 1
   unlocksOnPurchase:
@@ -2034,6 +2083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BombUpgrade_07
+  localizationKey: skillTree.flashlight.bombUpg07
   descriptionText: Decrease the damage tick interval of the Light Bomb by 8%
   skillCost: 1
   unlocksOnPurchase:
@@ -2172,6 +2222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SaberUpgrade_07
+  localizationKey: skillTree.flashlight.saberUpg07
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase:
@@ -2428,6 +2479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUpgrade_08
+  localizationKey: 
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -2565,6 +2617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BombUpgrade_03
+  localizationKey: skillTree.flashlight.bombUpg03
   descriptionText: Increase the amount of Light Bomb that can be carried by +1
   skillCost: 2
   unlocksOnPurchase:
@@ -2580,6 +2633,7 @@ GameObject:
   - component: {fileID: 5314039743225452604}
   - component: {fileID: 3499400679091960227}
   - component: {fileID: 3968352375954396819}
+  - component: {fileID: 8011578161003765690}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -2603,8 +2657,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -844, y: 443.81}
-  m_SizeDelta: {x: 186.1677, y: 78.3836}
+  m_AnchoredPosition: {x: -750.2, y: 446.4}
+  m_SizeDelta: {x: 302.1746, y: 45.2831}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3499400679091960227
 CanvasRenderer:
@@ -2638,16 +2692,16 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2648ba62b171845499db116803d9db54, type: 2}
-  m_sharedMaterial: {fileID: -2254361701340819715, guid: 2648ba62b171845499db116803d9db54,
+  m_fontAsset: {fileID: 11400000, guid: 312d261e968486945b6447819b64d9bd, type: 2}
+  m_sharedMaterial: {fileID: -4112636075424271595, guid: 312d261e968486945b6447819b64d9bd,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 3372220415
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.78431374}
+    rgba: 3363175167
+  m_fontColor: {r: 1, g: 0.9784743, b: 0.4584905, a: 0.78431374}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2664,14 +2718,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2706,6 +2760,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8011578161003765690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760395698520450269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:a43db9ae28d573640afe260c401bc85a
+    m_TableEntryReference:
+      m_KeyId: 49441821470720
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3968352375954396819}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &862811555894121670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2878,6 +2972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: WideUpgrade_08
+  localizationKey: skillTree.flashlight.wideUpg08
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -3210,6 +3305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SmashGroundUpgrade_04
+  localizationKey: 
   descriptionText: 50% chance of stunning the enemies for 3 seconds
   skillCost: 1
   unlocksOnPurchase: []
@@ -3347,6 +3443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: FlashUltUpgrade_08
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase: []
@@ -3484,6 +3581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SmashGroundUpgrade_05
+  localizationKey: 
   descriptionText: Increase the speed of the Expanding Beam by 10%
   skillCost: 2
   unlocksOnPurchase:
@@ -3699,6 +3797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BeamUpgrade_03
+  localizationKey: skillTree.flashlight.beamUpg03
   descriptionText: 20% chance of dealing double the damage every time Main Attack
     is triggered
   skillCost: 2
@@ -4303,6 +4402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: FlashUltUpgrade_03
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase: []
@@ -4440,6 +4540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUltUpgrade_08
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase: []
@@ -4870,6 +4971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: FlashUltUpgrade_02
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase:
@@ -5051,6 +5153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BeamUpgrade_05
+  localizationKey: skillTree.flashlight.beamUpg05
   descriptionText: 35% chance of dealing double the damage every time Main Attack
     is triggered
   skillCost: 2
@@ -5191,6 +5294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUltUpgrade_04
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase:
@@ -5947,6 +6051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SpinUpgrade_07
+  localizationKey: 
   descriptionText: Decrease the damage tick interval of the Light Bomb by 8%
   skillCost: 1
   unlocksOnPurchase:
@@ -6203,6 +6308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: WideUpgrade_04
+  localizationKey: skillTree.flashlight.wideUpg04
   descriptionText: 50% chance of stunning the enemies for 3 seconds
   skillCost: 1
   unlocksOnPurchase: []
@@ -7030,6 +7136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SpinUpgrade_04
+  localizationKey: 
   descriptionText: Increase the duration of the bomb by 20%
   skillCost: 1
   unlocksOnPurchase: []
@@ -7167,6 +7274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BeamUpgrade_04
+  localizationKey: skillTree.flashlight.beamUpg04
   descriptionText: Decrease the cooldown of the Main Attack by 10%
   skillCost: 1
   unlocksOnPurchase:
@@ -7473,6 +7581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: FlashUltUpgrade_06
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase:
@@ -7611,6 +7720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SaberUpgrade_06
+  localizationKey: skillTree.flashlight.saberUpg06
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -7748,6 +7858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUpgrade_05
+  localizationKey: 
   descriptionText: 35% chance of dealing double the damage every time Main Attack
     is triggered
   skillCost: 2
@@ -7888,6 +7999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: DashUpgrade_01
+  localizationKey: 
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase:
@@ -8027,6 +8139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: FlashUltUpgrade_04
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase:
@@ -8355,6 +8468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SaberUpgrade_01
+  localizationKey: skillTree.flashlight.saberUpg01
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase:
@@ -8713,6 +8827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BombUpgrade_08
+  localizationKey: skillTree.flashlight.bombUpg08
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -8850,6 +8965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: DashUpgrade_03
+  localizationKey: 
   descriptionText: TBD
   skillCost: 2
   unlocksOnPurchase:
@@ -9182,6 +9298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: FlashUltUpgrade_07
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase: []
@@ -9319,6 +9436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUltUpgrade_05
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase:
@@ -9458,6 +9576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUltUpgrade_03
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase: []
@@ -10857,6 +10976,7 @@ GameObject:
   - component: {fileID: 5329578465613762978}
   - component: {fileID: 447961116502324530}
   - component: {fileID: 7816505042710951424}
+  - component: {fileID: 782073326603582122}
   m_Layer: 5
   m_Name: SkillPoint_text
   m_TagString: Untagged
@@ -10913,8 +11033,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SKILL POINTS AVAILABLE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2648ba62b171845499db116803d9db54, type: 2}
-  m_sharedMaterial: {fileID: -2254361701340819715, guid: 2648ba62b171845499db116803d9db54,
+  m_fontAsset: {fileID: 11400000, guid: 312d261e968486945b6447819b64d9bd, type: 2}
+  m_sharedMaterial: {fileID: -4112636075424271595, guid: 312d261e968486945b6447819b64d9bd,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10939,8 +11059,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10981,6 +11101,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &782073326603582122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3794260913983024721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:a43db9ae28d573640afe260c401bc85a
+    m_TableEntryReference:
+      m_KeyId: 49441859219456
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7816505042710951424}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &3824889336709418325
 GameObject:
   m_ObjectHideFlags: 0
@@ -11263,6 +11423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: DashUpgrade_06
+  localizationKey: 
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -11400,6 +11561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: WideUpgrade_03
+  localizationKey: skillTree.flashlight.wideUpg03
   descriptionText: Increases the area of the Expanding Beam by 15%
   skillCost: 2
   unlocksOnPurchase:
@@ -11870,6 +12032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SaberUpgrade_02
+  localizationKey: skillTree.flashlight.saberUpg02
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -12183,6 +12346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: DashUpgrade_07
+  localizationKey: 
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase:
@@ -12530,6 +12694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: WideUpgrade_02
+  localizationKey: skillTree.flashlight.wideUpg02
   descriptionText: Increase the range of the Expanding Beam by 20%
   skillCost: 1
   unlocksOnPurchase: []
@@ -12763,7 +12928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2981879049686969027
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13064,6 +13229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: DashUpgrade_05
+  localizationKey: 
   descriptionText: TBD
   skillCost: 2
   unlocksOnPurchase:
@@ -13388,6 +13554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SpinUpgrade_03
+  localizationKey: 
   descriptionText: Increase the amount of Light Bomb that can be carried by +1
   skillCost: 2
   unlocksOnPurchase:
@@ -13526,6 +13693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: WideUpgrade_01
+  localizationKey: skillTree.flashlight.wideUpg01
   descriptionText: Increase the damage of the Expanding Beam by 10%
   skillCost: 1
   unlocksOnPurchase:
@@ -13665,6 +13833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: WideUpgrade_07
+  localizationKey: skillTree.flashlight.wideUpg07
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase:
@@ -14000,6 +14169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUpgrade_02
+  localizationKey: 
   descriptionText: Increase the speed of the Main Attack  by 20%
   skillCost: 1
   unlocksOnPurchase:
@@ -14849,6 +15019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUpgrade_07
+  localizationKey: 
   descriptionText: TBD
   skillCost: 3
   unlocksOnPurchase: []
@@ -15199,6 +15370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BeamUpgrade_07
+  localizationKey: skillTree.flashlight.beamUpg07
   descriptionText: TBD
   skillCost: 3
   unlocksOnPurchase: []
@@ -15469,6 +15641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: FlashUltUpgrade_05
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase:
@@ -16133,6 +16306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SmashGroundUpgrade_02
+  localizationKey: 
   descriptionText: Increase the range of the Expanding Beam by 20%
   skillCost: 1
   unlocksOnPurchase: []
@@ -16228,7 +16402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5611591384075839098
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16618,6 +16792,7 @@ GameObject:
   - component: {fileID: 6760075508517100353}
   - component: {fileID: 1644554628829861625}
   - component: {fileID: 1787854568843005129}
+  - component: {fileID: 3368738916724688874}
   m_Layer: 5
   m_Name: SkillPoint_text
   m_TagString: Untagged
@@ -16674,7 +16849,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: SKILL POINTS AVAILABLE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2648ba62b171845499db116803d9db54, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 312d261e968486945b6447819b64d9bd, type: 2}
   m_sharedMaterial: {fileID: -2254361701340819715, guid: 2648ba62b171845499db116803d9db54,
     type: 2}
   m_fontSharedMaterials: []
@@ -16700,8 +16875,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16739,9 +16914,49 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -248.01526, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3368738916724688874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5891155334665803867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:a43db9ae28d573640afe260c401bc85a
+    m_TableEntryReference:
+      m_KeyId: 49441859219456
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1787854568843005129}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &5903597640322192233
 GameObject:
   m_ObjectHideFlags: 0
@@ -16876,6 +17091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SpinUpgrade_08
+  localizationKey: 
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -17013,6 +17229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SpinUpgrade_05
+  localizationKey: 
   descriptionText: Increase the damage of the Light Bomb by 10%
   skillCost: 2
   unlocksOnPurchase:
@@ -17152,6 +17369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUltUpgrade_01
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase:
@@ -17290,6 +17508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SmashGroundUpgrade_08
+  localizationKey: 
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -17427,6 +17646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BombUpgrade_06
+  localizationKey: skillTree.flashlight.bombUpg06
   descriptionText: Increase the amount of Light Bomb that can be carried by +1
   skillCost: 1
   unlocksOnPurchase: []
@@ -17833,6 +18053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BombUpgrade_05
+  localizationKey: skillTree.flashlight.bombUpg05
   descriptionText: Increase the damage of the Light Bomb by 10%
   skillCost: 2
   unlocksOnPurchase:
@@ -17972,6 +18193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUpgrade_04
+  localizationKey: 
   descriptionText: Decrease the cooldown of the Main Attack by 10%
   skillCost: 1
   unlocksOnPurchase:
@@ -18459,6 +18681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUltUpgrade_02
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase:
@@ -18712,6 +18935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SpinUpgrade_06
+  localizationKey: 
   descriptionText: Increase the amount of Light Bomb that can be carried by +1
   skillCost: 1
   unlocksOnPurchase: []
@@ -19002,6 +19226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SmashGroundUpgrade_06
+  localizationKey: 
   descriptionText: Decrease the cooldown of the Expanding Beam by 12%
   skillCost: 1
   unlocksOnPurchase: []
@@ -19274,6 +19499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BombUpgrade_04
+  localizationKey: skillTree.flashlight.bombUpg04
   descriptionText: Increase the duration of the bomb by 20%
   skillCost: 1
   unlocksOnPurchase: []
@@ -19295,7 +19521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &475929962424204061
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20268,6 +20494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SpinUpgrade_02
+  localizationKey: 
   descriptionText: Increase the detonation area of Light Bomb by 10%
   skillCost: 1
   unlocksOnPurchase: []
@@ -20539,6 +20766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SaberUpgrade_05
+  localizationKey: skillTree.flashlight.saberUpg05
   descriptionText: TBD
   skillCost: 2
   unlocksOnPurchase:
@@ -20678,6 +20906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: DashUpgrade_02
+  localizationKey: 
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -20815,6 +21044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BeamUpgrade_01
+  localizationKey: skillTree.flashlight.beamUpg01
   descriptionText: Increase the damage of the Main Attack by 15%
   skillCost: 1
   unlocksOnPurchase:
@@ -21148,6 +21378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUltUpgrade_07
+  localizationKey: 
   descriptionText: 
   skillCost: 0
   unlocksOnPurchase: []
@@ -21285,6 +21516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SpinUpgrade_01
+  localizationKey: 
   descriptionText: Increase the damage of the Light Bomb by 10%
   skillCost: 1
   unlocksOnPurchase:
@@ -21424,6 +21656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BombUpgrade_01
+  localizationKey: skillTree.flashlight.bombUpg01
   descriptionText: Increase the damage of the Light Bomb by 10%
   skillCost: 1
   unlocksOnPurchase:
@@ -21682,6 +21915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BeamUpgrade_08
+  localizationKey: skillTree.flashlight.beamUpg08
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -21928,7 +22162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7702638269030451356}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.6637695, y: -0.016884923, z: 4.7574477}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23215,6 +23449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: StickUpgrade_06
+  localizationKey: 
   descriptionText: TBD
   skillCost: 2
   unlocksOnPurchase:
@@ -23663,6 +23898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BombUpgrade_02
+  localizationKey: skillTree.flashlight.bombUpg02
   descriptionText: Increase the detonation area of Light Bomb by 10%
   skillCost: 1
   unlocksOnPurchase: []
@@ -23875,6 +24111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SaberUpgrade_03
+  localizationKey: skillTree.flashlight.saberUpg03
   descriptionText: TBD
   skillCost: 2
   unlocksOnPurchase:
@@ -24322,6 +24559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: BeamUpgrade_06
+  localizationKey: skillTree.flashlight.beamUpg06
   descriptionText: TBD
   skillCost: 2
   unlocksOnPurchase:
@@ -24593,6 +24831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SmashGroundUpgrade_07
+  localizationKey: 
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase:
@@ -24883,7 +25122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2308208105053689437
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25486,6 +25725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: WideUpgrade_05
+  localizationKey: skillTree.flashlight.wideUpg05
   descriptionText: Increase the speed of the Expanding Beam by 10%
   skillCost: 2
   unlocksOnPurchase:
@@ -25625,6 +25865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: WideUpgrade_06
+  localizationKey: skillTree.flashlight.wideUpg06
   descriptionText: Decrease the cooldown of the Expanding Beam by 12%
   skillCost: 1
   unlocksOnPurchase: []
@@ -25837,6 +26078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: DashUpgrade_08
+  localizationKey: 
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -25974,6 +26216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: DashUpgrade_04
+  localizationKey: 
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -26264,6 +26507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeCode: SaberUpgrade_08
+  localizationKey: skillTree.flashlight.saberUpg08
   descriptionText: TBD
   skillCost: 1
   unlocksOnPurchase: []
@@ -26455,7 +26699,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -26465,7 +26709,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -26515,12 +26759,12 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -26710,7 +26954,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -26720,7 +26964,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -26770,12 +27014,12 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 436.47778
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27011,7 +27255,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27021,7 +27265,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27071,12 +27315,12 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1483.5222
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27227,7 +27471,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27237,7 +27481,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27287,12 +27531,12 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1483.5222
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27550,7 +27794,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27560,7 +27804,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27610,12 +27854,12 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27842,7 +28086,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27852,7 +28096,7 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
@@ -27902,12 +28146,12 @@ PrefabInstance:
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 436.47778
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539742736561344748, guid: 93add3b36ebe48749b3b4c3a57f2203b,
         type: 3}

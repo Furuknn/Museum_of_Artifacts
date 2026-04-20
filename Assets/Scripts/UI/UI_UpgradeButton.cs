@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -12,9 +13,12 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [Header("Upgrade ID (must match SkillTreeManager)")]
     [SerializeField] private string upgradeCode;
 
+    [Header("Localization")]
+    [SerializeField] private string localizationKey;
+
     [Header("Description Data")]
     [TextArea]
-    [SerializeField] private string descriptionText;
+    [SerializeField] public string descriptionText;
     [SerializeField] private int skillCost;
 
     [Header("Upgrades unlocked after purchasing this one")]
@@ -45,16 +49,21 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         button.onClick.AddListener(() => SkillTreeManager.Instance.UpgradeStat(upgradeCode));
 
-        ApplyDescription();
         RefreshFromSave();
     }
     private void OnEnable()
     {
         SkillTreeManager.OnUpgradeUnlocked += OnUpgradeUnlocked;
+
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
+        ApplyDescription();
     }
     private void OnDisable()
     {
         SkillTreeManager.OnUpgradeUnlocked -= OnUpgradeUnlocked;
+
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
     }
 
     private void Start()
@@ -68,6 +77,11 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
             if (PlayerPrefs.GetInt(next.UpgradeCode, 0) == 0)
                 next.Lock();
         }
+    }
+
+    private void OnLocaleChanged(UnityEngine.Localization.Locale locale)
+    {
+        ApplyDescription();
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -89,22 +103,25 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
         }
     }
 
-    public void Lock()
-    {
-        button.interactable = false;
-    }
 
-    public void Unlock()
-    {
-        button.interactable = true;
-    }
+    public void Lock() => button.interactable = false;
+    public void Unlock() => button.interactable = true;
 
     public void ApplyDescription()
     {
-        string rawText = descriptionText;
+        string raw;
 
-        descriptionText =
-            TMPNumberColorizer.ColorizeNumbers(rawText, numberColor);
+        if (!string.IsNullOrEmpty(localizationKey))
+            raw = LocalizationSettings.StringDatabase.GetLocalizedString("SkillTree", localizationKey);
+        else
+            raw = descriptionText; // fallback to Inspector text if no key assigned
+
+        descriptionText = TMPNumberColorizer.ColorizeNumbers(raw, numberColor);
+    }
+
+    public void SetDescription(string descText)
+    {
+        descriptionText = descText;
     }
 
     private void RefreshFromSave()

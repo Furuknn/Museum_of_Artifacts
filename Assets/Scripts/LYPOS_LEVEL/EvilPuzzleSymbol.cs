@@ -6,16 +6,20 @@ public class EvilPuzzleSymbol : MonoBehaviour,IInteractable
 {
     public string evil;
     public Material mat;
+    public List<Material> mats;
     public bool isActive = false;
-    public bool isInteractable = true;
+    public bool _isInteractable = true;
+
+    public bool isInteractable() => _isInteractable;
 
     private void Awake()
     {
-        mat = GetComponent<MeshRenderer>().material;
+        GetComponent<MeshRenderer>().GetSharedMaterials(mats);
+        mat = mats[1];
     }
     public void Interact()
     {
-        if (!isInteractable) return;
+        if (!_isInteractable) return;
         ToggleSymbol();
     }
 

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: MainMenu Shared Data
+  m_Name: UI Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: MainMenu
+  m_TableCollectionName: UI
   m_TableCollectionNameGuidString: e082f89810167434da163ad6dc4d14e4
   m_Entries:
   - m_Id: 81572966739968
@@ -25,6 +25,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 81573004488705
     m_Key: mainMenu.quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2128352134868992
+    m_Key: mainMenu.language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2128352176812032
+    m_Key: mainMenu.language.english
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2128352176812033
+    m_Key: mainMenu.language.turkish
     m_Metadata:
       m_Items: []
   - m_Id: 81573004488706

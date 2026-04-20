@@ -1,0 +1,197 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: SkillTree Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: SkillTree
+  m_TableCollectionNameGuidString: a43db9ae28d573640afe260c401bc85a
+  m_Entries:
+  - m_Id: 49441821470720
+    m_Key: skillTree.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49441859219456
+    m_Key: skillTree.pointsAvailable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131299291136
+    m_Key: skillTree.flashlight.beamUpg01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234176
+    m_Key: skillTree.flashlight.beamUpg02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234177
+    m_Key: skillTree.flashlight.beamUpg03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234178
+    m_Key: skillTree.flashlight.beamUpg04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234179
+    m_Key: skillTree.flashlight.beamUpg05
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234180
+    m_Key: skillTree.flashlight.beamUpg06
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234181
+    m_Key: skillTree.flashlight.beamUpg07
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234182
+    m_Key: skillTree.flashlight.beamUpg08
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234183
+    m_Key: skillTree.flashlight.wideUpg01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234184
+    m_Key: skillTree.flashlight.wideUpg02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234185
+    m_Key: skillTree.flashlight.wideUpg03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234186
+    m_Key: skillTree.flashlight.wideUpg04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234187
+    m_Key: skillTree.flashlight.wideUpg05
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234188
+    m_Key: skillTree.flashlight.wideUpg06
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234189
+    m_Key: skillTree.flashlight.wideUpg07
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234190
+    m_Key: skillTree.flashlight.wideUpg08
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234191
+    m_Key: skillTree.flashlight.bombUpg01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234192
+    m_Key: skillTree.flashlight.bombUpg02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234193
+    m_Key: skillTree.flashlight.bombUpg03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234194
+    m_Key: skillTree.flashlight.bombUpg04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234195
+    m_Key: skillTree.flashlight.bombUpg05
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234196
+    m_Key: skillTree.flashlight.bombUpg06
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234197
+    m_Key: skillTree.flashlight.bombUpg07
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234198
+    m_Key: skillTree.flashlight.bombUpg08
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234199
+    m_Key: skillTree.flashlight.saberUpg01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234200
+    m_Key: skillTree.flashlight.saberUpg02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234201
+    m_Key: skillTree.flashlight.saberUpg03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234202
+    m_Key: skillTree.flashlight.saberUpg04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234203
+    m_Key: skillTree.flashlight.saberUpg05
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234204
+    m_Key: skillTree.flashlight.saberUpg06
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234205
+    m_Key: skillTree.flashlight.saberUpg07
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234206
+    m_Key: skillTree.flashlight.saberUpg08
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234207
+    m_Key: skillTree.flashlight.flashUltUpg01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234208
+    m_Key: skillTree.flashlight.flashUltUpg02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234209
+    m_Key: skillTree.flashlight.flashUltUpg03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234210
+    m_Key: skillTree.flashlight.flashUltUpg04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234211
+    m_Key: skillTree.flashlight.flashUltUpg05
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234212
+    m_Key: skillTree.flashlight.flashUltUpg06
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234213
+    m_Key: skillTree.flashlight.flashUltUpg07
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8131341234214
+    m_Key: skillTree.flashlight.flashUltUpg08
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 25298973866590215
+  references:
+    version: 2
+    RefIds:
+    - rid: 25298973866590215
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1776101559074

@@ -6,8 +6,13 @@ public class EnemyHitFeedback : MonoBehaviour
     private SkinnedMeshRenderer skinnedMesh;
     private MaterialPropertyBlock mpb;
 
-    
-    [SerializeField]private float decaySpeed = 6f;
+    [Header("Material Settings")]
+    [Tooltip("The specific material to apply the hit feedback to.")]
+    [SerializeField] private Material targetMaterial;
+    private int targetMaterialIndex = -1; // -1 means not found yet
+
+    [Header("Feedback Settings")]
+    [SerializeField] private float decaySpeed = 6f;
     [SerializeField] private float maxScale = 0.02f;
     private float scaleValue = 0f;
 
@@ -17,6 +22,8 @@ public class EnemyHitFeedback : MonoBehaviour
     {
         skinnedMesh = GetComponentInChildren<SkinnedMeshRenderer>();
         mpb = new MaterialPropertyBlock();
+
+        FindTargetMaterialIndex();
     }
 
     void Update()
@@ -30,15 +37,38 @@ public class EnemyHitFeedback : MonoBehaviour
 
     public void OnHit()
     {
+        // Don't bother if we didn't find the material
+        if (targetMaterialIndex == -1) return;
+
         scaleValue = maxScale; // spike
         ApplyScale(scaleValue);
     }
 
     private void ApplyScale(float value)
     {
-        // IMPORTANT: material index 1
-        skinnedMesh.GetPropertyBlock(mpb, 1);
+        if (targetMaterialIndex == -1) return;
+
+        skinnedMesh.GetPropertyBlock(mpb, targetMaterialIndex);
         mpb.SetFloat(ScaleID, value);
-        skinnedMesh.SetPropertyBlock(mpb, 1);
+        skinnedMesh.SetPropertyBlock(mpb, targetMaterialIndex);
+    }
+
+    private void FindTargetMaterialIndex()
+    {
+        if (skinnedMesh == null || targetMaterial == null) return;
+
+        // Iterate through sharedMaterials to find the matching reference
+        Material[] mats = skinnedMesh.sharedMaterials;
+        for (int i = 0; i < mats.Length; i++)
+        {
+            if (mats[i] == targetMaterial)
+            {
+                targetMaterialIndex = i;
+                return; // Found it, stop searching
+            }
+        }
+
+        // If we get here, the material wasn't on the mesh
+        Debug.LogWarning($"[EnemyHitFeedback] The material '{targetMaterial.name}' was not found on {skinnedMesh.name}'s SkinnedMeshRenderer!");
     }
 }

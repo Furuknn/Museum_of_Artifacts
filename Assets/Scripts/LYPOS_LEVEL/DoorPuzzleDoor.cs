@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DoorPuzzleDoor : MonoBehaviour, IPlayerRespawn
@@ -10,8 +11,9 @@ public class DoorPuzzleDoor : MonoBehaviour, IPlayerRespawn
     //public GameObject door2;
     public GameObject trap;
     bool isOpened = false;
+    public TextMeshPro hint;
 
-    private void Start()
+    private void Awake()
     {
         if (isTrapped) trap.SetActive(true);
     }
@@ -46,7 +48,7 @@ public class DoorPuzzleDoor : MonoBehaviour, IPlayerRespawn
 
     void OpenDoor()
     {
-        door1.transform.DOLocalRotate(new Vector3(0, 90, 0), 1f).SetEase(Ease.OutBounce);
+        door1.transform.DOLocalRotate(new Vector3(0, -90, 0), 1f).SetEase(Ease.OutBounce);
         //door2.transform.DOLocalRotate(new Vector3(0, -90, 0), 1f).SetEase(Ease.OutBounce);
         isOpened = true;
     }

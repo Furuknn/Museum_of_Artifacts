@@ -9,8 +9,10 @@ public class LevelObjectInteraction : MonoBehaviour, IInteractable
     private MeshRenderer meshRenderer;
     private Material originalMaterial;
     private Material cursedMaterial;
+    private bool _isInteractable = true;
 
-
+    public bool isInteractable() => _isInteractable;
+    
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();

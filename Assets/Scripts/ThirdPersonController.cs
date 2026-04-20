@@ -36,12 +36,23 @@ public class ThirdPersonController : MonoBehaviour
     private bool isSprinting;
     private float baseSpeed;
 
-    [Header("Jump and Gravity")]
-    [SerializeField, Range(-100f, 100f)] private float gravity = -9.81f;
-    [SerializeField, Range(0f, 50f)] private float jumpForce = 5f;
-    [SerializeField, Range(1f, 2f)] private float groundRange;
+    [Header("Jump & Gravity")]
+    [SerializeField, Range(0f, 50f)] private float jumpForce = 12f;
+    [SerializeField, Range(-100f, 0f)] private float gravityValue = -25f;
+    [SerializeField, Range(1f, 5f)] private float fallMultiplier = 2.2f;   // Snappier fall
+    [SerializeField, Range(0f, 1f)] private float coyoteTime = 0.15f;      // Forgiveness after walking off a ledge
+    [SerializeField, Range(0f, 1f)] private float jumpBufferTime = 0.12f;  // Forgiveness for early jump press
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField, Range(0f, 1f)] private float groundCheckRadius = 0.3f;
+    [SerializeField] private Transform groundCheckOrigin;
+
     public bool canJump = true;
+
+    private float verticalVelocity;
+    private float coyoteTimer;
+    private float jumpBufferTimer;
+    private bool wasGrounded;
+    private bool isGrounded;
     private bool canApplyGravity = true;
 
     [Header("Interact")]
@@ -58,9 +69,12 @@ public class ThirdPersonController : MonoBehaviour
 
     private bool canAttack = true;
 
+    [Header("No Clip")]
+    [SerializeField]private float noClipSpeedMultiplier = 5f;
+    [SerializeField]private float noClipJumpForce = 20f;
     private bool isNoClip;
-    private float noClipSpeedMultiplier = 5f;
     private float originalMultiplier;
+    private float originalJumpForce;
 
     void Awake()
     {
@@ -77,7 +91,7 @@ public class ThirdPersonController : MonoBehaviour
 
         Instance = this;
 
-        mainCam=Camera.main;
+        mainCam = Camera.main;
     }
 
     private void OnGameStopped()
@@ -91,6 +105,7 @@ public class ThirdPersonController : MonoBehaviour
         if (animator != null)
             animator.speed = 0f;
     }
+    
     private void OnGameContinued()
     {
         canMove = true;
@@ -119,7 +134,7 @@ public class ThirdPersonController : MonoBehaviour
 
     void Update()
     {
-        ApplyGravity();
+        HandleGravityAndJump();
 
         // Shooter modundaysak karakter hareket etmese bile kameranın baktığı yere dönsün
         if (currentCameraStyle == CameraStyle.Shooter)
@@ -137,18 +152,23 @@ public class ThirdPersonController : MonoBehaviour
             {
                 isNoClip = false;
                 speedMultiplier = originalMultiplier; // restore speed
+                jumpForce = originalJumpForce;
                 SetLayerRecursively(gameObject, LayerMask.NameToLayer("Ignore Raycast")); // or whatever your normal layer is
             }
             else
             {
                 isNoClip = true;
                 originalMultiplier = speedMultiplier; // save before overwriting
+                originalJumpForce= jumpForce;
+
                 speedMultiplier = noClipSpeedMultiplier;
+                jumpForce = noClipJumpForce;
                 SetLayerRecursively(gameObject, LayerMask.NameToLayer("NoClip"));
             }
         }
 #endif
     }
+
     private void SetLayerRecursively(GameObject obj, int layer)
     {
         obj.layer = layer;
@@ -209,8 +229,6 @@ public class ThirdPersonController : MonoBehaviour
                 Vector3 moveDir = cam.forward * direction.z + cam.right * direction.x;
                 moveDir.y = 0; // Yükseklik değişimini engelle
 
-
-
                 float finalSpeed = speed * speedMultiplier;
 
                 if (isSprinting && direction.magnitude >= 0.1f)
@@ -252,9 +270,6 @@ public class ThirdPersonController : MonoBehaviour
             animator.SetBool("isSprinting", true);
             animator.SetFloat("moveSpeed", 1.4f);
         }
-            
-        
-
     }
 
     private void SprintEnd(InputAction.CallbackContext context)
@@ -267,7 +282,6 @@ public class ThirdPersonController : MonoBehaviour
             animator.SetBool("isSprinting", false);
             animator.SetFloat("moveSpeed", 1f);
         }
-            
     }
 
     // Shooter modu için karakteri zorla kameranın baktığı yöne döndürür
@@ -284,59 +298,113 @@ public class ThirdPersonController : MonoBehaviour
     #endregion
 
     #region Jump
-    public void JumpHandle(InputAction.CallbackContext context)
-    {
-        if (!canJump) return;
-        if (!context.performed) return;
-        if (isAttacking) return;
 
-        if (isPlayerOnGround() || isNoClip)
-        {
-            gravity = jumpForce;
-            characterController.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
-            if (animator != null)
-            {
-                animator.SetTrigger("Jump");
-                isLanded = false;
-            }
-        }
+    private bool CheckGrounded()
+    {
+        if (isNoClip) return true;
+
+        Vector3 origin = groundCheckOrigin != null
+            ? groundCheckOrigin.position
+            : transform.position + Vector3.up * 0.1f;
+
+        // Slightly offset origin upward so the sphere can detect ground even on slopes
+        return Physics.SphereCast(
+            origin + Vector3.up * (groundCheckRadius + 0.05f),
+            groundCheckRadius,
+            Vector3.down,
+            out _,
+            groundCheckRadius + 0.1f,   // max distance
+            groundLayer,
+            QueryTriggerInteraction.Ignore
+        );
     }
 
-    bool isPlayerOnGround()
+    void HandleGravityAndJump()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.GetMask("Ground"));
-    }
-    #endregion
-
-    #region Gravity
-    void ApplyGravity()
-    {
-
         if (!canApplyGravity) return;
 
-        if (isPlayerOnGround() && gravity < 0)
+        isGrounded = CheckGrounded();
+
+        // ── Coyote time: keep the "was grounded" window alive briefly
+        if (isGrounded)
+            coyoteTimer = coyoteTime;
+        else
+            coyoteTimer -= Time.deltaTime;
+
+        // ── Jump buffer: store the press for a brief window
+        if (jumpBufferTimer > 0f)
+            jumpBufferTimer -= Time.deltaTime;
+
+        // ── Landing detection (was airborne, now grounded)
+        if (!wasGrounded && isGrounded && verticalVelocity < 0f)
         {
-            gravity = -2f;
-            if (isPlayerOnGround() && animator != null)
+            verticalVelocity = -2f;     // Small snap-to-ground value — kills float without slamming
+            if (animator != null)
             {
+                animator.ResetTrigger("Jump");
+                animator.SetTrigger("Land");
                 animator.SetBool("isFalling", false);
                 animator.SetBool("isJumping", false);
             }
-        }
-        else
-        {
-            if (gravity < 0 && !isPlayerOnGround() && animator != null)
-            {
-                animator.SetBool("isJumping", false);
-            }
-        }
-        gravity += -20f * Time.deltaTime;
-        characterController.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
-        if (!isLanded && isPlayerOnGround())
-        {
-            animator.SetTrigger("Land");
-            StartCoroutine(LandSlowness());
             isLanded = true;
+            StartCoroutine(LandSlowness());
+        }
+
+        // ── Consume jump buffer if we have coyote window
+        if (jumpBufferTimer > 0f && coyoteTimer > 0f)
+        {
+            ExecuteJump();
+            jumpBufferTimer = 0f;
+            coyoteTimer = 0f;
+        }
+
+        // ── Gravity: fall faster than you rise (much better game feel)
+        float currentGravity = (!isGrounded && verticalVelocity < 0f)
+            ? gravityValue * fallMultiplier
+            : gravityValue;
+
+        verticalVelocity += currentGravity * Time.deltaTime;
+        verticalVelocity = Mathf.Max(verticalVelocity, -50f);   // Terminal velocity cap
+
+        // ── Airborne animation states
+        if (animator != null)
+        {
+            animator.SetBool("isJumping", !isGrounded && verticalVelocity > 0f);
+            animator.SetBool("isFalling", !isGrounded && verticalVelocity < -2f);
+        }
+
+        characterController.Move(Vector3.up * verticalVelocity * Time.deltaTime);
+        wasGrounded = isGrounded;
+    }
+    public void JumpHandle(InputAction.CallbackContext context)
+    {
+        if (!canJump || !context.performed || isAttacking) return;
+
+        jumpBufferTimer = jumpBufferTime;   // Always store the press
+
+        // If we already have a coyote window, jump immediately
+        if (coyoteTimer > 0f)
+        {
+            ExecuteJump();
+            jumpBufferTimer = 0f;
+            coyoteTimer = 0f;
+        }
+        // Otherwise the buffer will catch it in HandleGravityAndJump when we land
+    }
+
+    private void ExecuteJump()
+    {
+        verticalVelocity = jumpForce;
+        isLanded = false;
+
+        if (isNoClip) verticalVelocity = jumpForce;   // NoClip still works
+
+        if (animator != null)
+        {
+            animator.ResetTrigger("Land");
+            animator.SetTrigger("Jump");
+            animator.SetBool("isJumping", true);
+            animator.SetBool("isFalling", false);
         }
     }
 
@@ -346,15 +414,18 @@ public class ThirdPersonController : MonoBehaviour
         sprintMultiplier = 1.35f;
         yield return new WaitForSeconds(0.25f);
         sprintMultiplier = tempSprintMultiplier;
-
     }
+
     #endregion
 
     #region Interact & Actions
     void InteractHandle(InputAction.CallbackContext context)
     {
         if (!canInteract || !context.performed) return;
-        currentInteractable?.Interact();
+        if (currentInteractable == null) return;
+        if (!currentInteractable.isInteractable()) return;
+
+        currentInteractable.Interact();
     }
 
     void CheckInteractable()
@@ -364,25 +435,22 @@ public class ThirdPersonController : MonoBehaviour
         Ray screenRay = GetCrosshairRay();
         Vector3 targetPoint;
 
-        // Önce dünyanın neresine baktığımızı bul
         if (Physics.Raycast(screenRay, out RaycastHit screenHit, interactRange))
             targetPoint = screenHit.point;
         else
             targetPoint = screenRay.origin + screenRay.direction * interactRange;
 
-        // Sonra karakter gözünden o noktaya doğru ikinci bir ray fırlat
-        Vector3 eyePosition = transform.position + Vector3.up * 1.6f; // göz hizası
+        Vector3 eyePosition = transform.position + Vector3.up * 1.6f;
         Vector3 directionToTarget = (targetPoint - eyePosition).normalized;
         Ray eyeRay = new Ray(eyePosition, directionToTarget);
 
         if (Physics.Raycast(eyeRay, out RaycastHit eyeHit, interactRange))
-        {
             currentInteractable = eyeHit.collider.GetComponent<IInteractable>();
-        }
 
-        interactionIndicator.SetActive(currentInteractable != null);
+        // One line covers: null, exists but not interactable, exists and interactable
+        bool showIndicator = currentInteractable != null && currentInteractable.isInteractable();
+        interactionIndicator.SetActive(showIndicator);
 
-        // Debug
         Debug.DrawRay(eyeRay.origin, eyeRay.direction * interactRange, Color.green);
     }
 

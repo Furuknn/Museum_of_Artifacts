@@ -155,7 +155,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  damageTick: 0.25
   laserLine: {fileID: 0}
   beamMaterial: {fileID: 2100000, guid: 881facbaf2292d8489419e9ed4048403, type: 2}
   baseColor: {r: 1, g: 0.103773475, b: 0.103773475, a: 1}

@@ -6,14 +6,18 @@ using DG.Tweening;
 public class LyposBossTrigger : MonoBehaviour
 {
     public LyposBoss boss;
-    public GameObject door;
+    public GameObject doorCollider;
+    public Transform doorLeft;
+    public Transform doorRight;
 
     private void OnTriggerEnter(Collider other)
     {
         if (boss == null) return;
         if (boss._bossAwake == false)
         {
-            door.SetActive(true);
+            doorCollider.SetActive(true);
+            doorLeft.DOLocalRotate(new Vector3(90, 0, 0), 1.5f);
+            doorRight.DOLocalRotate(new Vector3(90, 0, 0), 1.5f);
             boss.transform.DOLocalMoveY(3f, 4f).OnComplete(() => {
                 boss.StartBoss();
 

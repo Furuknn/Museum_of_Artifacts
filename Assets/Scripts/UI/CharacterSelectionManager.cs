@@ -40,6 +40,8 @@ public class CharacterSelectionManager : MonoBehaviour
     [Header("Back Button")]
     [SerializeField] private Button backButton;
 
+    private string stringTableName = "UI";
+
     private int currentCharacterIndex = -1;
 
     private void Awake()
@@ -108,25 +110,24 @@ public class CharacterSelectionManager : MonoBehaviour
 
         if (weaponText != null)
             weaponText.text = LocalizationSettings.StringDatabase
-                .GetLocalizedString("MainMenu", $"UI.heroWeapon.desc.{ck}");
+                .GetLocalizedString(stringTableName, $"UI.heroWeapon.desc.{ck}");
 
         if (mainAbilityNameText != null)
             mainAbilityNameText.text = LocalizationSettings.StringDatabase
-                .GetLocalizedString("MainMenu", $"UI.heroMainAbility.{ck}");
+                .GetLocalizedString(stringTableName, $"UI.heroMainAbility.{ck}");
 
         if (mainAbilityDescText != null)
             mainAbilityDescText.text = LocalizationSettings.StringDatabase
-                .GetLocalizedString("MainMenu", $"UI.heroMainAbility.desc.{ck}");
+                .GetLocalizedString(stringTableName, $"UI.heroMainAbility.desc.{ck}");
 
         if (ultimateAbilityNameText != null)
             ultimateAbilityNameText.text = LocalizationSettings.StringDatabase
-                .GetLocalizedString("MainMenu", $"UI.heroUltimateAbility.{ck}");
+                .GetLocalizedString(stringTableName, $"UI.heroUltimateAbility.{ck}");
 
         if (ultimateAbilityDescText != null)
             ultimateAbilityDescText.text = LocalizationSettings.StringDatabase
-                .GetLocalizedString("MainMenu", $"UI.heroUltimateAbility.desc.{ck}");
+                .GetLocalizedString(stringTableName, $"UI.heroUltimateAbility.desc.{ck}");
 
-        // Secondary abilities — keys are 01, 02, 03...
         for (int i = 0; i < secondaryAbilityNameTexts.Count; i++)
         {
             string index2Digit = (i + 1).ToString("D2"); // 01, 02, 03
@@ -135,13 +136,13 @@ public class CharacterSelectionManager : MonoBehaviour
             if (secondaryAbilityNameTexts[i] != null)
                 secondaryAbilityNameTexts[i].text = hasAbility
                     ? LocalizationSettings.StringDatabase
-                        .GetLocalizedString("MainMenu", $"UI.heroSecondaryAbility{index2Digit}.{ck}")
+                        .GetLocalizedString(stringTableName, $"UI.heroSecondaryAbility{index2Digit}.{ck}")
                     : "";
 
             if (i < secondaryAbilityDescTexts.Count && secondaryAbilityDescTexts[i] != null)
                 secondaryAbilityDescTexts[i].text = hasAbility
                     ? LocalizationSettings.StringDatabase
-                        .GetLocalizedString("MainMenu", $"UI.heroSecondaryAbility{index2Digit}.desc.{ck}")
+                        .GetLocalizedString(stringTableName, $"UI.heroSecondaryAbility{index2Digit}.desc.{ck}")
                     : "";
         }
     }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: MainMenu_tr
+  m_Name: UI_tr
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: tr
@@ -315,6 +315,18 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 25298904396595204
+  - m_Id: 2128352134868992
+    m_Localized: "D\u0130L:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2128352176812032
+    m_Localized: "\u0130NG\u0130L\u0130ZCE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2128352176812033
+    m_Localized: "T\xDCRK\xC7E"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

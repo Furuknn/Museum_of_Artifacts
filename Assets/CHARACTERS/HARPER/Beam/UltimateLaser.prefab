@@ -80,7 +80,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -159,8 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thinWidth: 0.02
-  fullWidth: 1.5
-  expandTime: 1.5
+  fullWidth: 0.75
+  expandTime: 1.2
   widthExpandCurve:
     serializedVersion: 2
     m_Curve:
@@ -194,14 +194,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  damageTick: 0.25
   laserLine: {fileID: 4185498012325735711}
   beamMaterial: {fileID: 2100000, guid: 881facbaf2292d8489419e9ed4048403, type: 2}
   baseColor: {r: 1, g: 0.103773475, b: 0.103773475, a: 1}
-  baseIntensity: 100
-  emissionPulse: 30
-  pulseSpeed: 25
-  playerSpeedDecrease: 3
+  baseIntensity: 80
+  emissionPulse: 20
+  pulseSpeed: 20
   playerCam: {fileID: 0}
   hitEffectPrefab: {fileID: 2010217804087774048, guid: 58ea45e9f97a5614e8561f8938b06831,
     type: 3}

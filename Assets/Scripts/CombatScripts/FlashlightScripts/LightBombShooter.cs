@@ -11,8 +11,9 @@ public class LightBombShooter : MonoBehaviour, IBeam
     [SerializeField] private float lineWidth = 0.05f;
 
     [Header("Physics Settings")]
-    [SerializeField] private float throwSpeed = 20f; // Initial Speed in m/s
-    [SerializeField] private float drag = 0f;        // 0 for standard parabolic arc
+    [SerializeField] private float throwSpeed = 20f;  // Forward strength (based on crosshair)
+    [SerializeField] private float upwardSpeed = 5f;  // Extra upward pop
+    [SerializeField] private float drag = 0f;         // 0 for standard parabolic arc
     [SerializeField] private float mass = 1f;
 
     [Header("Prediction Settings")]
@@ -49,6 +50,17 @@ public class LightBombShooter : MonoBehaviour, IBeam
         lastFireTime = -_bombCooldown;
     }
 
+    private Vector3 GetThrowVelocity(Vector3 aimDirection)
+    {
+        // 1. Get the base velocity exactly where the player is aiming (respecting up/down pitch)
+        Vector3 baseVelocity = aimDirection.normalized * throwSpeed;
+
+        // 2. Add the extra vertical "pop" to create the arc
+        Vector3 finalVelocity = baseVelocity + (Vector3.up * upwardSpeed);
+
+        return finalVelocity;
+    }
+
     public void Shoot(Vector3 origin, Vector3 direction)
     {
         if (lineRenderer != null)
@@ -64,7 +76,7 @@ public class LightBombShooter : MonoBehaviour, IBeam
         {
             rb.mass = mass;
             rb.drag = drag;
-            rb.velocity = direction.normalized * throwSpeed;
+            rb.velocity = GetThrowVelocity(direction);
         }
 
         if (hudManager != null)
@@ -83,7 +95,7 @@ public class LightBombShooter : MonoBehaviour, IBeam
 
         lineRenderer.enabled = true;
 
-        Vector3 velocity = direction.normalized * throwSpeed;
+        Vector3 velocity = GetThrowVelocity(direction);
         Vector3 position = origin;
 
         List<Vector3> points = new List<Vector3>();
@@ -113,7 +125,6 @@ public class LightBombShooter : MonoBehaviour, IBeam
         lineRenderer.SetPositions(points.ToArray());
     }
 
-
     private Vector3 CalculateNewVelocity(Vector3 velocity, float drag, float increment)
     {
         velocity += Physics.gravity * increment; // Apply Gravity
@@ -127,7 +138,7 @@ public class LightBombShooter : MonoBehaviour, IBeam
             lineRenderer.enabled = false;
     }
 
-    public bool  IsOnCooldown()
+    public bool IsOnCooldown()
     {
         if (Time.time - lastFireTime < _bombCooldown)
         {
@@ -138,7 +149,6 @@ public class LightBombShooter : MonoBehaviour, IBeam
         {
             lineRenderer.material = activeMat;
             return false;
-
         }
     }
 }

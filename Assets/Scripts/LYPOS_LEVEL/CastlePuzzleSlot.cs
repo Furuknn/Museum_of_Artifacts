@@ -8,6 +8,9 @@ public class CastlePuzzleSlot : MonoBehaviour, IInteractable
     public CastlePuzzlePiece truePiece;
     public GameObject visualPiece;
     public bool isActivated = false;
+    private bool _isInteractable = true;
+
+    public bool isInteractable() => _isInteractable;
     private void Start()
     {
         visualPiece.SetActive(false);
