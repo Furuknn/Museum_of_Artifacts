@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class SkillTreeManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class SkillTreeManager : MonoBehaviour
 
     [SerializeField] private List<AbilityPanelEntry> abilityPanels;
 
-    private List<UpgradeDefinition> allUpgrades;
+    public List<UpgradeDefinition> allUpgrades;
     private Dictionary<string, UpgradeDefinition> upgradeLookup;
     private static Dictionary<string, GameObject> abilityPanelLookup = new();
 
@@ -251,6 +252,43 @@ public class SkillTreeManager : MonoBehaviour
         else
             Debug.LogWarning($"No panel registered for ability: {selectedAbility}");
     }
+
+    public void DeleteUpgradePrefs()
+    {
+        foreach (UpgradeDefinition upgrade in allUpgrades)
+        {
+            if (PlayerPrefs.HasKey(upgrade.name))
+            {
+                PlayerPrefs.DeleteKey(upgrade.name);
+                Debug.Log($"Deleted pref: {upgrade.name}");
+            }
+        }
+
+        PlayerPrefs.Save();
+        RefreshAllUpgradeButtons();
+    }
+
+    private void RefreshAllUpgradeButtons()
+    {
+        // Find every button in the skill tree panels, not the whole scene
+        UI_UpgradeButton[] allButtons = GetComponentsInChildren<UI_UpgradeButton>(true);
+
+        foreach (UI_UpgradeButton btn in allButtons)
+        {
+            // Reset visual back to default — white, interactable
+            btn.GetComponent<Image>().color = Color.white;
+            btn.Unlock();
+        }
+
+        // Now re-run the lock logic so prerequisite chains are respected
+        // A button should be locked if its parent upgrade is not purchased
+        foreach (UI_UpgradeButton btn in allButtons)
+        {
+            // Re-trigger Start-like logic: lock children of unpurchased upgrades
+            btn.SendMessage("ResetLockState", SendMessageOptions.DontRequireReceiver);
+        }
+    }
+
 
     public UpgradeDefinition GetUpgrade(string name) =>
     upgradeLookup.TryGetValue(name, out var u) ? u : null;

@@ -26,7 +26,7 @@ public class TreeInteraction : MonoBehaviour, IInteractable
             UIManager.Instance.ToggleSkillTree();
             Debug.Log("Skill Tree açıldı");
 
-            MuseumEventManager.Instance.OpenGreed();
+            MuseumEventManager.Instance.OpenGreedZone();
         }
 
 

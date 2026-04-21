@@ -154,6 +154,8 @@ public class LevelManager : MonoBehaviour
         }
 
     }
+
+
     public void ReturnWithLoseFromLevel()
     {
         if (!isPlayerGetFirstWin)

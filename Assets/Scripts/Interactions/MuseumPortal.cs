@@ -30,7 +30,7 @@ public class MuseumPortal : MonoBehaviour, IInteractable
 
         if (newlyLoadedScene.IsValid())
         {
-            // Bu satýr, Lighting (Fog dahil) ayarlarýnýn bu sahneden alýnmasýný saðlar
+            // Bu satï¿½r, Lighting (Fog dahil) ayarlarï¿½nï¿½n bu sahneden alï¿½nmasï¿½nï¿½ saï¿½lar
             SceneManager.SetActiveScene(newlyLoadedScene);
         }
 

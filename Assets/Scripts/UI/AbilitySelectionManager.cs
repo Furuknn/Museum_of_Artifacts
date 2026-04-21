@@ -80,4 +80,12 @@ public class AbilitySelectionManager : MonoBehaviour
         PlayerPrefs.Save();
         OnAbilityConfirmed?.Invoke();
     }
+
+    public void ResetSkillTree()
+    {
+        SkillTreeManager.Instance.DeleteUpgradePrefs();
+        SkillTreeManager.Instance.UpdateSkillTreeUI();
+    }
+
+    
 }

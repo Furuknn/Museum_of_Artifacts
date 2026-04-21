@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 0853e8ad4216322489ab58a7b4efa9e7
   - enabled: 1
-    path: Assets/Scenes/Scenes_Furkna/Furkna_Museum.unity
-    guid: 58e1f0532103f634c93f6f921ca84da9
-  - enabled: 0
     path: Assets/Scenes/LIVE_SCENE.unity
-    guid: 355178dd6647b3d41bc9fa1140fc4f0f
+    guid: 9384718e0db2b1e468e390bb7eb8884c
   - enabled: 1
     path: Assets/Scenes/LevelScenes/greedScene.unity
     guid: cdd44b3c0dba6704cb3e17b0444495ba

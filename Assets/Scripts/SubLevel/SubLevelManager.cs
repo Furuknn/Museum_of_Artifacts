@@ -28,10 +28,17 @@ public class SubLevelManager : MonoBehaviour
 
     [Header ("Boss Trigger")]
     [SerializeField] private Collider bossTrigerCollider;
+
+    [SerializeField] private GameObject exitPortal;
     void Awake()
     {
         if (Instance == null) Instance = this;
         SpawnEnemies();
+    }
+    private void Start()
+    {
+        if (exitPortal != null)
+            exitPortal.SetActive(false);
     }
     private void SpawnEnemies()
     {
@@ -63,6 +70,11 @@ public class SubLevelManager : MonoBehaviour
 
             }
         }
+    }
+
+    public void WinCondition()
+    {
+        exitPortal.SetActive(true);
     }
 
     public void CheckEnemyList(GameObject enemyGO)

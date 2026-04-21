@@ -69,6 +69,11 @@ public class ThirdPersonController : MonoBehaviour
 
     private bool canAttack = true;
 
+    [Header("Audio")]
+    public AudioSource stepSource;
+    public float stepSoundInterval = 0.7f;
+    float _stepTimer = 0f;
+
     [Header("No Clip")]
     [SerializeField]private float noClipSpeedMultiplier = 5f;
     [SerializeField]private float noClipJumpForce = 20f;
@@ -92,6 +97,8 @@ public class ThirdPersonController : MonoBehaviour
         Instance = this;
 
         mainCam = Camera.main;
+
+        _stepTimer = stepSoundInterval;
     }
 
     private void OnGameStopped()
@@ -145,7 +152,7 @@ public class ThirdPersonController : MonoBehaviour
         CameraRay();
         CheckInteractable();
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR || DEVELOPMENT_BUILD
         if (Input.GetKeyDown(KeyCode.F1) || Input.GetKeyDown(KeyCode.End))
         {
             if (isNoClip)
@@ -153,7 +160,7 @@ public class ThirdPersonController : MonoBehaviour
                 isNoClip = false;
                 speedMultiplier = originalMultiplier; // restore speed
                 jumpForce = originalJumpForce;
-                SetLayerRecursively(gameObject, LayerMask.NameToLayer("Ignore Raycast")); // or whatever your normal layer is
+                SetLayerRecursively(gameObject, LayerMask.NameToLayer("Player")); // or whatever your normal layer is
             }
             else
             {
@@ -166,7 +173,7 @@ public class ThirdPersonController : MonoBehaviour
                 SetLayerRecursively(gameObject, LayerMask.NameToLayer("NoClip"));
             }
         }
-#endif
+//#endif
     }
 
     private void SetLayerRecursively(GameObject obj, int layer)
@@ -199,6 +206,14 @@ public class ThirdPersonController : MonoBehaviour
         // Eğer hareket girdisi varsa
         if (direction.magnitude >= 0.1f)
         {
+            _stepTimer -= Time.deltaTime;
+            if (_stepTimer <= 0f)
+            {
+                stepSource.Play();
+                if (isSprinting) _stepTimer = stepSoundInterval;
+                else _stepTimer = 0.41f;
+            }
+
             if (animator != null) animator.SetBool("isMoving", true);
 
             // --- COMBAT MODU (Serbest Hareket) ---

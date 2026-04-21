@@ -39,6 +39,7 @@ public class EnemyBase : MonoBehaviour, IEnemy, IDamageable
     [Header("Weapon")]
     public Transform[] weaponPoints;
     public float weaponRange = 1.2f;
+    public float weaponRadius = 0.4f;
 
     [Header("Stun")]
     public bool stunOnHit = false;
@@ -174,14 +175,16 @@ public class EnemyBase : MonoBehaviour, IEnemy, IDamageable
 
         if (isBoss)
         {
-            LevelManager.Instance.ReturnFromLevel();
-            LevelManager.Instance.DestroyCurrentLevel();
-            LevelManager.Instance.ReturnWithWinFromLevel();
+            //LevelManager.Instance.ReturnFromLevel();
+            //LevelManager.Instance.DestroyCurrentLevel();
+            //LevelManager.Instance.ReturnWithWinFromLevel();
+            SubLevelManager.Instance.WinCondition();
         }
 
         LyposEnemy lyposEnemy = GetComponent<LyposEnemy>();
         if (lyposEnemy != null) lyposEnemy.OnDie();
     }
+
 
     public float GetHealthPercent() => currentHealth / maxHealth;
 
@@ -195,13 +198,14 @@ public class EnemyBase : MonoBehaviour, IEnemy, IDamageable
         Destroy(gameObject);
     }
 
+    // REPLACE ApplySeparation entirely
     private void ApplySeparation()
     {
         if (!agent.isActiveAndEnabled || isDead) return;
 
         Collider[] neighbours = Physics.OverlapSphere(
             transform.position, separationRadius,
-            LayerMask.GetMask("Enemy"),
+            LayerMask.GetMask("Enemy"),  // make sure your player is NOT on this layer
             QueryTriggerInteraction.Ignore
         );
 
@@ -211,6 +215,13 @@ public class EnemyBase : MonoBehaviour, IEnemy, IDamageable
         foreach (Collider col in neighbours)
         {
             if (col.gameObject == gameObject) continue;
+
+            // Hard-exclude the player regardless of layer setup,
+            // so a misconfigured layer can never cause pushback
+            if (col.GetComponent<ThirdPersonController>() != null) continue;
+
+            // Also skip anything that isn't an enemy — obstacles, props etc.
+            if (col.GetComponent<EnemyBase>() == null) continue;
 
             Vector3 away = transform.position - col.transform.position;
             float dist = away.magnitude;
@@ -229,7 +240,6 @@ public class EnemyBase : MonoBehaviour, IEnemy, IDamageable
 
         push /= count;
         push.y = 0f;
-
         agent.Move(push * separationForce * Time.deltaTime);
     }
 
@@ -255,13 +265,24 @@ public class EnemyBase : MonoBehaviour, IEnemy, IDamageable
 
         foreach (Transform wp in weaponPoints)
         {
-            RaycastHit[] hits = Physics.RaycastAll(
-                wp.position, wp.up, weaponRange
+            // SphereCast gives the hit detection actual volume —
+            // a raycast from a weapon bone is a single pixel in world space
+            // and almost always misses unless perfectly aligned.
+            // 0.4f radius is a good starting point; expose it as a field if needed.
+            RaycastHit[] hits = Physics.SphereCastAll(
+                wp.position,
+                0.4f,               // detection radius — tweak per enemy type
+                wp.up,
+                weaponRange,
+                LayerMask.GetMask("Player"), // only check the player layer
+                QueryTriggerInteraction.Ignore
             );
+
+            // Draw so you can see the sweep in Scene view while playtesting
+            Debug.DrawRay(wp.position, wp.up * weaponRange, Color.red, 0.1f);
 
             foreach (RaycastHit hit in hits)
             {
-                if (hit.collider.gameObject == gameObject) continue;
                 if (hitThisSwing.Contains(hit.collider.gameObject)) continue;
 
                 var playerHealth = hit.collider.GetComponent<PlayerHealthManager>();

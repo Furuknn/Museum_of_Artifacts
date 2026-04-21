@@ -28,6 +28,7 @@ public class LevelObjectInteraction : MonoBehaviour, IInteractable
         Debug.Log($"Obje ile etkileşime geçildi {loadToScene} yükleniyor");
 
         StartCoroutine(LoadSceneAndTeleport());
+        _isInteractable = false;
         /*SceneManager.LoadScene(loadToScene, LoadSceneMode.Additive);
 
         playerSpawnPoint.transform.position = transform.Find("PlayerSpawnPoint").position + new Vector3(0, tpPlayerPosY, 0);

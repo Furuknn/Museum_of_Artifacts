@@ -123,7 +123,16 @@ public class UI_UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         descriptionText = descText;
     }
-
+    public void ResetLockState()
+    {
+        // If this upgrade has no unlocked parent driving it, it stays unlocked by default.
+        // Children of THIS button get locked since this upgrade is now unowned.
+        foreach (var next in unlocksOnPurchase)
+        {
+            if (next == null) continue;
+            next.Lock();
+        }
+    }
     private void RefreshFromSave()
     {
         if (PlayerPrefs.GetInt(upgradeCode, 0) == 1)

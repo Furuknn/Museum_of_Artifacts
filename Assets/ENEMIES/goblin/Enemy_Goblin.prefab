@@ -1829,6 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b293507de2d43574b84182a3d79c1b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetMaterial: {fileID: 0}
   decaySpeed: 0.25
   maxScale: 0.08
 --- !u!54 &8621774447896291828

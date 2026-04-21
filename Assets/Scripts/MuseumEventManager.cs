@@ -5,8 +5,10 @@ using UnityEngine;
 public class MuseumEventManager : MonoBehaviour, IInteractable
 {
     public static MuseumEventManager Instance;
+    public GameObject ENVIRONMENT_Museum;
     public List<Light> museumLights;
     public GameObject treeWall;
+    public GameObject greedObject;
     public Light greedLight;
     public Light lyposLight;
     public Light threnosLight;
@@ -36,6 +38,8 @@ public class MuseumEventManager : MonoBehaviour, IInteractable
     public void Interact()
     {
         if (!callAnswered) AnswerCall();
+        if (!_isInteractable) return;
+        _isInteractable = false;
     }
     void CallEvent()
     {
@@ -71,15 +75,25 @@ public class MuseumEventManager : MonoBehaviour, IInteractable
         treeWall.SetActive(false);
     }
 
-    public void OpenGreed()
+    public void OpenGreedZone()
     {
         greedLight.gameObject.SetActive(true);
         greedLight.enabled = true;
         greedDoor.SetActive(false);
     }
 
+    public void OpenLyposZone()
+    {
+        lyposLight.gameObject.SetActive(true);
+        lyposLight.enabled = true;
+        lyposDoor.SetActive(false);
+    }
+
     public void TeleportPlayerToMuseum(string region)
     {
+        if(!ENVIRONMENT_Museum.activeSelf)
+            ENVIRONMENT_Museum.SetActive(true);
+
         var player = ThirdPersonController.Instance;
         GameObject spawnObj = GameObject.Find(region + "SpawnPoint");
         Vector3 targetPos = spawnObj.transform.position;
@@ -96,6 +110,17 @@ public class MuseumEventManager : MonoBehaviour, IInteractable
         if (cc != null)
         {
             cc.enabled = true;
+        }
+
+        if (region == "Greed")
+        {
+            greedLight.gameObject.SetActive(false);
+            greedObject.transform.rotation = Quaternion.Euler(90f, 0, 90f);
+            OpenLyposZone();
+        }
+        else if (region == "Lypos")
+        {
+            lyposLight.gameObject.SetActive(false);
         }
     }
 }
