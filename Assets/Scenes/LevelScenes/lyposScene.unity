@@ -1737,6 +1737,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350862064}
     m_Modifications:
+    - target: {fileID: 789116076040133342, guid: 35543840321eafc40a31dd3773f1f235,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy_Goblin_REDONE_1
+      objectReference: {fileID: 0}
     - target: {fileID: 3629398405774100021, guid: 35543840321eafc40a31dd3773f1f235,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1786,11 +1791,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 789116076040133342, guid: 35543840321eafc40a31dd3773f1f235,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy_Goblin_REDONE_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2173,6 +2173,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350862064}
     m_Modifications:
+    - target: {fileID: 789116076040133342, guid: 35543840321eafc40a31dd3773f1f235,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy_Goblin_REDONE_2
+      objectReference: {fileID: 0}
     - target: {fileID: 3629398405774100021, guid: 35543840321eafc40a31dd3773f1f235,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2222,11 +2227,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 789116076040133342, guid: 35543840321eafc40a31dd3773f1f235,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy_Goblin_REDONE_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19665,11 +19665,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 789116076040133342, guid: 35543840321eafc40a31dd3773f1f235,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy_Goblin_REDONE_4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24304,6 +24299,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350862064}
     m_Modifications:
+    - target: {fileID: 789116076040133342, guid: 35543840321eafc40a31dd3773f1f235,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy_Goblin_REDONE_3
+      objectReference: {fileID: 0}
     - target: {fileID: 3629398405774100021, guid: 35543840321eafc40a31dd3773f1f235,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24353,11 +24353,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 789116076040133342, guid: 35543840321eafc40a31dd3773f1f235,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy_Goblin_REDONE_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
