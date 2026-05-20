@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05736d717897c6145bed89fd4b1565b1, type: 3}
+  m_Name: Move2_CountCard
+  m_EditorClassIdentifier: 
+  type: 0
+  components:
+  - rid: 9214155095720853504
+  value: +2
+  valueColor: {r: 1, g: 1, b: 1, a: 1}
+  passiveCard: 0
+  cardSprite: {fileID: 21300000, guid: 4bd059999be356046b4d292d6574b485, type: 3}
+  countdownSprite: {fileID: 21300000, guid: bcc909d9a4b8776439a799b7961050d1, type: 3}
+  countdownCard: 1
+  actionEveryCount: 0
+  count: 3
+  inDeck: 1
+  inDeckAmount: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 9214155095720853504
+      type: {class: card_addmove, ns: , asm: Assembly-CSharp}
+      data:
+        addMove: 2
