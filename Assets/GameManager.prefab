@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5693109294762063740}
   - component: {fileID: 6652021430266841276}
   - component: {fileID: 8499346650061494506}
+  - component: {fileID: 2380115336793692325}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -116,6 +117,7 @@ MonoBehaviour:
     panel: {fileID: 0}
   - abilityKey: Dash
     panel: {fileID: 0}
+  allUpgrades: []
   skillPoints: 30
 --- !u!114 &6652021430266841276
 MonoBehaviour:
@@ -152,3 +154,20 @@ MonoBehaviour:
   canvas: {fileID: 0}
   offset: {x: 150, y: -60}
   hoverDelay: 0.1
+--- !u!114 &2380115336793692325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397242580623127685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bec9690950f164eb6b1137796dda75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level1SceneName: greedScene
+  level2SceneName: lyposScene
+  level3SceneName: threnosScene
+  level4SceneName: dolvarisScene
+  spawnOffsetY: 3

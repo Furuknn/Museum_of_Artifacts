@@ -364,7 +364,7 @@ MonoBehaviour:
   player: {fileID: 0}
   distanceToPlayer: 0
   maxHealth: 100
-  chaseRange: 20
+  chaseRange: 50
   attackRange: 2
   separationRadius: 1.25
   separationForce: 7

@@ -7,7 +7,7 @@ using System.Drawing;
 
 public enum BossState { Idle, Chasing, Attacking, Ability, Death }
 
-public class LyposBoss : MonoBehaviour
+public class LyposBoss : MonoBehaviour, IDamageable
 {
     public BossState currentState;
     public Transform player;
@@ -151,13 +151,13 @@ public class LyposBoss : MonoBehaviour
     IEnumerator ExposeHeartRoutine()
     {
         //parkour.SetActive(true);
-        chestParts[0].DOLocalMoveZ(3.8f, 1f);
-        chestParts[1].DOLocalMoveZ(-3.8f, 1f);
+        chestParts[0].DOLocalMoveX(2.5f, 1f);
+        chestParts[1].DOLocalMoveX(-2.5f, 1f);
 
         yield return new WaitForSeconds(exposeHeartTime);
 
-        chestParts[0].DOLocalMoveZ(2.3f, 1f);
-        chestParts[1].DOLocalMoveZ(-2.3f, 1f);
+        chestParts[0].DOLocalMoveX(0f, 1f);
+        chestParts[1].DOLocalMoveX(0f, 1f);
         _usingSkill = false;
         //parkour.SetActive(false);
     }

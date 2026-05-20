@@ -18,7 +18,7 @@ public class LyposBossTrigger : MonoBehaviour
             doorCollider.SetActive(true);
             doorLeft.DOLocalRotate(new Vector3(90, 0, 0), 1.5f);
             doorRight.DOLocalRotate(new Vector3(90, 0, 0), 1.5f);
-            boss.transform.DOLocalMoveY(3f, 4f).OnComplete(() => {
+            boss.transform.DOLocalMoveY(1.35f, 4f).OnComplete(() => {
                 boss.StartBoss();
 
             });

@@ -920,8 +920,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   player: {fileID: 0}
   distanceToPlayer: 0
-  maxHealth: 130
-  chaseRange: 15
+  maxHealth: 120
+  chaseRange: 45
   attackRange: 2.5
   separationRadius: 1.8
   separationForce: 6

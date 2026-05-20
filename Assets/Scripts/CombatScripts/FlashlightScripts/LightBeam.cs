@@ -75,13 +75,17 @@ public class LightBeam : MonoBehaviour
         float currentRadius = transform.localScale.x * 1f;
 
         // RAYCAST FOR COLLISION
+        // In Update(), replace the narrow beam block
         if (beamType == BeamType.Narrow)
         {
-            // Narrow Beam: Stops on the first thing it hits (Blocking)
-            if (Physics.SphereCast(transform.position, currentRadius, fireDirection, out RaycastHit hit, moveDistance + skinOffset, hitLayers))
+            if (Physics.SphereCast(transform.position, currentRadius, fireDirection,
+                out RaycastHit hit, moveDistance + skinOffset, hitLayers))
             {
+                // Collider can exist on a destroyed object during the deferred destroy window
+                if (hit.collider == null || hit.collider.gameObject == null) return;
+
                 HandleImpact(hit.collider.gameObject, hit.point, hit.normal);
-                return; // Stop execution so we don't move or expand
+                return;
             }
         }
         else if (beamType == BeamType.Wide)
@@ -90,6 +94,8 @@ public class LightBeam : MonoBehaviour
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, currentRadius, fireDirection, moveDistance + skinOffset, hitLayers);
             foreach (RaycastHit hit in hits)
             {
+                if (hit.collider == null || hit.collider.gameObject == null) return;
+
                 HandleImpact(hit.collider.gameObject, hit.point, hit.normal);
             }
         }
@@ -104,29 +110,26 @@ public class LightBeam : MonoBehaviour
     // --- CENTRALIZED IMPACT LOGIC ---
     private void HandleImpact(GameObject hitObj, Vector3 hitPoint, Vector3 hitNormal)
     {
-        // For wide beams, prevent hitting the same target twice
+        // hitObj can be a destroyed object reference during Unity's deferred destroy window
+        if (hitObj == null) return;
+
         if (beamType == BeamType.Wide)
         {
             if (alreadyHitTargets.Contains(hitObj)) return;
             alreadyHitTargets.Add(hitObj);
         }
 
-        // Try to deal damage
         IDamageable damageable = hitObj.GetComponent<IDamageable>();
         if (damageable != null)
-        {
             damageable.TakeDamage(GetDamage());
-        }
 
-        // Handle VFX and Destruction based on beam type
         if (beamType == BeamType.Narrow)
         {
             SpawnHitVFX(hitPoint, hitNormal);
-            Destroy(gameObject); // Narrow beam always destroys on first impact
+            Destroy(gameObject);
         }
         else if (beamType == BeamType.Wide && damageable != null)
         {
-            // Wide beam only spawns VFX if it actually hit an enemy
             SpawnHitVFX(hitPoint, hitNormal);
         }
     }

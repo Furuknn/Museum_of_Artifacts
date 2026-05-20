@@ -24,6 +24,8 @@ public class MuseumEventManager : MonoBehaviour, IInteractable
     public List<AudioClip> dolvarisDialogues;
     private bool _isInteractable = true;
 
+    [SerializeField] private GameObject outline;
+
     public bool isInteractable() => _isInteractable;
 
     private void Awake()
@@ -40,6 +42,8 @@ public class MuseumEventManager : MonoBehaviour, IInteractable
         if (!callAnswered) AnswerCall();
         if (!_isInteractable) return;
         _isInteractable = false;
+
+        if(outline!=null) outline.SetActive(false);
     }
     void CallEvent()
     {
