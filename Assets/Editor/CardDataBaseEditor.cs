@@ -29,7 +29,8 @@ public class CardDatabaseEditor : Editor
         // "t:Card" ifadesi, Card sýnýfýndan türeyen tüm assetleri filtreler
         string[] guids = AssetDatabase.FindAssets("t:CardSO");
 
-        List<CardSO> foundCards = new List<CardSO>();
+        List<CardSO> foundActionCards = new List<CardSO>();
+        List<CardSO> foundFateCards = new List<CardSO>();
 
         foreach (string guid in guids)
         {
@@ -38,9 +39,10 @@ public class CardDatabaseEditor : Editor
             // Dosyayý yükle ve listeye ekle
             CardSO card = AssetDatabase.LoadAssetAtPath<CardSO>(path);
 
-            if (card != null)
+            if (card != null && card.inDeck)
             {
-                foundCards.Add(card);
+                if (card.type == CardType.Action) foundActionCards.Add(card);
+                else if (card.type == CardType.Fate) foundFateCards.Add(card);
             }
         }
 
@@ -48,7 +50,8 @@ public class CardDatabaseEditor : Editor
         Undo.RecordObject(db, "Refresh Card Database");
 
         // 3. Listeyi güncelle
-        db.allCards = foundCards;
+        db.actionCards = foundActionCards;
+        db.fateCards = foundFateCards;
 
         // 4. Dosyayý kirli (Dirty) olarak iþaretle ki Unity kaydedilmesi gerektiðini anlasýn
         EditorUtility.SetDirty(db);
@@ -56,6 +59,6 @@ public class CardDatabaseEditor : Editor
         // 5. Deðiþiklikleri diske yaz
         AssetDatabase.SaveAssets();
 
-        Debug.Log($"Ýþlem Tamam: {foundCards.Count} adet kart bulundu ve veritabanýna eklendi.");
+        Debug.Log($"Ýþlem Tamam: {foundActionCards.Count} adet kart bulundu ve veritabanýna eklendi.");
     }
 }

@@ -1,7 +1,42 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
+// Helper so every state can safely touch the agent without repeating the guard.
+// If the agent is missing or inactive (e.g. Threnos), the call is a silent no-op.
+internal static class AgentUtil
+{
+    public static void Stop(EnemyBase e)
+    {
+        if (e.agent != null && e.agent.isActiveAndEnabled)
+            e.agent.isStopped = true;
+    }
 
+    public static void Resume(EnemyBase e)
+    {
+        if (e.agent != null && e.agent.isActiveAndEnabled)
+            e.agent.isStopped = false;
+    }
+
+    public static void Disable(EnemyBase e)
+    {
+        if (e.agent != null && e.agent.enabled)
+            e.agent.enabled = false;
+    }
+
+    public static void SetDestination(EnemyBase e, Vector3 dest)
+    {
+        if (e.agent != null && e.agent.isActiveAndEnabled)
+            e.agent.SetDestination(dest);
+    }
+
+    public static void ResetPath(EnemyBase e)
+    {
+        if (e.agent != null && e.agent.isActiveAndEnabled)
+            e.agent.ResetPath();
+    }
+}
+
+// ── IDLE ──────────────────────────────────────────────────────────────
 public class EnemyIdleState : IEnemyState
 {
     private float idleTimer;
@@ -10,7 +45,7 @@ public class EnemyIdleState : IEnemyState
     public void Enter(EnemyBase e)
     {
         idleTimer = IDLE_DURATION;
-        e.agent.isStopped = true;
+        AgentUtil.Stop(e);
         e.SetAnimMove(true, false, false);
     }
 
@@ -26,14 +61,15 @@ public class EnemyIdleState : IEnemyState
 
     public void Exit(EnemyBase e)
     {
-        e.agent.isStopped = false;
+        AgentUtil.Resume(e);
     }
 }
 
+// ── CHASE ─────────────────────────────────────────────────────────────
 public class EnemyChaseState : IEnemyState
 {
     private float repathTimer;
-    private const float REPATH_INTERVAL = 0.15f; 
+    private const float REPATH_INTERVAL = 0.15f;
 
     private Vector3 arrivalOffset;
 
@@ -41,7 +77,7 @@ public class EnemyChaseState : IEnemyState
     {
         repathTimer = 0f;
         arrivalOffset = PickArrivalOffset(e);
-        e.agent.isStopped = false;
+        AgentUtil.Resume(e);
         e.SetAnimMove(false, false, true);
     }
 
@@ -52,8 +88,7 @@ public class EnemyChaseState : IEnemyState
         if (repathTimer <= 0f)
         {
             repathTimer = REPATH_INTERVAL;
-            Vector3 dest = e.player.position + arrivalOffset;
-            e.agent.SetDestination(dest);
+            AgentUtil.SetDestination(e, e.player.position + arrivalOffset);
         }
 
         if (e.distanceToPlayer <= e.attackRange)
@@ -63,16 +98,14 @@ public class EnemyChaseState : IEnemyState
         }
 
         if (e.distanceToPlayer > e.chaseRange + 3f)
-        {
             e.TransitionTo(e.IdleState);
-        }
     }
 
     public void FixedTick(EnemyBase e) { }
 
     public void Exit(EnemyBase e)
     {
-        e.agent.ResetPath();
+        AgentUtil.ResetPath(e);
     }
 
     private Vector3 PickArrivalOffset(EnemyBase e)
@@ -83,11 +116,12 @@ public class EnemyChaseState : IEnemyState
     }
 }
 
+// ── ATTACK ────────────────────────────────────────────────────────────
 public class EnemyAttackState : IEnemyState
 {
     public void Enter(EnemyBase e)
     {
-        e.agent.isStopped = true;
+        AgentUtil.Stop(e);
         e.SetAnimMove(false, false, false);
     }
 
@@ -110,7 +144,7 @@ public class EnemyAttackState : IEnemyState
     public void Exit(EnemyBase e)
     {
         e.CloseDamageWindow();
-        e.agent.isStopped = false;
+        AgentUtil.Resume(e);
     }
 
     private void TryAttack(EnemyBase e)
@@ -119,16 +153,12 @@ public class EnemyAttackState : IEnemyState
         if (data == null) return;
 
         bool cooldownReady = Time.time - e.lastAttackTime >= data.attackCooldown;
-        bool windowNotOpen = !e.isDealtDamageWindowOpen;
-
-        if (!cooldownReady || !windowNotOpen) return;
+        if (!cooldownReady || e.isDealtDamageWindowOpen) return;
 
         if (e.animator.runtimeAnimatorController != data.animatorOV)
-        {
             e.animator.runtimeAnimatorController = data.animatorOV;
-        }
-        e.animator.Play("Attack_1", 0, 0f);
 
+        e.animator.Play("Attack_1", 0, 0f);
         e.lastAttackTime = Time.time;
         e.AdvanceCombo();
     }
@@ -146,12 +176,13 @@ public class EnemyAttackState : IEnemyState
     }
 }
 
+// ── STUN ──────────────────────────────────────────────────────────────
 public class EnemyStunState : IEnemyState
 {
     public void Enter(EnemyBase e)
     {
-        e.agent.isStopped = true;
-        e.agent.enabled = false;
+        AgentUtil.Stop(e);
+        AgentUtil.Disable(e);           // safe no-op if agent is already gone
         e.CloseDamageWindow();
         e.SetAnimMove(false, false, false);
 
@@ -168,16 +199,17 @@ public class EnemyStunState : IEnemyState
 
     public void Exit(EnemyBase e)
     {
-        e.agent.isStopped = false;
+        AgentUtil.Resume(e);
     }
 }
 
+// ── DEATH ─────────────────────────────────────────────────────────────
 public class EnemyDeathState : IEnemyState
 {
     public void Enter(EnemyBase e)
     {
-        e.agent.isStopped = true;
-        e.agent.enabled = false;
+        AgentUtil.Stop(e);
+        AgentUtil.Disable(e);           // safe no-op if agent is already gone
         e.CloseDamageWindow();
         e.SetAnimMove(false, false, false);
         e.animator.SetTrigger("death");

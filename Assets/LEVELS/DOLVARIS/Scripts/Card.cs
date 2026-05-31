@@ -13,10 +13,12 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public CardType type;
     [SerializeReference] public List<CardComponent> components = new List<CardComponent>();
     public bool passiveCard = false;
+    public string user = "None";
 
     [Header("Visual Settings")]
     public Image cardImage;
     public TextMeshProUGUI valueText;
+    public Image removeIndicator;
 
     [Header("Hover Settings")]
     public float scaleFactor = 1.1f; // Ne kadar büyüyecek?
@@ -46,7 +48,8 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         count = cardSO.count;
         components.Clear();
         components = cardSO.components;
-        if (valueText != null && cardSO.value != 0) valueText.text = cardSO.value.ToString();
+        valueText.text = cardSO.value;
+        valueText.color = cardSO.valueColor;
     }
     public T GetData<T>() where T : CardComponent
     {
@@ -55,12 +58,14 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (type == CardType.Fate) return;
         if (!CardGameManager.Instance.playersTurn || CardGameManager.Instance.playerCards.Count < CardGameManager.Instance.minCardsToPlay) return;
         if (!CardGameManager.Instance.gameStarted) return;
         if (passiveCard) return;
         if (CardGameManager.Instance.playersTurn && CardGameManager.Instance.canPlay)
         {
             CardGameManager.Instance.canPlay = false;
+            CardGameManager.Instance.actionDeckButton.interactable = false;
             glowEffect.GetComponent<Image>().DOColor(disabled, 0.15f);
             cardImage.DOColor(disabled, 0.15f);
             valueText.transform.DOScale(2f, 0.65f);
@@ -71,6 +76,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (type == CardType.Fate) return;
         if (!CardGameManager.Instance.playersTurn || CardGameManager.Instance.playerCards.Count < CardGameManager.Instance.minCardsToPlay || !CardGameManager.Instance.canPlay) return;
         if (!CardGameManager.Instance.gameStarted) return;
         if (passiveCard) return;
@@ -84,61 +90,71 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (type == CardType.Fate) return;
         transform.DOScale(originalScale, 0.4f);
-        //transform.localScale = originalScale;
         if (glowEffect != null) glowEffect.GetComponent<Image>().DOColor(disabled, 0.4f);
     }
     public void UseCard()
     {
-        if (countdownCard && !actionEveryCount && count == 1 || countdownCard && actionEveryCount || !countdownCard)
+        if (type != CardType.Fate) RemoveCard();
+        CardGameManager.Instance.source.PlayOneShot(CardGameManager.Instance.playCardSound);
+        if (!countdownCard)
         {
             foreach (var comp in components)
             {
                 comp.Use();
-            }
-        }
-
-
-        if (countdownCard)
-        {
-            if (CardGameManager.Instance.playersTurn) CardGameManager.Instance.playerCountdowns.Add(gameObject);
-            else CardGameManager.Instance.dolvarisCountdowns.Add(gameObject);
-            count--;
-            if (count == 0)
-            {
-                //if (CardGameManager.Instance.playersTurn) CardGameManager.Instance.playerCountdowns.Remove(gameObject);
-                //else CardGameManager.Instance.dolvarisCountdowns.Remove(gameObject);
+                Debug.LogWarning(comp.ToString() + " used!");
             }
         }
         else
         {
-            //if (CardGameManager.Instance.playersTurn) CardGameManager.Instance.playerCards.Remove(gameObject);
-            //else CardGameManager.Instance.dolvarisCards.Remove(gameObject);
+            CardCountdown countdown;
+            if (actionEveryCount) countdown = Instantiate(CardGameManager.Instance.countdownPrefab).GetComponent<CardCountdown>();
+            else countdown = Instantiate(CardGameManager.Instance.bombPrefab).GetComponent<CardCountdown>();
+            countdown.cardSO = cardSO;
+            countdown.InitializeCountdown();
+            if (user == "Player")
+            {
+                CardGameManager.Instance.playerCountdowns.Add(countdown.gameObject);
+                countdown.transform.SetParent(CardGameManager.Instance.playerCountdownParent);
+            }
+            else
+            {
+                CardGameManager.Instance.dolvarisCountdowns.Add(countdown.gameObject);
+                countdown.transform.SetParent(CardGameManager.Instance.dolvarisCountdownParent);
+            }
         }
 
-        if (!countdownCard && !passiveCard) StartCoroutine(CardGameManager.Instance.ChangeTurn());
+        if (!passiveCard && type != CardType.Fate) StartCoroutine(CardGameManager.Instance.ChangeTurn());
 
-        if (countdownCard && count == 0 || !countdownCard) RemoveCard();
+        
         
     }
 
-    void RemoveCard()
+    public void RemoveCard()
     {
         cardImage.enabled = false;
-        Destroy(gameObject);
+        if (CardGameManager.Instance != null)
+        {
+            if (CardGameManager.Instance.playerCards.Contains(this.gameObject))
+            {
+                CardGameManager.Instance.playerCards.Remove(this.gameObject);
+                transform.SetParent(null);
+            }
+               
+
+            else if (CardGameManager.Instance.dolvarisCards.Contains(this.gameObject))
+            {
+                CardGameManager.Instance.dolvarisCards.Remove(this.gameObject);
+            }
+                
+        }
     }
 
     private void OnDestroy()
     {
         // Hangi listede olduðunu biliyorsa kendini oradan sildirir
-        if (CardGameManager.Instance != null)
-        {
-            if (CardGameManager.Instance.playerCards.Contains(this.gameObject))
-                CardGameManager.Instance.playerCards.Remove(this.gameObject);
-
-            else if (CardGameManager.Instance.dolvarisCards.Contains(this.gameObject))
-                CardGameManager.Instance.dolvarisCards.Remove(this.gameObject);
-        }
+        
     }
 }
 

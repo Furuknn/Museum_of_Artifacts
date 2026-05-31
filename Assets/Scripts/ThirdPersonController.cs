@@ -45,8 +45,11 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField, Range(0f, 1f)] private float groundCheckRadius = 0.3f;
     [SerializeField] private Transform groundCheckOrigin;
-
     public bool canJump = true;
+
+    [Header("Knockback")]
+    [SerializeField] private float knockbackDecay = 8f;   // how fast it bleeds off
+    private Vector3 knockbackVelocity = Vector3.zero;
 
     private float verticalVelocity;
     private float coyoteTimer;
@@ -185,8 +188,32 @@ public class ThirdPersonController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(canMove)
-            MovementHandle();
+        if (canMove) MovementHandle();
+
+        // Bleed off knockback each fixed frame
+        if (knockbackVelocity.sqrMagnitude > 0.01f)
+        {
+            characterController.Move(knockbackVelocity * Time.fixedDeltaTime);
+            knockbackVelocity = Vector3.Lerp(knockbackVelocity, Vector3.zero, knockbackDecay * Time.fixedDeltaTime);
+        }
+        else
+        {
+            knockbackVelocity = Vector3.zero;
+        }
+    }
+
+    // Called by ThrenosController when dash connects
+    public void ApplyKnockback(Vector3 direction, float horizontalForce, float verticalForce)
+    {
+        // Flatten direction then add vertical component separately
+        direction.y = 0f;
+        direction.Normalize();
+
+        knockbackVelocity = direction * horizontalForce;
+
+        // Launch upward by directly setting vertical velocity in the jump system
+        // so it works with coyote time and gravity correctly
+        verticalVelocity = verticalForce;
     }
 
     #region Movement and TPS Camera

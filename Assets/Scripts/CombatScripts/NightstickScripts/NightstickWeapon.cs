@@ -158,7 +158,7 @@ public class NightstickWeapon : WeaponBase
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
         if (Physics.Raycast(ray, out hit, _attackRange, attackLayer))
         {
-            EnemyScript enemy = hit.collider.gameObject.GetComponent<EnemyScript>();
+            IDamageable enemy = hit.collider.gameObject.GetComponent<IDamageable>();
             if (enemy != null)
             {
                 enemy.TakeDamage(_mainAttackDamage);
@@ -244,7 +244,7 @@ public class NightstickWeapon : WeaponBase
         foreach (var hitCollider in hitColliders)
         {
             // 2. Çarpýlan nesnede düþman scripti var mý kontrol et
-            EnemyScript enemy = hitCollider.GetComponent<EnemyScript>();
+            EnemyBase enemy = hitCollider.GetComponent<EnemyBase>();
 
             if (enemy != null)
             {
@@ -310,7 +310,7 @@ public class NightstickWeapon : WeaponBase
         foreach (var hitCollider in hitColliders)
         {
             // 2. Çarpýlan nesnede düþman scripti var mý kontrol et
-            EnemyScript enemy = hitCollider.GetComponent<EnemyScript>();
+            IDamageable enemy = hitCollider.GetComponent<IDamageable>();
 
             if (enemy != null)
             {
@@ -404,7 +404,7 @@ public class NightstickWeapon : WeaponBase
     {
         if (_isDashing)
         {
-            EnemyScript enemy = other.gameObject.GetComponent<EnemyScript>();
+            EnemyBase enemy = other.gameObject.GetComponent<EnemyBase>();
             if (enemy != null)
             {
                 enemy.TakeDamage(_dashDamage);

@@ -17,6 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelScenes/lyposScene.unity
     guid: ffa06cc9f51894e4a886cc55fa422e53
+  - enabled: 1
+    path: Assets/Scenes/LevelScenes/threnosScene.unity
+    guid: c8266d9fd3a584a45b993961caeff104
+  - enabled: 1
+    path: Assets/Scenes/LevelScenes/dolvarisScene.unity
+    guid: 18b257f0b64dccf498953fd20e06c126
+  - enabled: 1
+    path: Assets/Scenes/CreditsScene.unity
+    guid: d7445e89afedd7d408dd9d0e718ade20
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: a575c45e256513642ab77293d3008b57,
       type: 2}

@@ -14,6 +14,8 @@ public class LightBeamShooter : MonoBehaviour, IBeam
 
     private HUDManager hudManager;
 
+    [SerializeField] private AudioSource beamAudioSrc;
+
 
     private void Awake()
     {
@@ -35,6 +37,11 @@ public class LightBeamShooter : MonoBehaviour, IBeam
 
             if (attackIndex != -1)
                 hudManager.StartCooldown(_cooldown, attackIndex);
+        }
+
+        if (beamAudioSrc != null)
+        {
+            beamAudioSrc.PlayOneShot(beamAudioSrc.clip);
         }
     }
 }

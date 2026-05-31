@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public CharacterData[] characters = new CharacterData[3];
 
+    public GameObject PlayerParentObject;
     [SerializeField] private GameObject player;
     private GameObject freeLookCamera;
     public EGameState gameState;
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     public int currentHeroIndex;
 
+    public CinemachineFreeLook freeLook;
+    private GameObject ui;
 
     void Awake()
     {
@@ -52,6 +56,9 @@ public class GameManager : MonoBehaviour
         freeLookCamera = GameObject.Find("FreeLook Camera");
 
         ActiveControl(false);
+
+        freeLook = FindAnyObjectByType<CinemachineFreeLook>();
+        ui = GameObject.Find("UI");
     }
 
     void OnDestroy()
@@ -64,6 +71,22 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void RestartDolvaris()
+    {
+        StartCoroutine(RestartRoutine());
+    }
+
+    public IEnumerator RestartRoutine()
+    {
+        AsyncOperation load = SceneManager.UnloadSceneAsync("dolvarisScene");
+        while (!load.isDone) yield return null;
+
+        AsyncOperation reload = SceneManager.LoadSceneAsync("dolvarisScene", LoadSceneMode.Additive);
+        while (!reload.isDone) yield return null;
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("dolvarisScene"));
     }
 
     public void SetGameState(EGameState gameState)
@@ -165,6 +188,27 @@ public class GameManager : MonoBehaviour
             freeLookCamera.GetComponent<Cinemachine.CinemachineFreeLook>().enabled = true;
         else
             freeLookCamera.GetComponent<Cinemachine.CinemachineFreeLook>().enabled = false;
+    }
+
+    public void SetUIAndCamera(bool set)
+    {
+        
+        if (freeLook != null) freeLook.gameObject.SetActive(set);
+
+        if (ui != null) ui.SetActive(set);
+
+        if (set == false)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+        GameManager.Instance.PlayerParentObject.SetActive(set);
     }
     void OnDisable()
     {

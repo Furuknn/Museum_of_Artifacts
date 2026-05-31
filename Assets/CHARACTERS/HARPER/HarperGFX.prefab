@@ -1234,6 +1234,7 @@ GameObject:
   - component: {fileID: 3180957006461905853}
   - component: {fileID: 7021058959736304513}
   - component: {fileID: 627934542618353643}
+  - component: {fileID: 2995751894764918988}
   m_Layer: 8
   m_Name: HarperGFX
   m_TagString: Player
@@ -1319,6 +1320,26 @@ CapsuleCollider:
   m_Height: 1.978879
   m_Direction: 1
   m_Center: {x: 0, y: 0.94633746, z: 0}
+--- !u!114 &2995751894764918988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4798609644905712427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9621e7785baea7f4a8fc5150180ed6ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTime: 2
+  meshRefreshRate: 0.1
+  meshDestroyDelay: 3
+  positionToSpawn: {fileID: 4424976558863191316}
+  mat: {fileID: 2100000, guid: 31a43b30cabaa5f4d919ff6f7581e41d, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  ShaderVarRefreshRate: 0.1
 --- !u!1 &5029559920922224638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,8 +2064,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 8900315669530634258}
   m_AABB:
-    m_Center: {x: -0.00010073185, y: -0.11607927, z: 0.05416915}
-    m_Extent: {x: 0.9257833, y: 0.9927109, z: 0.30044854}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.89, y: 0.97, z: 0.16}
   m_DirtyAABB: 0
 --- !u!1 &7150044307869747610
 GameObject:
@@ -2410,6 +2431,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1262055423905829439, guid: 27bf846639f695443b9c56abf19d507b,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 1677004356554083680, guid: 27bf846639f695443b9c56abf19d507b,
         type: 3}

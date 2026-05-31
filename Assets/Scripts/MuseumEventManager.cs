@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,8 @@ public class MuseumEventManager : MonoBehaviour, IInteractable
     public List<AudioClip> dolvarisDialogues;
     private bool _isInteractable = true;
 
+    [SerializeField] private GameObject outline;
+
     public bool isInteractable() => _isInteractable;
 
     private void Awake()
@@ -40,6 +43,8 @@ public class MuseumEventManager : MonoBehaviour, IInteractable
         if (!callAnswered) AnswerCall();
         if (!_isInteractable) return;
         _isInteractable = false;
+
+        if(outline!=null) outline.SetActive(false);
     }
     void CallEvent()
     {
@@ -89,6 +94,23 @@ public class MuseumEventManager : MonoBehaviour, IInteractable
         lyposDoor.SetActive(false);
     }
 
+    public void OpenDolvarisZone()
+    {
+        dolvarisLight.gameObject.SetActive(true);
+        dolvarisLight.enabled = true;
+        dolvarisDoor.SetActive(false);
+    }
+
+    public void OpenThrenosZone()
+    {
+        threnosLight.gameObject.SetActive(true);
+        threnosLight.enabled = true;
+        threnosDoor.SetActive(false);
+
+    }
+
+    
+
     public void TeleportPlayerToMuseum(string region)
     {
         if(!ENVIRONMENT_Museum.activeSelf)
@@ -121,6 +143,18 @@ public class MuseumEventManager : MonoBehaviour, IInteractable
         else if (region == "Lypos")
         {
             lyposLight.gameObject.SetActive(false);
+            //threnos zone
+        }
+        else if (region == "Threnos")
+        {
+            threnosLight.gameObject.SetActive(false);
+            OpenDolvarisZone();
+        }
+        else if (region == "Dolvaris")
+        {
+            dolvarisLight.gameObject.SetActive(false);
+
+            //ULTIMATE WIN
         }
     }
 }

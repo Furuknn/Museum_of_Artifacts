@@ -10,9 +10,9 @@ public class EnemyBase : MonoBehaviour, IEnemy, IDamageable
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Animator animator;
     [HideInInspector] public Transform player;
-    [HideInInspector] public float distanceToPlayer;
+    public float distanceToPlayer;
 
-    private IEnemyState currentState;
+    protected IEnemyState currentState;
     public EnemyIdleState IdleState = new EnemyIdleState();
     public EnemyChaseState ChaseState = new EnemyChaseState();
     public EnemyAttackState AttackState = new EnemyAttackState();
@@ -187,6 +187,7 @@ public class EnemyBase : MonoBehaviour, IEnemy, IDamageable
 
 
     public float GetHealthPercent() => currentHealth / maxHealth;
+    public float GetHealth() => currentHealth;
 
     public void DestroyEnemy()
     {
@@ -316,7 +317,7 @@ public class EnemyBase : MonoBehaviour, IEnemy, IDamageable
     }
 
 
-    private void UpdateHealthUI()
+    protected void UpdateHealthUI()
     {
         if (healthBarFill == null || healthBarRoot == null || !healthBarRoot.activeSelf) return;
 

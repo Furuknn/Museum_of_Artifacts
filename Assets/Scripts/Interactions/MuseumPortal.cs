@@ -18,6 +18,8 @@ public class MuseumPortal : MonoBehaviour, IInteractable
 
     IEnumerator TeleportToMuseum()
     {
+        GameManager.Instance.PlayerParentObject.SetActive(true);
+        GameManager.Instance.freeLook.gameObject.SetActive(true);
         AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         LevelManager.Instance.ModifyCurrentLevelName(museumName);
         MuseumEventManager.Instance.TeleportPlayerToMuseum(region.ToString());
@@ -34,7 +36,8 @@ public class MuseumPortal : MonoBehaviour, IInteractable
             SceneManager.SetActiveScene(newlyLoadedScene);
         }
 
-        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public enum MuseumSpawnRegions

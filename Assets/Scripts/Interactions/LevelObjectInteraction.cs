@@ -1,4 +1,6 @@
+using Cinemachine;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,11 +31,17 @@ public class LevelObjectInteraction : MonoBehaviour, IInteractable
 
         StartCoroutine(LoadSceneAndTeleport());
         _isInteractable = false;
-        /*SceneManager.LoadScene(loadToScene, LoadSceneMode.Additive);
 
-        playerSpawnPoint.transform.position = transform.Find("PlayerSpawnPoint").position + new Vector3(0, tpPlayerPosY, 0);
-        ThirdPersonController.instance.characterController.Move(playerSpawnPoint.transform.position);*/
+        if (loadToScene == "dolvarisScene")
+        {
+            GameManager.Instance.SetUIAndCamera(false);
+            
+            
+        }
+        else GameManager.Instance.SetUIAndCamera(true);
     }
+
+    
 
     IEnumerator LoadSceneAndTeleport()
     {
@@ -58,7 +66,8 @@ public class LevelObjectInteraction : MonoBehaviour, IInteractable
     {
         var player = ThirdPersonController.Instance;
         GameObject spawnObj = GameObject.Find("PlayerSpawnPoint");
-        Vector3 targetPos = spawnObj.transform.position + new Vector3(0, tpPlayerPosY, 0);
+        Vector3 targetPos = Vector3.zero;
+        if (spawnObj != null) targetPos = spawnObj.transform.position + new Vector3(0, tpPlayerPosY, 0);
 
         LevelManager.Instance.ActiveMuseum(false);
         CharacterController cc = player.GetComponent<CharacterController>();
@@ -73,6 +82,8 @@ public class LevelObjectInteraction : MonoBehaviour, IInteractable
         {
             cc.enabled = true;
         }
+
+        
     }
 
     public void TeleportPlayerBack()
